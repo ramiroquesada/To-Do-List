@@ -1,0 +1,29 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": ">A To-Do app",
+  "main": "/src/index.js",
+  "scripts": {
+    "build": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramessj/To-Do-List.git"
+  },
+  "author": "Ramiro Quesada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramessj/To-Do-List/issues"
+  },
+  "homepage": "https://github.com/ramessj/To-Do-List#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "favicons": "^7.1.0",
+    "favicons-webpack-plugin": "^6.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
