@@ -183,7 +183,7 @@ body {
 
 
 
-@media(max-width:900px){
+@media(max-width:950px){
 
   .main{
     grid-template-columns: 1fr;
