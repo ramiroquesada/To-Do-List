@@ -1,5 +1,8 @@
 export default class todos{
+
+    
     constructor(title, description, dueDate, priority ){
+        this.id = Date.now();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -8,6 +11,8 @@ export default class todos{
 
 
     //GETTERS
+
+    getId = () => this.id;
 
     getTitle = ()=> this.title;
 
