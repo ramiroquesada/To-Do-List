@@ -1,1 +1,76 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>To-Do-App</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/><link rel="shortcut icon" href="./images/favicon.ico" type="image/ico"><script defer="defer" src="main.js"></script></head><body><div class="ventanaModal" id="modal"><div class="modalContentNuevo"><div class="closeFullW"><span></span> <span class="close" id="cerrarModal">✕</span></div><div class="modalNuevaTarea"><h1>Ventana Modal</h1></div></div></div><div class="main"><div class="header"><div class="header-logo"><p>TO-DO</p><i class="fa-solid fa-check-double"></i></div></div><div class="main-content"><div class="menu">1</div><div class="content"><div class="tituloMas"><h1>Tareas Pendientes</h1><div class="btnAgregarTarea" id="btnAgregarTarea">+</div></div><ul class="tareas"><li>1</li><li>2</li><li>3</li></ul></div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/ico">
+<script defer src="main.js"></script></head>
+<body>
+
+    <div class="ventanaModal" id="modal" style="display: block;">
+        <div class="modalContentNuevo">
+            
+            <div class="closeFullW">
+                <span></span>
+                <span class="close" id="cerrarModal">✕</span>
+            </div>
+            
+
+            <div class="modalNuevaTarea">
+                <h1>Nueva tarea</h1>
+                <form class="nuevaTareaForm">
+                    <label for="todoname">Nombre *</label>
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required>
+                    <label for="tododescription">Descripción</label>
+                    <input type="text" title="tododescription" placeholder="Descripción de la tarea">
+                    <label for="todolimit">Fecha límite</label>
+                    <input type="date" title="todolimit" id="inputFechaLimite">
+                    <label for="todoprioridad">Seleccionar Prioridad</label>
+                    <select id="cars" name="prioridades" title="todoprioridad">
+                        <option value="bajo">Bajo</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="alto">Alto</option>                      
+                    </select>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <div class="main">
+        <div class="header">
+            <div class="header-logo"><p>TO-DO</p><i class="fa-solid fa-check-double"></i></div>
+        </div>
+        <div class="main-content">
+            <div class="menu">
+                <ul>
+                    <li>
+                        Todos
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="tituloMas">
+                    <h1>Tareas Pendientes</h1>
+                    <div class="btnAgregarTarea" id="btnAgregarTarea">+</div>
+                </div>
+                
+
+
+                
+                <ul class="tareas">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
