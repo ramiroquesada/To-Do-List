@@ -9,6 +9,24 @@
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/ico">
 </head>
 <body>
+
+    <div class="ventanaModal" id="modal">
+        <div class="modalContentNuevo">
+            
+            <div class="closeFullW">
+                <span></span>
+                <span class="close" id="cerrarModal">✕</span>
+            </div>
+            
+
+            <div class="modalNuevaTarea">
+                <h1>Ventana Modal</h1>
+            </div>
+            
+        </div>
+    </div>
+
+
     <div class="main">
         <div class="header">
             <div class="header-logo"><p>TO-DO</p><i class="fa-solid fa-check-double"></i></div>
@@ -18,12 +36,18 @@
             <div class="content">
                 <div class="tituloMas">
                     <h1>Tareas Pendientes</h1>
-                    <div class="btnAgregarTarea">+</div>
+                    <div class="btnAgregarTarea" id="btnAgregarTarea">+</div>
                 </div>
                 
 
 
-                <div class="tareas"></div>
+                
+                <ul class="tareas">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                </ul>
+                
             </div>
         </div>
     </div>

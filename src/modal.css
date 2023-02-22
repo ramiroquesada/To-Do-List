@@ -1,0 +1,93 @@
+.ventanaModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.75);
+}
+
+
+.modalContentNuevo{
+
+    position: relative;
+    background-color: aliceblue;
+    top: 25%;
+  
+    left: 20%;
+    width: 60%;
+    height: 50%;
+    
+    
+ 
+}
+
+
+.closeFullW{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.close {
+    color: black;
+    position: relative;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+  
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modalNuevaTarea{
+    padding: 1rem;
+}
+
+
+
+
+
+ @media(max-width:1200px){
+
+    .modalContentNuevo{
+
+    
+              
+        left: 10%;
+        width: 80%;
+        height: 50%;
+        
+        
+     
+    }
+  
+  }
+
+  @media(max-width:700px){
+
+    .modalContentNuevo{
+
+        
+        left: 0;
+      
+    
+        width: 100%;
+        height: 50%;
+        
+     
+    }
+    
+   
+  
+  }
