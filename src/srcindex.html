@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="ventanaModal" id="modal">
+    <div class="ventanaModal" id="modal" style="display: block;">
         <div class="modalContentNuevo">
             
             <div class="closeFullW">
@@ -20,7 +20,22 @@
             
 
             <div class="modalNuevaTarea">
-                <h1>Ventana Modal</h1>
+                <h1>Nueva tarea</h1>
+                <form class="nuevaTareaForm">
+                    <label for="todoname">Nombre *</label>
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required>
+                    <label for="tododescription">Descripción</label>
+                    <input type="text" title="tododescription" placeholder="Descripción de la tarea">
+                    <label for="todolimit">Fecha límite</label>
+                    <input type="date" title="todolimit" id="inputFechaLimite">
+                    <label for="todoprioridad">Seleccionar Prioridad</label>
+                    <select id="cars" name="prioridades" title="todoprioridad">
+                        <option value="bajo">Bajo</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="alto">Alto</option>                      
+                    </select>
+
+                </form>
             </div>
             
         </div>
@@ -32,7 +47,13 @@
             <div class="header-logo"><p>TO-DO</p><i class="fa-solid fa-check-double"></i></div>
         </div>
         <div class="main-content">
-            <div class="menu">1</div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        Todos
+                    </li>
+                </ul>
+            </div>
             <div class="content">
                 <div class="tituloMas">
                     <h1>Tareas Pendientes</h1>

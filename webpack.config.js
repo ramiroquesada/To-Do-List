@@ -11,6 +11,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+  },
   module: {
     rules: [
       {
@@ -26,9 +33,10 @@ module.exports = {
     }),
    // new FaviconsWebpackPlugin("./src/images/favicon.png"),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
-  mode: "production",
+  // optimization: {
+  //   minimize: false,
+  //   minimizer: [new TerserPlugin()],
+  // },
+  mode: "development",
+  devtool: false,
 };

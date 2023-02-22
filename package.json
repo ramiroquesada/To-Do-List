@@ -4,7 +4,7 @@
   "description": ">A To-Do app",
   "main": "/src/index.js",
   "scripts": {
-    "build": "webpack --watch"
+    "build": "webpack serve "
   },
   "repository": {
     "type": "git",

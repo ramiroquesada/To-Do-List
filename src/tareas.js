@@ -1,12 +1,13 @@
 export default class todos{
 
     
-    constructor(title, description, dueDate, priority ){
+    constructor(title, description, dueDate, priority, project){
         this.id = Date.now();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.project = project;
     }
 
 
@@ -31,6 +32,10 @@ export default class todos{
     setDueDate = (newDueDate) => this.dueDate = newDueDate;
 
     setPriority = (newPriority) => this.priority = newPriority;
+
+    setProject = (newProject) => this.project = newProject;
+
+
 
 
 }
