@@ -15,7 +15,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    compress: true,
+    compress: false,
     port: 9000,
   },
   module: {
@@ -31,12 +31,12 @@ module.exports = {
       filename: "index.html",
       template: "./src/srcindex.html",
     }),
-   // new FaviconsWebpackPlugin("./src/images/favicon.png"),
+  
   ],
-  // optimization: {
-  //   minimize: false,
-  //   minimizer: [new TerserPlugin()],
-  // },
+   optimization: {
+    minimize: false,
+     minimizer: [new TerserPlugin()],
+   },
   mode: "development",
-  devtool: false,
+  devtool: "eval",
 };

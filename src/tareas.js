@@ -1,13 +1,15 @@
+const {v4:uuid} = require('uuid')
+
 export default class todos{
 
     
-    constructor(title, description, dueDate, priority, project){
-        this.id = Date.now();
+    constructor(title, description, dueDate, priority/* project*/){
+        this.id = uuid();
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = project;
+        //this.project = project;
     }
 
 
@@ -33,7 +35,7 @@ export default class todos{
 
     setPriority = (newPriority) => this.priority = newPriority;
 
-    setProject = (newProject) => this.project = newProject;
+    //setProject = (newProject) => this.project = newProject;
 
 
 
