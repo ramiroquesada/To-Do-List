@@ -164,6 +164,8 @@ body {
   background-color: #39bd8b;
   min-width: 320px;
   max-width: 800px;
+  display: flex;
+  gap: 1rem;
 }
 
 

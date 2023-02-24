@@ -11,23 +11,29 @@ const todosArray = [];
 
 const projectsArray = [];
 
-const priority = ["Bajo", "Normal", "Alto"];
+
 
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 let tareas = document.getElementById("tareas");
 
 let crearTarea = () => {
-  let fechalimite = document.getElementById("inputFechaLimite");
+  let fechalimite = document.getElementById("inputFechaLimite").value;
 
-  let todoname = document.getElementById("todoname");
-  let tododescription = document.getElementById("tododescription");
-  let todoprioridad = document.getElementById("todoprioridad");
+  let todoname = document.getElementById("todoname").value;
+  let tododescription = document.getElementById("tododescription").value;
+  let todoprioridad = document.getElementById("todoprioridad").value;
 
+  
+  if(todoname == '' || tododescription == '' || fechalimite == ''){
+
+    return
+  }
+  
   let tarea = new todos(
-    todoname.value,
-    tododescription.value,
-    fechalimite.value,
-    todoprioridad.value
+    todoname,
+    tododescription,
+    fechalimite,
+    todoprioridad
   );
   todosArray.push(tarea);
   renderTodos();
@@ -36,12 +42,18 @@ let crearTarea = () => {
 
 btnCrearTarea.addEventListener("click", crearTarea);
 
+
+
+//RENDERIZA LOS TODOS DEL ARRAY TODOSARRAY
+
+
 let renderTodos = () => {
   tareas.innerHTML = ``;
 
   todosArray.forEach((todo) => {
     let tareali = document.createElement("li");
-    tareali.innerHTML = `${todo.title}, ${todo.description}, ${todo.dueDate}, ${todo.priority} <button type="button">Editar</button><button type="button">Eliminar</button>`;
+    tareali.setAttribute('id', todo.id)
+    tareali.innerHTML = `<div>${todo.title}</div> <div>${todo.description}</div> <div>${todo.dueDate}</div> <div>${todo.priority}</div> <div><button type="button">Editar</button></div><div><button type="button">Eliminar</button></div>`;
     tareas.appendChild(tareali);
   });
 };
