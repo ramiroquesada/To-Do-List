@@ -6,9 +6,9 @@ const path = require("path");
 module.exports = {
   entry: "./src/app.js",
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
-    
+    clean: true,
   },
   // devServer: {
   //   static: {
@@ -34,14 +34,8 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-      }),
+      new TerserPlugin(      
+      ),
     ],
   },
   mode: "development",
