@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="ventanaModal" id="modal" style="display: block;">
+    <div class="ventanaModal" id="modal">
         <div class="modalContentNuevo">
             
             <div class="closeFullW">
@@ -23,16 +23,14 @@
                 <h1 id="palopalo">Nueva tarea</h1>
                 <form class="nuevaTareaForm">
                     <label for="todoname">Nombre *</label>
-                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required id="todoname">
-                    <label for="tododescription">Descripción</label>
-                    <input type="text" title="tododescription" placeholder="Descripción de la tarea" id="tododescription">
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required id="todoname">                    
                     <label for="todolimit">Fecha límite</label>
                     <input type="date" title="todolimit" id="inputFechaLimite">
                     <label for="todoprioridad">Seleccionar Prioridad</label>
                     <select name="prioridad" title="todoprioridad" id="todoprioridad">
-                        <option value="bajo">Bajo</option>
-                        <option value="normal" selected>Normal</option>
-                        <option value="alto">Alto</option>                      
+                        <option value="Bajo">Bajo</option>
+                        <option value="Normal" selected>Normal</option>
+                        <option value="Alto">Alto</option>                      
                     </select>
 
                 </form>
@@ -66,9 +64,7 @@
 
                 
                 <ul class="tareas" id="tareas">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        
                 </ul>
                 
             </div>

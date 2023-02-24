@@ -16,27 +16,33 @@ const projectsArray = [];
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 let tareas = document.getElementById("tareas");
 
+
 let crearTarea = () => {
   let fechalimite = document.getElementById("inputFechaLimite").value;
 
   let todoname = document.getElementById("todoname").value;
-  let tododescription = document.getElementById("tododescription").value;
+  
   let todoprioridad = document.getElementById("todoprioridad").value;
 
   
-  if(todoname == '' || tododescription == '' || fechalimite == ''){
+  if(todoname == '' || fechalimite == ''){
 
     return
   }
   
   let tarea = new todos(
-    todoname,
-    tododescription,
+    todoname,    
     fechalimite,
     todoprioridad
   );
   todosArray.push(tarea);
   renderTodos();
+
+  fechalimite = '';
+  todoname = '';
+  modal.style.display = "none";
+  
+
   console.log(todosArray);
 };
 
@@ -53,7 +59,16 @@ let renderTodos = () => {
   todosArray.forEach((todo) => {
     let tareali = document.createElement("li");
     tareali.setAttribute('id', todo.id)
-    tareali.innerHTML = `<div>${todo.title}</div> <div>${todo.description}</div> <div>${todo.dueDate}</div> <div>${todo.priority}</div> <div><button type="button">Editar</button></div><div><button type="button">Eliminar</button></div>`;
+    tareali.innerHTML = `<div class="todoLeft"><div class="checkNameTodo"><div><input type="checkbox"  class="checkboxTodo"></div> <div>${todo.title}</div></div></div><div class="todoRight"><div>${todo.dueDate}</div> <div class="todoPriority">${todo.priority}</div><div class="editDeleteContainer"> <div class="editTodoContainer"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer"><i class="fa-solid fa-trash"></i></div></div></div>`;
     tareas.appendChild(tareali);
   });
 };
+
+
+
+//TESTING
+
+
+let tareaProvisional = new todos("Ir al baño", "2/3/23", "Alto");
+todosArray.push(tareaProvisional);
+renderTodos();

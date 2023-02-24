@@ -71,7 +71,7 @@ body {
 .main-content{
   grid-row: 2;
   grid-column: 1/3;
-  background-color: aliceblue;
+  background-color: rgb(240, 255, 250);
   display: grid;
   grid-template-columns: 300px 1fr;
   grid-template-rows: minmax(80vh, auto) 1fr;
@@ -85,7 +85,7 @@ body {
 
 .menu{
   
-  
+  background-color: rgb(230, 245, 240);
   border-radius: 0 0 0 1rem;
   height: 100%;
   border-right: 1px solid #39bd8b ;
@@ -147,6 +147,19 @@ body {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
+  -webkit-transition: all .4s;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
+  -o-transition: all .4s;
+  transition: all .4s;
+}
+
+.btnAgregarTarea:hover{
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 
@@ -156,17 +169,115 @@ body {
 .tareas{
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .tareas li{
-  background-color: #39bd8b;
-  min-width: 320px;
+  background-color: rgb(230, 245, 240);
+  min-width: 580px;
   max-width: 800px;
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 0 0rem .5rem;
+  min-height: 2rem;
+  position: relative;
+  max-height: 6rem;
+  
+ 
 }
+
+.tareas li:hover{
+  border-bottom: #27b27d 2px solid;
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+
+.checkNameTodo{
+  display: flex;
+  gap: .5rem;
+  min-width: 100px;
+}
+
+.checkboxTodo{
+  
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+
+.todoRight{
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  align-items: center;
+}
+
+
+.editDeleteContainer{
+  display: flex;
+  height: 100%;
+}
+
+
+.editTodoContainer{
+  background-color: #ffff92;
+  height: 100%;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+.editTodoContainer i:hover{
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  transform: scale(1.3);
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+
+
+.deleteTodoContainer{
+  background-color: #fe9393;
+  height: 100%;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+.deleteTodoContainer i:hover{
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  transform: scale(1.3);
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+
 
 
 
