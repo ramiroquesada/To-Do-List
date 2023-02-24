@@ -57,13 +57,13 @@ let renderTodos = () => {
   todosArray.forEach((todo) => {
     let tareali = document.createElement("li");
     tareali.setAttribute("id", todo.id);
-    tareali.innerHTML = `<div class="todoLeft"><div class="checkNameTodo"><div><input type="checkbox"  class="checkboxTodo"></div> <div>${todo.title}</div></div></div><div class="todoRight"><div>${todo.dueDate}</div> <div class="todoPriority">${todo.priority}</div><div class="editDeleteContainer"> <div class="editTodoContainer"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer"><i class="fa-solid fa-trash"></i></div></div></div>`;
+    tareali.innerHTML = `<div class="todoLeft"><div><input type="checkbox" title="checkCompleted"  class="checkboxTodo"></div> <div>${todo.title}</div></div><div class="todoRight"><div class="todoFecha">${todo.dueDate}</div> <div class="todoPriority">${todo.priority}</div><div class="editDeleteContainer"> <div class="editTodoContainer"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer"><i class="fa-solid fa-trash"></i></div></div></div>`;
     tareas.appendChild(tareali);
   });
 };
 
 //TESTING
 
-let tareaProvisional = new todos("Ir al baño", "02/3/23", "Alto");
+let tareaProvisional = new todos("Ir al baño", "02/03/23", "Alto");
 todosArray.push(tareaProvisional);
 renderTodos();

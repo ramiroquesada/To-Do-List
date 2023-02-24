@@ -180,8 +180,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 0 0 0rem .5rem;
+  
+  padding: 0 0 0 .2rem;
   min-height: 2rem;
   position: relative;
   max-height: 6rem;
@@ -199,11 +199,7 @@ body {
 }
 
 
-.checkNameTodo{
-  display: flex;
-  gap: .5rem;
-  min-width: 100px;
-}
+
 
 .checkboxTodo{
   
@@ -214,6 +210,20 @@ body {
   transform: scale(1.2);
 }
 
+.todoLeft{
+  display: flex;
+  
+  height: 100%;
+  align-items: center;
+
+gap: .5rem;
+
+}
+
+
+
+
+
 
 .todoRight{
   display: flex;
@@ -221,6 +231,22 @@ body {
   height: 100%;
   align-items: center;
 }
+
+.todoFecha{
+  font-weight: 600;
+}
+
+
+
+
+.todoPriority{
+  min-width: 56px;
+  display: flex;
+  justify-content: center;
+  
+}
+
+
 
 
 .editDeleteContainer{
@@ -404,6 +430,14 @@ body {
         
   }
  
+  .todoRight{
+    gap: .5rem
+  }
+
+
+  .todoPriority{
+    min-width: 42px;
+  }
 
 }
 
@@ -418,18 +452,29 @@ body {
     font-size: 1.3rem;
     display: flex; 
     align-items: center;
-    gap: 1.2rem;
-    height: 3rem;
+    gap: 1.5rem;
+    height: 2.5rem;
     
   }
  
   .tareas li{
     
-    min-width: 320px;
+    min-width: 350px;
+    font-size: 0.8rem;
         
    
   }
 
+  .btnAgregarTarea{
+    width: 2rem;
+    height: 2rem;
+  }
+  
+
+  .todoLeft,
+  .todoRight{
+    gap: .3rem;
+  }
 
  
 
