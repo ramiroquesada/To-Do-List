@@ -7,10 +7,10 @@
     <title>To-Do-App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/ico">
-<script defer src="main.js"></script></head>
+<script defer src="main.bundle.js"></script></head>
 <body>
 
-    <div class="ventanaModal" id="modal" style="display: block;">
+    <div class="ventanaModal" id="modal">
         <div class="modalContentNuevo">
             
             <div class="closeFullW">
@@ -20,22 +20,22 @@
             
 
             <div class="modalNuevaTarea">
-                <h1>Nueva tarea</h1>
+                <h1 id="palopalo">Nueva tarea</h1>
                 <form class="nuevaTareaForm">
                     <label for="todoname">Nombre *</label>
-                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required>
-                    <label for="tododescription">Descripción</label>
-                    <input type="text" title="tododescription" placeholder="Descripción de la tarea">
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" required id="todoname">                    
                     <label for="todolimit">Fecha límite</label>
                     <input type="date" title="todolimit" id="inputFechaLimite">
                     <label for="todoprioridad">Seleccionar Prioridad</label>
-                    <select id="cars" name="prioridades" title="todoprioridad">
-                        <option value="bajo">Bajo</option>
-                        <option value="normal" selected>Normal</option>
-                        <option value="alto">Alto</option>                      
+                    <select name="prioridad" title="todoprioridad" id="todoprioridad">
+                        <option value="Bajo">Bajo</option>
+                        <option value="Normal" selected>Normal</option>
+                        <option value="Alto">Alto</option>                      
                     </select>
 
                 </form>
+
+                <button type="button" class="nuevaTareaButton" id="nuevaTareaButton">Crear Tarea</button>
             </div>
             
         </div>
@@ -63,10 +63,8 @@
 
 
                 
-                <ul class="tareas">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                <ul class="tareas" id="tareas">
+                        
                 </ul>
                 
             </div>
