@@ -19,11 +19,11 @@
             </div>
             
 
-            <div class="modalNuevaTarea">
+            <div class="modalNuevaTarea" id="modalNuevaTarea">
                 <h1 id="palopalo">Nueva tarea</h1>
                 <form class="nuevaTareaForm">
                     <label for="todoname">Nombre *</label>
-                    <input type="text" title="todoname" placeholder="Nombre de la tarea" id="todoname" maxlength="20">                    
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" id="todoname" maxlength="60">                    
                     <label for="todolimit">Fecha límite</label>
                     <input type="date" title="todolimit" id="inputFechaLimite">
                     <label for="todoprioridad">Seleccionar Prioridad</label>
@@ -37,6 +37,27 @@
 
                 <button type="button" class="nuevaTareaButton" id="nuevaTareaButton">Crear Tarea</button>
             </div>
+
+
+            <div class="modalEditarTarea" id="modalEditarTarea">
+                <h1 id="palopalo">Modificar tarea</h1>
+                <form class="nuevaTareaForm">
+                    <label for="todoname">Nombre *</label>
+                    <input type="text" title="todoname" placeholder="Nombre de la tarea" id="todonameEdit" maxlength="60">                    
+                    <label for="todolimit">Fecha límite</label>
+                    <input type="date" title="todolimit" id="inputFechaLimiteEdit">
+                    <label for="todoprioridad">Seleccionar Prioridad</label>
+                    <select name="prioridad" title="todoprioridad" id="todoprioridadEdit">
+                        <option value="Bajo">Bajo</option>
+                        <option value="Normal" selected>Normal</option>
+                        <option value="Alto">Alto</option>                      
+                    </select>
+
+                </form>
+
+                
+            </div>
+
             
         </div>
     </div>
@@ -57,7 +78,7 @@
             <div class="content">
                 <div class="tituloMas">
                     <h1>Tareas Pendientes</h1>
-                    <div class="btnAgregarTarea" id="btnAgregarTarea">+</div>
+                    <div class="btnAgregarTarea" id="btnAgregarTarea"><div class="add">+</div></div>
                 </div>
                 
 

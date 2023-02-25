@@ -52,6 +52,8 @@
 
 .modalNuevaTarea{
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -69,6 +71,16 @@
     margin-bottom: 1rem;
 }
 
+.nuevaTareaButton{
+    width: 20%;
+    align-self: flex-end;
+}
+
+
+.modalEditarTarea{
+    display: flex;
+}
+
 
 
 
@@ -79,8 +91,8 @@
 
     
               
-        left: 10%;
-        width: 80%;
+        left: 17%;
+        width: 66%;
        
         
         
@@ -89,7 +101,24 @@
   
   }
 
+
   @media(max-width:700px){
+
+    .modalContentNuevo{
+
+    
+              
+        left: 3%;
+        width: 94%;
+       
+        
+        
+     
+    }
+  
+  }
+
+  @media(max-width:540px){
 
     .modalContentNuevo{
 

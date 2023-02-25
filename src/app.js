@@ -65,5 +65,6 @@ let renderTodos = () => {
 //TESTING
 
 let tareaProvisional = new todos("Ir al baño", "02/03/23", "Alto");
-todosArray.push(tareaProvisional);
+let tarea2 = new todos("Hola mi nombre es jesus y me gusta aprender javascript nashe", "02/03/23", "Medio");
+todosArray.push(tareaProvisional, tarea2);
 renderTodos();

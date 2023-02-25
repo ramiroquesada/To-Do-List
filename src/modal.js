@@ -1,14 +1,23 @@
 let modal = document.getElementById('modal');
 
-let abrirModal = document.getElementById('btnAgregarTarea');
+let abrirModalAgregarTarea = document.getElementById('btnAgregarTarea');
 
-let cerrarModal = document.getElementById('cerrarModal')
+let cerrarModal = document.getElementById('cerrarModal');
 
-abrirModal.addEventListener('click', ()=>{
-    modal.style.display = "block";
+let modalEditarTarea = document.getElementById('modalEditarTarea');
+
+let modalNuevaTarea = document.getElementById('modalNuevaTarea');
+
+
+abrirModalAgregarTarea.addEventListener('click', ()=>{
+    modal.style.display = "block";    
+    modalNuevaTarea.style.display = "flex";
+    modalEditarTarea.style.display = "none";
 })
 
 cerrarModal.addEventListener('click', ()=>{
-    modal.style.display = "none"
+    modal.style.display = "none";
+    
+    
 })
 
