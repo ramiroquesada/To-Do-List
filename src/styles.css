@@ -171,12 +171,13 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
+  width: 90%;
 }
 
 .tareas li{
   background-color: rgb(230, 245, 240);
-  min-width: 600px;
-  max-width: 800px;
+  
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -184,7 +185,7 @@ body {
   padding: 0 0 0 .2rem;
   min-height: 2rem;
   position: relative;
-  max-height: 6rem;
+  max-height: 10rem;
   
  
 }
@@ -221,6 +222,11 @@ gap: .5rem;
 }
 
 
+.todoTitle{
+  overflow-wrap: anywhere;
+  margin-right: .2rem;
+}
+
 
 
 
@@ -240,7 +246,7 @@ gap: .5rem;
 
 
 .todoPriority{
-  min-width: 56px;
+  width: 56px;
   display: flex;
   justify-content: center;
   
@@ -379,12 +385,7 @@ gap: .5rem;
   border-radius: 0 ;
 }
 
-.tareas li{
-    
-  min-width: 530px;
-      
- 
-}
+
 
 }
 
@@ -410,12 +411,7 @@ gap: .5rem;
   .content{
     width: 100%;
   }
-  .tareas li{
-    
-    min-width: 650px;
-        
-   
-  }
+
  
 
 }
@@ -423,20 +419,14 @@ gap: .5rem;
 @media(max-width:700px){
 
  
- 
-  .tareas li{
-    
-    min-width: 430px;
-        
-  }
- 
+  
   .todoRight{
     gap: .5rem
   }
 
 
   .todoPriority{
-    min-width: 42px;
+    width: 42px;
   }
 
 }
@@ -448,20 +438,24 @@ gap: .5rem;
 @media(max-width:500px){
 
   .tituloMas{
-    margin: 2rem;
-    font-size: 1.3rem;
+    margin: 1rem;
+    font-size: 1.2rem;
     display: flex; 
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     height: 2.5rem;
+    margin-top: 2rem;
     
   }
  
-  .tareas li{
+  .tareas{
+    width: 95%;
+  }
+
+  .tareas li{    
     
-    min-width: 350px;
     font-size: 0.8rem;
-        
+    
    
   }
 

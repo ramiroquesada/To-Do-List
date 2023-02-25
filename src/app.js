@@ -57,7 +57,7 @@ let renderTodos = () => {
   todosArray.forEach((todo) => {
     let tareali = document.createElement("li");
     tareali.setAttribute("id", todo.id);
-    tareali.innerHTML = `<div class="todoLeft"><div><input type="checkbox" title="checkCompleted"  class="checkboxTodo"></div> <div>${todo.title}</div></div><div class="todoRight"><div class="todoFecha">${todo.dueDate}</div> <div class="todoPriority">${todo.priority}</div><div class="editDeleteContainer"> <div class="editTodoContainer"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer"><i class="fa-solid fa-trash"></i></div></div></div>`;
+    tareali.innerHTML = `<div class="todoLeft"><div><input type="checkbox" title="checkCompleted"  class="checkboxTodo"></div> <div class="todoTitle">${todo.title}</div></div><div class="todoRight"><div class="todoFecha">${todo.dueDate}</div> <div class="todoPriority">${todo.priority}</div><div class="editDeleteContainer"> <div class="editTodoContainer"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer"><i class="fa-solid fa-trash"></i></div></div></div>`;
     tareas.appendChild(tareali);
   });
 };
