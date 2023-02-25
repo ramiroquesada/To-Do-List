@@ -15,10 +15,11 @@ let btnCrearTarea = document.getElementById("nuevaTareaButton");
 let tareas = document.getElementById("tareas");
 
 let crearTarea = () => {
+  let nuevaTareaForm = document.getElementById('nuevaTareaForm');
   let fechalimite = document.getElementById("inputFechaLimite").value;
-  console.log(fechalimite);
+  
 
-  let fecha = new Date(fechalimite); // crea un objeto Date con el valor del input
+  let fecha = new Date(fechalimite);
 
   fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
 
@@ -26,13 +27,19 @@ let crearTarea = () => {
     day: "2-digit",
     month: "2-digit",
     year: "2-digit",
-  }); // da formato a la fecha
+  });
 
   let todoname = document.getElementById("todoname").value;
 
   let todoprioridad = document.getElementById("todoprioridad").value;
 
   if (todoname == "" || fechalimite == "") {
+    let msgNuevaTarea = document.getElementById('msgNuevaTarea');
+    msgNuevaTarea.innerText = "Debe completar todos los campos"
+    setTimeout(()=>{
+      msgNuevaTarea.innerText = ""
+    }, 3000)
+    
     return;
   }
 
@@ -40,8 +47,7 @@ let crearTarea = () => {
   todosArray.push(tarea);
   renderTodos();
 
-  fechalimite = "";
-  todoname = "";
+  nuevaTareaForm.reset();
   modal.style.display = "none";
 
   console.log(todosArray);
@@ -68,3 +74,6 @@ let tareaProvisional = new todos("Ir al baño", "02/03/23", "Alto");
 let tarea2 = new todos("Hola mi nombre es jesus y me gusta aprender javascript nashe", "02/03/23", "Medio");
 todosArray.push(tareaProvisional, tarea2);
 renderTodos();
+
+console.log(tarea2.getTitle())
+

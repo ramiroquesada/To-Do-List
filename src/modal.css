@@ -71,14 +71,18 @@
     margin-bottom: 1rem;
 }
 
-.nuevaTareaButton{
-    width: 20%;
-    align-self: flex-end;
-}
+
 
 
 .modalEditarTarea{
     display: flex;
+}
+
+
+
+.msgBtnNuevaTarea{
+    display: flex;
+    justify-content: space-between;
 }
 
 
