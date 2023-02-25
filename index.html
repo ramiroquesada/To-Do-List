@@ -21,21 +21,25 @@
 
             <div class="modalNuevaTarea" id="modalNuevaTarea">
                 <h1 id="palopalo">Nueva tarea</h1>
-                <form class="nuevaTareaForm">
-                    <label for="todoname">Nombre *</label>
+                <form class="nuevaTareaForm" id="nuevaTareaForm">
+                    <label for="todoname">Nombre</label>
                     <input type="text" title="todoname" placeholder="Nombre de la tarea" id="todoname" maxlength="60">                    
                     <label for="todolimit">Fecha límite</label>
                     <input type="date" title="todolimit" id="inputFechaLimite">
                     <label for="todoprioridad">Seleccionar Prioridad</label>
                     <select name="prioridad" title="todoprioridad" id="todoprioridad">
                         <option value="Bajo">Bajo</option>
-                        <option value="Normal" selected>Normal</option>
+                        <option value="Medio" selected>Normal</option>
                         <option value="Alto">Alto</option>                      
                     </select>
 
                 </form>
 
-                <button type="button" class="nuevaTareaButton" id="nuevaTareaButton">Crear Tarea</button>
+                <div class="msgBtnNuevaTarea">
+                    <div class="msgNuevaTarea" id="msgNuevaTarea"></div>
+                    <button type="button" class="nuevaTareaButton" id="nuevaTareaButton">Crear Tarea</button>
+                </div>
+                
             </div>
 
 
