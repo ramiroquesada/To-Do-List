@@ -64,18 +64,26 @@ let crearTarea = () => {
 btnCrearTarea.addEventListener("click", crearTarea);
 
 
+//OBTENER TODO POR ID
+
+
+function getTodoById(id) {
+  return todosArray.find(function(todo) {
+    return todo.id === id;
+  });
+}
+
 //EDITAR TAREA
 
 
-
-
-
-
-
 let editTodo = (e)=>{
-  let liId = e.target.parentElement.parentElement.parentElement.id;
+  let todoIdFromLi = e.target.parentElement.parentElement.parentElement.id;
   
-
+ 
+  
+  let todo = getTodoById(todoIdFromLi);
+  console.log(todo)
+  console.log(todosArray)
   
 
 }
