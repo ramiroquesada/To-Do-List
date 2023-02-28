@@ -164,15 +164,18 @@ body {
 
 .tareas li {
   background-color: rgb(230, 245, 240);
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  
   min-height: 2rem;
   position: relative;
   max-height: 10rem;
+  
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .tareas li:hover {
@@ -294,6 +297,12 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  
+  -webkit-border-radius: 0 0.5rem 0.5rem 0;
+  -moz-border-radius: 0 0.5rem 0.5rem 0;
+  -ms-border-radius: 0 0.5rem 0.5rem 0;
+  -o-border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .deleteTodoContainer:hover i{
