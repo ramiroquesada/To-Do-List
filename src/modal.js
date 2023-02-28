@@ -1,3 +1,5 @@
+
+
 let modal = document.getElementById('modal');
 
 let abrirModalAgregarTarea = document.getElementById('btnAgregarTarea');
@@ -8,6 +10,29 @@ let modalEditarTarea = document.getElementById('modalEditarTarea');
 
 let modalNuevaTarea = document.getElementById('modalNuevaTarea');
 
+let nuevaTareaForm = document.getElementById("nuevaTareaForm");
+
+let msgNuevaTarea = document.getElementById("msgNuevaTarea");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 abrirModalAgregarTarea.addEventListener('click', ()=>{
     modal.style.display = "block";    
@@ -16,6 +41,7 @@ abrirModalAgregarTarea.addEventListener('click', ()=>{
 })
 
 cerrarModal.addEventListener('click', ()=>{
+    modalNuevaTarea.style.display = "none"
     modal.style.display = "none";
     
     

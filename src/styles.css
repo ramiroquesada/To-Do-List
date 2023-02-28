@@ -205,6 +205,8 @@ body {
   overflow-wrap: break-word;
   white-space: pre-wrap;
   margin-right: 0.3rem;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .todoRight {
@@ -216,13 +218,41 @@ body {
 
 .todoFecha {
   font-weight: 600;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .todoPriority {
   width: 56px;
   display: flex;
   justify-content: center;
+  padding: .5rem;
+ 
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  border-radius: 1rem;
+  color: white;
+  text-shadow: black 2px 1px;
+  font-weight: 600;
+  
+  -webkit-user-select: none;
+  user-select: none;
 }
+
+.priorityBajo{
+  background-color: #39bd8b;
+
+}
+
+.priorityMedio{
+  background-color: #caca02;
+}
+.priorityAlto{
+  background-color: #fa6b6b;
+}
+
 
 .editDeleteContainer {
   display: flex;

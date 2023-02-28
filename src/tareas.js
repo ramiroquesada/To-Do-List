@@ -15,27 +15,27 @@ export default class todos{
 
     //GETTERS
 
-    getId(){return this.id};
+   get getId(){return this.id};
 
-    getTitle(){return this.title};    
+   get getTitle(){return this.title};    
 
-    getDueDate(){return this.dueDate};
+   get getDueDate(){return this.dueDate};
 
-    getPriority(){return this.priority};
+   get getPriority(){return this.priority};
 
-    getCompleted(){return this.completed};
+   get getCompleted(){return this.completed};
 
     //SETTERS
 
 
 
-    setTitle(newTitle){ this.title = newTitle};    
+   set setTitle(newTitle){ this.title = newTitle};    
 
-    setDueDate(newDueDate){ this.dueDate = newDueDate};
+   set setDueDate(newDueDate){ this.dueDate = newDueDate};
 
-    setPriority(newPriority){this.priority = newPriority};
+   set setPriority(newPriority){this.priority = newPriority};
 
-    setCompleted(newCompleted){this.completed = newCompleted};
+   set setCompleted(newCompleted){this.completed = newCompleted};
 
     //setProject = (newProject) => this.project = newProject;
 
