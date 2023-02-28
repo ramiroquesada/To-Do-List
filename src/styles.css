@@ -16,11 +16,11 @@ body {
 .main {
   background-color: #e8ffd3;
   width: 85vw;
-
+  overflow: hidden;
   box-shadow: #0000004a 0.5rem 0.5rem 8px 2px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 60px 45rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   -ms-border-radius: 1rem;
@@ -76,6 +76,10 @@ body {
   -ms-border-radius: 0 0 1rem 1rem;
   -o-border-radius: 0 0 1rem 1rem;
   border-radius: 0 0 1rem 1rem;
+
+  
+
+
 }
 
 .menu {
@@ -160,6 +164,8 @@ body {
   gap: 1.5rem;
   margin-top: 2rem;
   width: 90%;
+  height: 66%;
+  overflow-y: auto;
 }
 
 .tareas li {
@@ -167,7 +173,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 2rem;
+  width: 98%;
   position: relative;
   max-height: 10rem;
   
@@ -186,6 +192,15 @@ body {
   -o-transform: scale(1.01);
   transform: scale(1.01);
 }
+
+
+.completedTask{
+  color: #8d8d8d;
+  text-decoration: line-through;
+}
+
+
+
 
 .checkboxTodo {
   -webkit-transform: scale(1.2);
@@ -223,13 +238,23 @@ body {
   font-weight: 600;
   -webkit-user-select: none;
   user-select: none;
+  border: 1px rgba(0, 0, 0, 0.5) solid;
+  padding: .3rem;
+  
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 .todoPriority {
   width: 56px;
   display: flex;
   justify-content: center;
-  padding: .5rem;
+  padding: .3rem;
+
+  border: 1px rgba(0, 0, 0, 0.5) solid;
  
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
@@ -259,17 +284,27 @@ body {
 
 .editDeleteContainer {
   display: flex;
+  align-items: center;
   height: 100%;
+  gap: 0.2rem;
 }
 
 .editTodoContainer {
   background-color: #ffff92;
-  height: 100%;
-  width: 2rem;
+  height: 2.4rem;
+  width: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  
+  -webkit-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -moz-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -ms-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -o-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .editTodoContainer:hover i{
@@ -291,18 +326,19 @@ body {
 
 .deleteTodoContainer {
   background-color: #fe9393;
-  height: 100%;
-  width: 2rem;
+  height: 2.4rem;
+  width: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  -webkit-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -moz-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -ms-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  -o-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   
-  -webkit-border-radius: 0 0.5rem 0.5rem 0;
-  -moz-border-radius: 0 0.5rem 0.5rem 0;
-  -ms-border-radius: 0 0.5rem 0.5rem 0;
-  -o-border-radius: 0 0.5rem 0.5rem 0;
-  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .deleteTodoContainer:hover i{
@@ -352,6 +388,7 @@ body {
   .main-content {
     grid-template-rows: 1fr;
     border-radius: 0 0 0 1rem;
+    height: 100vh;
   }
 
   .menu {
@@ -371,6 +408,11 @@ body {
     -o-border-radius: 0;
     border-radius: 0;
   }
+
+  
+
+  
+
 }
 
 @media (max-width: 900px) {
@@ -425,5 +467,23 @@ body {
   .todoLeft,
   .todoRight {
     gap: 0.3rem;
+  }
+
+  .todoFecha{
+    font-size: .7rem;
+  }
+
+  .todoPriority{
+    padding: .14rem;
+  }
+
+  .editTodoContainer,
+  .deleteTodoContainer{
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .deleteTodoContainer{
+    margin-right: .1rem;
   }
 }
