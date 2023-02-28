@@ -97,6 +97,7 @@ body {
   margin-top: 2rem;
   font-size: 1.5rem;
   cursor: pointer;
+  text-align: center;
 }
 
 .menu ul li:hover {
@@ -166,6 +167,8 @@ body {
   width: 90%;
   height: 66%;
   overflow-y: auto;
+  padding: 0 .5rem 0 .5rem ;
+  align-items: center;
 }
 
 .tareas li {
@@ -173,7 +176,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 98%;
+  width: 95%;
   position: relative;
   max-height: 10rem;
   
@@ -215,7 +218,7 @@ body {
 
   height: 100%;
   align-items: center;
-  margin: .5rem 0 .5rem .2rem;
+  margin: .5rem 0 .5rem 0;
   gap: 0.5rem;
 }
 
@@ -249,33 +252,27 @@ body {
 }
 
 .todoPriority {
-  width: 56px;
   display: flex;
-  justify-content: center;
-  padding: .3rem;
-
+  height: 100%;
+  min-width: .2rem;
   border: 1px rgba(0, 0, 0, 0.5) solid;
- 
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  border-radius: 1rem;
-  color: white;
-  text-shadow: black 2px 1px;
-  font-weight: 600;
-  
+  -webkit-border-radius: .5rem 0 0 0.5rem;
+  -moz-border-radius: .5rem 0 0 0.5rem;
+  -ms-border-radius: .5rem 0 0 0.5rem;
+  -o-border-radius: .5rem 0 0 0.5rem;
+  border-radius: .5rem 0 0 0.5rem;
   -webkit-user-select: none;
   user-select: none;
 }
 
 .priorityBajo{
   background-color: #39bd8b;
+  
 
 }
 
 .priorityMedio{
-  background-color: #caca02;
+  background-color: #f0f026;
 }
 .priorityAlto{
   background-color: #fa6b6b;
@@ -409,7 +406,9 @@ body {
     border-radius: 0;
   }
 
-  
+  .tareas{
+    height: 70%;
+  }
 
   
 
@@ -434,11 +433,6 @@ body {
   }
 }
 
-@media (max-width: 700px) {
-  .todoPriority {
-    width: 45px;
-  }
-}
 
 @media (max-width: 500px) {
   .tituloMas {
@@ -452,7 +446,8 @@ body {
   }
 
   .tareas {
-    width: 95%;
+    width: 100%;
+    height: none;
   }
 
   .tareas li {
@@ -471,10 +466,6 @@ body {
 
   .todoFecha{
     font-size: .7rem;
-  }
-
-  .todoPriority{
-    padding: .14rem;
   }
 
   .editTodoContainer,

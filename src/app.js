@@ -34,7 +34,7 @@ let crearTarea = () => {
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
+        
       }
     });
 
@@ -156,7 +156,8 @@ let deleteTodo = (e) => {
 //MARCAR TAREA COMO COMPLETADA
 
 let completeStatus = (e) => {
-  let todoFromLi = e.target.parentElement.parentElement.parentElement;
+  let todoFromLi = e.target.parentElement.parentElement;
+  console.log(todoFromLi)
   let todoIdFromLi = todoFromLi.id;
   let todo = getTodoById(todoIdFromLi);
 
@@ -202,15 +203,13 @@ let renderTodos = () => {
 
     //clase de prioridad dependiendo de la variable
 
-    tareali.innerHTML = `<div class="todoLeft"><div><input type="checkbox" title="checkCompleted" class="checkboxTodo" ></div> <p class="todoTitle">${
+    tareali.innerHTML = `<div class="todoLeft"><div class="todoPriority ${colorPrioridad(
+      todo.priority
+    )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
       todo.title
     }</p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
       todo.dueDate
-    )}</p> <p class="todoPriority ${colorPrioridad(
-      todo.priority
-    )}" title="Prioridad">${
-      todo.priority
-    }</p><div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
+    )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
     let checkCompletedInput = tareali.querySelector(".checkboxTodo");
 
     let editBtn = tareali.querySelector(".editTodoContainer");
@@ -227,7 +226,7 @@ let renderTodos = () => {
       let todoFecha = tareali.querySelector(".todoFecha");
       todoFecha.classList.add("completedTask");
       let todoPriority = tareali.querySelector(".todoPriority");
-      todoPriority.remove();
+      todoPriority.style.backgroundColor = "grey";
       editBtn.remove();
 
       checkCompletedInput.checked = true;
@@ -241,7 +240,7 @@ let renderTodos = () => {
 
 let tarea1 = new todos("Ir al baño", "2024-03-02", "Alto");
 let tarea2 = new todos(
-  "Hola mi nombre es jesus y me gusta aprender javascript nashe",
+  "Hola me gusta aprender javascript nashe",
   "2023-02-28",
   "Medio"
 );
@@ -251,14 +250,6 @@ let tarea4 = new todos("Hacer kaka", "1996-11-06", "Bajo");
 let tarea5 = new todos("Hacer kaka", "1996-11-06", "Bajo");
 let tarea6 = new todos("Hacer kaka", "1996-11-06", "Bajo");
 let tarea7 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea8 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea9 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea10 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea11 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea12 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea13 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea14 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea15 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea16 = new todos("Hacer kakona", "1996-11-06", "Bajo");
-todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8, tarea9, tarea10, tarea11, tarea12, tarea13, tarea14, tarea15, tarea16 );
+
+todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
 renderTodos();
