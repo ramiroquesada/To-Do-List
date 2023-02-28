@@ -7,7 +7,9 @@ import "./modal";
 
 import todos from "./tareas";
 
-const todosArray = [];
+import "./menuControl"
+
+export const todosArray = [];
 
 const projectsArray = [];
 
