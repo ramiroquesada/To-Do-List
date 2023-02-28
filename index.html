@@ -109,17 +109,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
           <p>TO-DO</p>
           <i class="fa-solid fa-check-double"></i>
         </div>
+        <div class="headerMenuButtons">
+          <i class="fa-solid fa-bars menuCerrado" id="menuCerrado" title="Menú"></i>
+          <i class="fa-solid fa-xmark menuAbierto" id="menuAbierto" title="Cerrar Menú"></i>
+        </div>
       </div>
       <div class="main-content">
-        <div class="menu">
+        <div class="menu" id="menuPrincipal">
           <ul>
-            <li>Todos</li>
-            <li>Esto es un menu privisional</li>
+            <li class="menuLi"><span><i class="fa-solid fa-circle-right"></i></span><span class="menuTitle">Todos</span><span class="numberOfTodos">2</span></li>
+            
           </ul>
         </div>
-        <div class="content">
+        <div class="content" id="contentPrincipal">
           <div class="tituloMas">
-            <h1>Tareas Pendientes</h1>
+            <h1>TAREAS PENDIENTES</h1>
             <div class="btnAgregarTarea" id="btnAgregarTarea">
               <div class="add">+</div>
             </div>
