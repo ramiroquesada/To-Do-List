@@ -17,6 +17,23 @@ export const todosArray = [];
 
 export const projectsArray = [];
 
+
+//cambio nombre de pestaña cuando se va xDD
+
+let tituloPrevio = document.title;
+
+window.addEventListener("blur", ()=>{
+  tituloPrevio = document.title;
+  document.title = 'No te vayas 😢';
+})
+
+window.addEventListener("focus", ()=>{
+  document.title = tituloPrevio;
+})
+
+
+
+
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 let tareas = document.getElementById("tareas");
 
