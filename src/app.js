@@ -94,17 +94,19 @@ let editTodo = (e) => {
   let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
   let todoprioridadEdit = document.getElementById("todoprioridadEdit");
   let selectCategoria = document.getElementById("selectCategoria");
-  let categoriaId =
-    selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
-      "datass"
-    );
-
-  let newCategoriaId = 0;
-
+ 
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
   todoprioridadEdit.value = todo.getPriority;
   selectCategoria.value = todo.getProject;
+
+  let categoriaId =
+  selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
+    "datass"
+  );
+
+let newCategoriaId = categoriaId;
+
 
   selectCategoria.addEventListener("change", () => {
     newCategoriaId =
@@ -122,10 +124,23 @@ let editTodo = (e) => {
     if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
       nuevoProyecto.todos.push(todo);
       proyectoActual.todos.splice(todoIdFromLi, 1);
-    } else if (proyectoActual.id == 0 && nuevoProyecto.id > 0) {
+      console.log("actual !0 & !0 nuevo - NUEVO") ;
+      console.log(nuevoProyecto.todos );
+      console.log("actual !0 & !0 viejo - VIEJO") ;
+      console.log(proyectoActual.todos );
+
+    } else if (proyectoActual.id == 0 && nuevoProyecto.id != proyectoActual.id) {
       nuevoProyecto.todos.push(todo);
+      console.log("actual 0 & !0 nuevo - NUEVO") ;
+      console.log(nuevoProyecto.todos );
+      console.log("actual 0 & !0 viejo - VIEJO") ;
+      console.log(proyectoActual.todos );
     } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
       proyectoActual.todos.splice(todoIdFromLi, 1);
+      console.log("actual !0 & 0 nuevo - NUEVO") ;
+      console.log(nuevoProyecto.todos );
+      console.log("actual !0 & 0 viejo - VIEJO") ;
+      console.log(proyectoActual.todos );
     }
 
     todo.setTitle = todonameEdit.value;
