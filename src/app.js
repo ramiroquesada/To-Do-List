@@ -5,13 +5,17 @@ import "./modal.css";
 
 import "./modal";
 
-import todos from "./tareas";
+import Todos from "./tareas";
 
-import "./menuControl"
+import Proyectos from "./menuControl.js";
+
+import "./menuControl";
+
+import { updateMenu } from "./menuControl.js";
 
 export const todosArray = [];
 
-const projectsArray = [];
+export const projectsArray = [];
 
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 let tareas = document.getElementById("tareas");
@@ -36,14 +40,13 @@ let crearTarea = () => {
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        
       }
     });
 
     return;
   }
 
-  let tarea = new todos(todoname, fechalimite, todoprioridad);
+  let tarea = new Todos(todoname, fechalimite, todoprioridad);
   todosArray.push(tarea);
   renderTodos();
 
@@ -58,8 +61,6 @@ let crearTarea = () => {
 
   nuevaTareaForm.reset();
   modal.style.display = "none";
-
-  console.log(todosArray);
 };
 
 btnCrearTarea.addEventListener("click", crearTarea);
@@ -72,14 +73,19 @@ let getTodoById = (id) => {
   });
 };
 
+
+let getCategoryById = (id) =>{
+  return projectsArray.find(function (project){
+    return project.id === id
+  })
+}
+
 //EDITAR TAREA
 
 let editTodo = (e) => {
   let todoIdFromLi = e.target.parentElement.parentElement.parentElement.id;
 
   let todo = getTodoById(todoIdFromLi);
-  console.log(todo);
-  console.log(todosArray);
 
   modal.style.display = "block";
   modalNuevaTarea.style.display = "none";
@@ -88,15 +94,22 @@ let editTodo = (e) => {
   let todonameEdit = document.getElementById("todonameEdit");
   let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
   let todoprioridadEdit = document.getElementById("todoprioridadEdit");
-
+  let selectCategoria = document.getElementById("selectCategoria");
+  let categoriaId = selectCategoria.options[selectCategoria.selectedIndex].getAttribute('datass');
+  console.log(categoriaId)
+  
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
   todoprioridadEdit.value = todo.getPriority;
+  selectCategoria.value = todo.getProject;
+  
 
   let modificarTodo = () => {
+   
     todo.setTitle = todonameEdit.value;
     todo.setDueDate = inputFechaLimiteEdit.value;
     todo.setPriority = todoprioridadEdit.value;
+    todo.setProject = selectCategoria.value;
     nuevaTareaForm.reset();
     modalEditarTarea.style.display = "none";
     modal.style.display = "none";
@@ -111,6 +124,8 @@ let editTodo = (e) => {
       timer: 2000,
       heightAuto: false,
     });
+
+    
   };
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
@@ -159,14 +174,12 @@ let deleteTodo = (e) => {
 
 let completeStatus = (e) => {
   let todoFromLi = e.target.parentElement.parentElement;
-  console.log(todoFromLi)
   let todoIdFromLi = todoFromLi.id;
   let todo = getTodoById(todoIdFromLi);
 
   todo.completed = !todo.completed;
 
   renderTodos();
-  console.log(todo);
 };
 
 //funcion para cambiar variable de clase dependiendo de la prioridad
@@ -236,22 +249,24 @@ let renderTodos = () => {
 
     tareas.appendChild(tareali);
   });
+  updateMenu();
 };
 
 //TESTING
 
-let tarea1 = new todos("Ir al baño", "2024-03-02", "Alto");
-let tarea2 = new todos(
+let tarea1 = new Todos("Ir al baño", "2024-03-02", "Alto");
+let tarea2 = new Todos(
   "Hola me gusta aprender javascript nashe",
   "2023-02-28",
   "Medio"
 );
 
-let tarea3 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea4 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea5 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea6 = new todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea7 = new todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea3 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea4 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea5 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea6 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea7 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
 
 todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
+
 renderTodos();

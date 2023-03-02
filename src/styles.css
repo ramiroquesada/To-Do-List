@@ -12,7 +12,7 @@ body {
   height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
-
+/***********************************************************************************************************************/
 .main {
   background-color: #e8ffd3;
   width: 85vw;
@@ -27,7 +27,7 @@ body {
   -o-border-radius: 1rem;
   border-radius: 1rem;
 }
-
+/***********************************************************************************************************************/
 .header {
   height: 60px;
   background-color: #27b27d;
@@ -64,28 +64,21 @@ body {
   margin-left: 1rem;
 }
 
-
-.headerMenuButtons{
+.headerMenuButtons {
   display: none;
   margin-right: 2rem;
   color: white;
   align-items: center;
   cursor: pointer;
-  
 }
 
 .menuAbierto,
-.menuCerrado{
+.menuCerrado {
   font-size: 2.75rem;
   text-shadow: black 2px 2px 3px;
-
-
-
 }
 
-
-
-
+/***********************************************************************************************************************/
 
 .main-content {
   grid-row: 2;
@@ -100,11 +93,9 @@ body {
   -ms-border-radius: 0 0 1rem 1rem;
   -o-border-radius: 0 0 1rem 1rem;
   border-radius: 0 0 1rem 1rem;
-
-  
-
-
 }
+
+/***********************************************************************************************************************/
 
 .menu {
   background-color: rgb(230, 245, 240);
@@ -117,7 +108,13 @@ body {
   align-items: center;
 }
 
-.menu ul{
+.menuPrincipalTitle{
+  padding-top: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.menu ul {
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -125,19 +122,15 @@ body {
   min-width: 50%;
 }
 
-
 .menuLi {
-  
-  
-  
   gap: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.menuTitle{
-  margin-left: -0.8rem;
+.menuTitle {
+  margin-left: -0.5rem;
   font-size: 1.5rem;
 }
 
@@ -146,10 +139,10 @@ body {
   font-weight: 800;
 }
 
-.numberOfTodos{
+.numberOfTodos {
   background-color: #fe9393;
-  padding: .12rem;
-  width: 1.2rem;
+  padding: 4px;
+  width: 16px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -160,6 +153,93 @@ body {
   justify-content: center;
   color: white;
 }
+
+
+.addProjectContainer{
+  display: flex;
+    
+}
+
+
+
+.addNuevaBtn{
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.addNuevaBtn p{
+  font-size: 1.5rem;
+}
+
+.addProjectBtn {
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+  
+}
+.addProjectBtn:hover {
+  
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+  animation-direction: alternate;
+  
+  -webkit-transform: rotate(-360deg);
+  -moz-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg);
+  -o-transform: rotate(-360deg);
+  transform: rotate(-360deg);
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+  
+}
+
+.addProjectBtn:active{
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+  -webkit-transform: rotate(-360deg);
+  -moz-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg);
+  -o-transform: rotate(-360deg);
+  transform: rotate(-360deg);
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+
+.addProjectBtn i {
+  pointer-events: none;
+}
+
+
+.projectInput{
+  display: none;
+  flex-direction: column;
+}
+
+.acceptCancelProject{
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.acceptCancelProject i{
+  cursor: pointer;
+}
+
+
+/***********************************************************************************************************************/
 
 .content {
   -webkit-border-radius: 0 0 1rem 0;
@@ -171,7 +251,7 @@ body {
   align-items: center;
   flex-direction: column;
 }
-
+/***********************************************************************************************************************/
 .tituloMas {
   margin: 2rem;
   font-size: 2rem;
@@ -181,22 +261,20 @@ body {
   height: 3rem;
 }
 
-.tituloMas h1{
-  color: #00000061;
-  text-shadow: #27b27d 1px 2px 2px;
+.tituloMas h1 {
+  color: #39bd8b;
+  text-shadow: #39bd8ac4 1px 2px 3px;
   font-style: italic;
   font-weight: 600;
- -webkit-user-select: none;
- user-select: none;
-
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .btnAgregarTarea {
-  background-color: #27b27d;
-  color: white;
+  color: #27b27d;
   font-size: 3rem;
   padding: 0.5rem;
-  
+
   width: 3rem;
   display: flex;
   font-weight: 800;
@@ -208,11 +286,9 @@ body {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
-  
 }
 
 .btnAgregarTarea:hover div {
-  
   animation-fill-mode: forwards;
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
@@ -226,6 +302,8 @@ body {
   transform: rotate(360deg);
 }
 
+/***********************************************************************************************************************/
+
 .tareas {
   display: flex;
   flex-direction: column;
@@ -234,7 +312,7 @@ body {
   width: 90%;
   height: 66%;
   overflow-y: auto;
-  padding: 0 .5rem 0 .5rem ;
+  padding: 0 0.5rem 0 0.5rem;
   align-items: center;
 }
 
@@ -246,7 +324,7 @@ body {
   width: 95%;
   position: relative;
   max-height: 10rem;
-  
+
   -webkit-border-radius: 0.5rem;
   -moz-border-radius: 0.5rem;
   -ms-border-radius: 0.5rem;
@@ -264,18 +342,14 @@ body {
   transform: scale(1.01);
 }
 
-.tareas li:hover .todoLeft .todoTitle{
+.tareas li:hover .todoLeft .todoTitle {
   font-weight: 600;
 }
 
-
-.completedTask{
+.completedTask {
   color: #8d8d8d;
   text-decoration: line-through;
 }
-
-
-
 
 .checkboxTodo {
   -webkit-transform: scale(1.2);
@@ -290,11 +364,11 @@ body {
 
   height: 100%;
   align-items: center;
-  margin: .5rem 0 .5rem 0;
+  margin: 0.5rem 0 0.5rem 0;
   gap: 0.5rem;
 }
 
-.todoTitle {  
+.todoTitle {
   overflow-wrap: break-word;
   white-space: pre-wrap;
   margin-right: 0.3rem;
@@ -314,8 +388,8 @@ body {
   -webkit-user-select: none;
   user-select: none;
   border: 1px rgba(0, 0, 0, 0.5) solid;
-  padding: .3rem;
-  
+  padding: 0.3rem;
+
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   -ms-border-radius: 1rem;
@@ -326,30 +400,27 @@ body {
 .todoPriority {
   display: flex;
   height: 100%;
-  min-width: .2rem;
+  min-width: 0.2rem;
   border: 1px rgba(0, 0, 0, 0.5) solid;
-  -webkit-border-radius: .5rem 0 0 0.5rem;
-  -moz-border-radius: .5rem 0 0 0.5rem;
-  -ms-border-radius: .5rem 0 0 0.5rem;
-  -o-border-radius: .5rem 0 0 0.5rem;
-  border-radius: .5rem 0 0 0.5rem;
+  -webkit-border-radius: 0.5rem 0 0 0.5rem;
+  -moz-border-radius: 0.5rem 0 0 0.5rem;
+  -ms-border-radius: 0.5rem 0 0 0.5rem;
+  -o-border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 0.5rem 0 0 0.5rem;
   -webkit-user-select: none;
   user-select: none;
 }
 
-.priorityBajo{
+.priorityBajo {
   background-color: #39bd8b;
-  
-
 }
 
-.priorityMedio{
+.priorityMedio {
   background-color: #f0f026;
 }
-.priorityAlto{
+.priorityAlto {
   background-color: #fa6b6b;
 }
-
 
 .editDeleteContainer {
   display: flex;
@@ -366,9 +437,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  
+
   border: 1px solid rgba(0, 0, 0, 0.5);
-  
+
   -webkit-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   -moz-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   -ms-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -376,7 +447,7 @@ body {
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
-.editTodoContainer:hover i{
+.editTodoContainer:hover i {
   -webkit-transform: scale(1.3);
   -moz-transform: scale(1.3);
   -ms-transform: scale(1.3);
@@ -389,7 +460,7 @@ body {
   transition: all 0.2s;
 }
 
-.editTodoContainer i{
+.editTodoContainer i {
   pointer-events: none;
 }
 
@@ -407,10 +478,9 @@ body {
   -o-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  
 }
 
-.deleteTodoContainer:hover i{
+.deleteTodoContainer:hover i {
   -webkit-transform: scale(1.3);
   -moz-transform: scale(1.3);
   -ms-transform: scale(1.3);
@@ -423,9 +493,11 @@ body {
   transition: all 0.2s;
 }
 
-.deleteTodoContainer i{
+.deleteTodoContainer i {
   pointer-events: none;
 }
+
+/***********************************************************************************************************************/
 
 @media (max-width: 1200px) {
   .main {
@@ -448,8 +520,6 @@ body {
     -o-border-radius: 0;
     border-radius: 0;
   }
-
-
 
   .header-logo i {
     font-size: 1.8rem;
@@ -480,20 +550,12 @@ body {
     border-radius: 0;
   }
 
-  .tareas{
+  .tareas {
     height: 70%;
   }
-
-
-
-
-
-
-  
-
-  
-
 }
+
+/***********************************************************************************************************************/
 
 @media (max-width: 900px) {
   .main {
@@ -504,19 +566,17 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .menu {        
+  .menu {
     display: none;
   }
 
-  .contentDetras{
+  .contentDetras {
     pointer-events: none;
     -webkit-filter: blur(5px);
     filter: blur(5px);
-    
-}
+  }
 
-  .menuOpened{
-    
+  .menuOpened {
     grid-column: 1;
     display: flex;
     position: fixed;
@@ -527,36 +587,25 @@ body {
     border-right: none;
   }
 
-
-  
-
   .content {
     width: 100%;
   }
 
-  .headerMenuButtons{
+  .headerMenuButtons {
     display: flex;
-    
   }
 
-  .menuAbierto{
+  .menuAbierto {
     display: none;
     font-size: 3.5rem;
   }
-  
-  .menuCerrado{
+
+  .menuCerrado {
     display: flex;
-    
-  
-  
   }
-
-
-
-
-
 }
 
+/***********************************************************************************************************************/
 
 @media (max-width: 500px) {
   .tituloMas {
@@ -588,27 +637,22 @@ body {
     gap: 0.3rem;
   }
 
-  .todoFecha{
-    font-size: .7rem;
+  .todoFecha {
+    font-size: 0.7rem;
   }
 
   .editTodoContainer,
-  .deleteTodoContainer{
+  .deleteTodoContainer {
     height: 2rem;
     width: 2rem;
   }
 
-  .deleteTodoContainer{
-    margin-right: .1rem;
+  .deleteTodoContainer {
+    margin-right: 0.1rem;
   }
 
-  .menuOpened{
+  .menuOpened {
     width: 66%;
     font-size: 1.2rem;
   }
-
-
-
-
-
 }

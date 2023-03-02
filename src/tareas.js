@@ -1,14 +1,14 @@
 const {v4:uuid} = require('uuid')
 
-export default class todos{
+export default class Todos{
 
     
-    constructor(title, dueDate, priority/* project*/){
+    constructor(title, dueDate, priority){
         this.id = uuid();
         this.title = title;        
         this.dueDate = dueDate;
         this.priority = priority;
-        //this.project = project;
+        this.project = "Ninguna";
         this.completed = false;
     }
 
@@ -25,6 +25,8 @@ export default class todos{
 
    get getCompleted(){return this.completed};
 
+   get getProject(){return this.project};
+
     //SETTERS
 
 
@@ -37,7 +39,7 @@ export default class todos{
 
    set setCompleted(newCompleted){this.completed = newCompleted};
 
-    //setProject = (newProject) => this.project = newProject;
+   set setProject(newProject){this.project = newProject};
 
 
 

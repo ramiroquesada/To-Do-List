@@ -17,23 +17,6 @@ let msgNuevaTarea = document.getElementById("msgNuevaTarea");
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 abrirModalAgregarTarea.addEventListener('click', ()=>{
     modal.style.display = "block";    
     modalNuevaTarea.style.display = "flex";
