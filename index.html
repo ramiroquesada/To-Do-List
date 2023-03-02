@@ -90,15 +90,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
               <option value="Alto">Alto</option>
             </select>
             <label for="todocategoria">Asignar Categoria</label>
-            <select id="selectCategoria"
-              name="categoria"
-              title="todocategoria"              
-            >
-              
-              <option value="Ninguna" datass="xX" selected>Ninguna</option>
-
-
-              
+            <select id="selectCategoria" name="categoria" title="todocategoria">
+              <option value="Ninguna" datass="0">Ninguna</option>
             </select>
           </form>
 
@@ -138,12 +131,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
       <div class="main-content">
         <div class="menu" id="menuPrincipal">
           <p class="menuPrincipalTitle">//CATEGORÍAS</p>
-          <ul  id="dinamicUl">
-            
-          </ul>
-
-
-         
+          <ul id="dinamicUl"></ul>
 
           <div class="addProjectContainer">
             <div class="addNuevaBtn" id="addNuevaBtn">
@@ -155,13 +143,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
 
             <div class="projectInput" id="projectInput">
               <form id="newProjectForm">
-              <input
-                type="text"
-                name="projectName"
-                id="projectName"
-                title="Nombre del proyecto"
-              />
-            </form>
+                <input
+                  type="text"
+                  name="projectName"
+                  id="projectName"
+                  title="Nombre del proyecto"
+                />
+              </form>
               <div class="acceptCancelProject">
                 <i class="fa-solid fa-check" id="acceptNewProject"></i>
                 <i class="fa-solid fa-ban" id="cancelNewProject"></i>
