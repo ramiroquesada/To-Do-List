@@ -77,30 +77,24 @@ export default class Proyectos {
   }
 }
 
-let selectCategoria = document.getElementById('selectCategoria')
+let selectCategoria = document.getElementById("selectCategoria");
 
 const createProject = () => {
   let inputValue = projectNameInput.value;
   let project = new Proyectos(inputValue);
-  
+
   projectsArray.push(project);
-  
+
   closeNewProjectFunction();
 
   updateMenu();
 
   let option = document.createElement("option");
   option.setAttribute("value", `${project.getNombre}`);
-  option.setAttribute("data", `${project.getId}`);
-  option.innerHTML= `${project.getNombre}`;
+  option.setAttribute("datass", `${project.getId}`);
+  option.innerHTML = `${project.getNombre}`;
   selectCategoria.append(option);
-
-
 };
-
-
-
-
 
 const nuevoProyecto = () => {
   addNuevaBtn.style.display = "none";
@@ -131,10 +125,11 @@ export function updateMenu() {
   dinamicUl.appendChild(mainLi);
 
   projectsArray.forEach((project) => {
-    let dinamicLi = document.createElement("li");
-    console.log(dinamicLi);
-    dinamicLi.classList.add("menuLi");
-    dinamicLi.innerHTML = `<span class="menuTitle">${project.getNombre}</span><span class="numberOfTodos"">${project.getTodos.length}</span>`;
-    dinamicUl.appendChild(dinamicLi);
+    if (project.id != 0) {
+      let dinamicLi = document.createElement("li");
+      dinamicLi.classList.add("menuLi");
+      dinamicLi.innerHTML = `<span class="menuTitle">${project.getNombre}</span><span class="numberOfTodos"">${project.getTodos.length}</span>`;
+      dinamicUl.appendChild(dinamicLi);
+    }
   });
 }

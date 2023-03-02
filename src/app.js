@@ -73,12 +73,11 @@ let getTodoById = (id) => {
   });
 };
 
-
-let getCategoryById = (id) =>{
-  return projectsArray.find(function (project){
-    return project.id === id
-  })
-}
+const getProjectById = (id) => {
+  return projectsArray.find(function (project) {
+    return project.id == id;
+  });
+};
 
 //EDITAR TAREA
 
@@ -95,17 +94,40 @@ let editTodo = (e) => {
   let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
   let todoprioridadEdit = document.getElementById("todoprioridadEdit");
   let selectCategoria = document.getElementById("selectCategoria");
-  let categoriaId = selectCategoria.options[selectCategoria.selectedIndex].getAttribute('datass');
-  console.log(categoriaId)
-  
+  let categoriaId =
+    selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
+      "datass"
+    );
+
+  let newCategoriaId = 0;
+
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
   todoprioridadEdit.value = todo.getPriority;
   selectCategoria.value = todo.getProject;
-  
+
+  selectCategoria.addEventListener("change", () => {
+    newCategoriaId =
+      selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
+        "datass"
+      );
+    console.log(newCategoriaId);
+  });
 
   let modificarTodo = () => {
-   
+    let nuevoProyecto = getProjectById(newCategoriaId);
+
+    let proyectoActual = getProjectById(categoriaId);
+
+    if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
+      nuevoProyecto.todos.push(todo);
+      proyectoActual.todos.splice(todoIdFromLi, 1);
+    } else if (proyectoActual.id == 0 && nuevoProyecto.id > 0) {
+      nuevoProyecto.todos.push(todo);
+    } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
+      proyectoActual.todos.splice(todoIdFromLi, 1);
+    }
+
     todo.setTitle = todonameEdit.value;
     todo.setDueDate = inputFechaLimiteEdit.value;
     todo.setPriority = todoprioridadEdit.value;
@@ -124,8 +146,6 @@ let editTodo = (e) => {
       timer: 2000,
       heightAuto: false,
     });
-
-    
   };
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
@@ -254,18 +274,22 @@ let renderTodos = () => {
 
 //TESTING
 
+let ninguna = new Proyectos("Ninguna");
+ninguna.todos = todosArray;
+projectsArray.push(ninguna);
+
 let tarea1 = new Todos("Ir al baño", "2024-03-02", "Alto");
 let tarea2 = new Todos(
-  "Hola me gusta aprender javascript nashe",
+  "Practicar javascript orientado a objetos",
   "2023-02-28",
   "Medio"
 );
 
-let tarea3 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea4 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea5 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea6 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
-let tarea7 = new Todos("Hacer kaka", "1996-11-06", "Bajo");
+let tarea3 = new Todos("Hacer judo", "1996-11-06", "Bajo");
+let tarea4 = new Todos("Espiar a la unión sovietica", "1996-11-06", "Medio");
+let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
+let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
+let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
 
 todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
 
