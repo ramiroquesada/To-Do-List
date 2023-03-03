@@ -1,4 +1,4 @@
-const {v4:uuid} = require('uuid')
+export const {v4:uuid} = require('uuid')
 
 export default class Todos{
 
@@ -28,7 +28,7 @@ export default class Todos{
    get getProject(){return this.project};
 
     //SETTERS
-
+ 
 
 
    set setTitle(newTitle){ this.title = newTitle};    

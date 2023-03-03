@@ -21,6 +21,7 @@ export const projectsArray = [];
 
 let tituloPrevio = document.title;
 
+
 window.addEventListener("blur", () => {
   tituloPrevio = document.title;
   document.title = "No te vayas 😢";
@@ -136,16 +137,13 @@ let editTodo = (e) => {
     if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
       proyectoActual.todos.splice(origenTodoIndex, 1);
       nuevoProyecto.todos.push(todo);
-      console.log(proyectoActual.todos);
-      console.log(nuevoProyecto.todos);
+      
     } else if (proyectoActual.id == 0 && nuevoProyecto != proyectoActual) {
       nuevoProyecto.todos.push(todo);
-      console.log(proyectoActual.todos);
-      console.log(nuevoProyecto.todos);
+      
     } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
       proyectoActual.todos.splice(origenTodoIndex, 1);
-      console.log(proyectoActual.todos);
-      console.log(nuevoProyecto.todos);
+      
     }
 
     todo.setTitle = todonameEdit.value;
@@ -248,7 +246,14 @@ let formatearFecha = (fechalimite) => {
 
 //RENDERIZA LOS TODOS DEL ARRAY TODOSARRAY
 
-let renderTodos = () => {
+export const renderTodos = (proyecto) => {
+  //console.log(proyecto);
+  if(proyecto == undefined){
+    proyecto = projectsArray[0];
+  }else{
+    proyecto = proyecto.todos;
+  }
+
   let tareas = document.getElementById("tareas");
   tareas.innerHTML = ``;
 
@@ -267,8 +272,9 @@ let renderTodos = () => {
     divMsg.appendChild(todosVacioMsg);
 
     contentPrincipal.appendChild(divMsg);
-  } else {
-    todosArray.forEach((todo) => {
+  } else {    
+    console.log(proyecto)
+    proyecto.forEach((todo) => {
       let tareali = document.createElement("li");
       tareali.setAttribute("id", todo.id);
 
@@ -306,12 +312,12 @@ let renderTodos = () => {
       tareas.appendChild(tareali);
     });
 
-    updateMenu();
+    
+    
   }
 };
 
 //TESTING
-
 let ninguna = new Proyectos("Ninguna");
 ninguna.todos = todosArray;
 projectsArray.push(ninguna);
@@ -334,3 +340,4 @@ todosArray.push(
 );
 
 renderTodos();
+updateMenu();
