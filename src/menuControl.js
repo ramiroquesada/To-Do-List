@@ -44,14 +44,6 @@ window.addEventListener("resize", () => {
   }
 });
 
-//control de contador de todos
-
-// let numberOfTodos = document.getElementById("numberOfTodos");
-
-// export const updateTodosCount = () => {
-//   numberOfTodos.innerText = `${todosArray.length}`;
-// };
-
 export default class Proyectos {
   static id = 0;
   constructor(nombre) {
@@ -79,7 +71,8 @@ export default class Proyectos {
 
 let selectCategoria = document.getElementById("selectCategoria");
 
-const createProject = () => {
+const createProject = (e) => {
+  e.preventDefault();
   let inputValue = projectNameInput.value;
   let project = new Proyectos(inputValue);
 
@@ -96,11 +89,13 @@ const createProject = () => {
   selectCategoria.append(option);
 };
 
-const nuevoProyecto = () => {
+const nuevoProyecto = (e) => {
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
 
   acceptNewProject.addEventListener("click", createProject);
+
+  e.preventDefault();
 };
 
 addProjectBtn.addEventListener("click", nuevoProyecto);
@@ -126,9 +121,19 @@ export function updateMenu() {
 
   projectsArray.forEach((project) => {
     if (project.id != 0) {
+      let projectIdForEvent = project.id + 1000;
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
-      dinamicLi.innerHTML = `<span class="menuTitle">${project.getNombre}</span><span class="numberOfTodos"">${project.getTodos.length}</span>`;
+      dinamicLi.innerHTML = `<span></span><span class="menuTitle" id="${projectIdForEvent}">${project.getNombre}</span><span class="numberOfTodos"">${project.getTodos.length}</span>`;
+
+      let projectNameBtn = document.getElementById(`${projectIdForEvent}`);
+
+      // let showProjectTodos = ()=>{
+
+      // }
+
+      // projectNameBtn.addEventListener("click", showProjectTodos);
+
       dinamicUl.appendChild(dinamicLi);
     }
   });

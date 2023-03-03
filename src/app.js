@@ -17,25 +17,20 @@ export const todosArray = [];
 
 export const projectsArray = [];
 
-
 //cambio nombre de pestaña cuando se va xDD
 
 let tituloPrevio = document.title;
 
-window.addEventListener("blur", ()=>{
+window.addEventListener("blur", () => {
   tituloPrevio = document.title;
-  document.title = 'No te vayas 😢';
-})
+  document.title = "No te vayas 😢";
+});
 
-window.addEventListener("focus", ()=>{
+window.addEventListener("focus", () => {
   document.title = tituloPrevio;
-})
-
-
-
+});
 
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
-let tareas = document.getElementById("tareas");
 
 let crearTarea = () => {
   let fechalimite = document.getElementById("inputFechaLimite").value;
@@ -111,26 +106,24 @@ let editTodo = (e) => {
   let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
   let todoprioridadEdit = document.getElementById("todoprioridadEdit");
   let selectCategoria = document.getElementById("selectCategoria");
- 
+
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
   todoprioridadEdit.value = todo.getPriority;
   selectCategoria.value = todo.getProject;
 
   let categoriaId =
-  selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
-    "datass"
-  );
+    selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
+      "datass"
+    );
 
-let newCategoriaId = categoriaId;
-
+  let newCategoriaId = categoriaId;
 
   selectCategoria.addEventListener("change", () => {
     newCategoriaId =
       selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
         "datass"
       );
-    console.log(newCategoriaId);
   });
 
   let modificarTodo = () => {
@@ -138,26 +131,21 @@ let newCategoriaId = categoriaId;
 
     let proyectoActual = getProjectById(categoriaId);
 
-    if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
-      nuevoProyecto.todos.push(todo);
-      proyectoActual.todos.splice(todoIdFromLi, 1);
-      console.log("actual !0 & !0 nuevo - NUEVO") ;
-      console.log(nuevoProyecto.todos );
-      console.log("actual !0 & !0 viejo - VIEJO") ;
-      console.log(proyectoActual.todos );
+    let origenTodoIndex = proyectoActual.todos.indexOf(todo);
 
-    } else if (proyectoActual.id == 0 && nuevoProyecto.id != proyectoActual.id) {
+    if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
+      proyectoActual.todos.splice(origenTodoIndex, 1);
       nuevoProyecto.todos.push(todo);
-      console.log("actual 0 & !0 nuevo - NUEVO") ;
-      console.log(nuevoProyecto.todos );
-      console.log("actual 0 & !0 viejo - VIEJO") ;
-      console.log(proyectoActual.todos );
+      console.log(proyectoActual.todos);
+      console.log(nuevoProyecto.todos);
+    } else if (proyectoActual.id == 0 && nuevoProyecto != proyectoActual) {
+      nuevoProyecto.todos.push(todo);
+      console.log(proyectoActual.todos);
+      console.log(nuevoProyecto.todos);
     } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
-      proyectoActual.todos.splice(todoIdFromLi, 1);
-      console.log("actual !0 & 0 nuevo - NUEVO") ;
-      console.log(nuevoProyecto.todos );
-      console.log("actual !0 & 0 viejo - VIEJO") ;
-      console.log(proyectoActual.todos );
+      proyectoActual.todos.splice(origenTodoIndex, 1);
+      console.log(proyectoActual.todos);
+      console.log(nuevoProyecto.todos);
     }
 
     todo.setTitle = todonameEdit.value;
@@ -181,7 +169,6 @@ let newCategoriaId = categoriaId;
   };
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
-
   btnAceptarCambios.addEventListener("click", modificarTodo, { once: true });
 };
 
@@ -262,46 +249,67 @@ let formatearFecha = (fechalimite) => {
 //RENDERIZA LOS TODOS DEL ARRAY TODOSARRAY
 
 let renderTodos = () => {
+  let tareas = document.getElementById("tareas");
   tareas.innerHTML = ``;
 
-  todosArray.forEach((todo) => {
-    let tareali = document.createElement("li");
-    tareali.setAttribute("id", todo.id);
+  if (todosArray.length == 0) {
+    updateMenu();
+    tareas.remove();
 
-    //clase de prioridad dependiendo de la variable
+    let contentPrincipal = document.getElementById("contentPrincipal");
+    let divMsg = document.createElement("div");
+    divMsg.classList.add("divMsgTodosVacio");
+    let todosVacioMsg = document.createElement("p");
 
-    tareali.innerHTML = `<div class="todoLeft"><div class="todoPriority ${colorPrioridad(
-      todo.priority
-    )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
-      todo.title
-    }</p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
-      todo.dueDate
-    )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
-    let checkCompletedInput = tareali.querySelector(".checkboxTodo");
+    todosVacioMsg.classList.add("todosVacioMsg");
+    todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente! <span id="svgOrigen">Crea una</span>`;
 
-    let editBtn = tareali.querySelector(".editTodoContainer");
-    editBtn.addEventListener("click", editTodo);
+    divMsg.appendChild(todosVacioMsg);
 
-    let deleteBtn = tareali.querySelector(".deleteTodoContainer");
-    deleteBtn.addEventListener("click", deleteTodo);
+    contentPrincipal.appendChild(divMsg);
+  } else {
+    todosArray.forEach((todo) => {
+      let tareali = document.createElement("li");
+      tareali.setAttribute("id", todo.id);
 
-    checkCompletedInput.addEventListener("change", completeStatus);
+      //clase de prioridad dependiendo de la variable
 
-    if (todo.completed) {
-      let todoTitle = tareali.querySelector(".todoTitle");
-      todoTitle.classList.add("completedTask");
-      let todoFecha = tareali.querySelector(".todoFecha");
-      todoFecha.classList.add("completedTask");
-      let todoPriority = tareali.querySelector(".todoPriority");
-      todoPriority.style.backgroundColor = "grey";
-      editBtn.remove();
+      tareali.innerHTML = `<div class="todoLeft"><div class="todoPriority ${colorPrioridad(
+        todo.priority
+      )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
+        todo.title
+      }  ${
+        todo.project
+      }</p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
+        todo.dueDate
+      )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
+      let checkCompletedInput = tareali.querySelector(".checkboxTodo");
 
-      checkCompletedInput.checked = true;
-    }
+      let editBtn = tareali.querySelector(".editTodoContainer");
+      editBtn.addEventListener("click", editTodo);
 
-    tareas.appendChild(tareali);
-  });
-  updateMenu();
+      let deleteBtn = tareali.querySelector(".deleteTodoContainer");
+      deleteBtn.addEventListener("click", deleteTodo);
+
+      checkCompletedInput.addEventListener("change", completeStatus);
+
+      if (todo.completed) {
+        let todoTitle = tareali.querySelector(".todoTitle");
+        todoTitle.classList.add("completedTask");
+        let todoFecha = tareali.querySelector(".todoFecha");
+        todoFecha.classList.add("completedTask");
+        let todoPriority = tareali.querySelector(".todoPriority");
+        todoPriority.style.backgroundColor = "grey";
+        editBtn.remove();
+
+        checkCompletedInput.checked = true;
+      }
+
+      tareas.appendChild(tareali);
+    });
+
+    updateMenu();
+  }
 };
 
 //TESTING
@@ -323,6 +331,9 @@ let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
 let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
 
-todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
+todosArray.push(
+  tarea1
+  // , tarea2, tarea3, tarea4, tarea5, tarea6, tarea7
+);
 
 renderTodos();
