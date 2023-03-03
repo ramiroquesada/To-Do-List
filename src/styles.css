@@ -122,6 +122,8 @@ body {
   min-width: 50%;
 }
 
+
+
 .menuLi {
   gap: 1rem;
   display: flex;
@@ -129,12 +131,38 @@ body {
   align-items: center;
 }
 
-.menuTitle {
-  margin-left: -0.5rem;
-  font-size: 1.5rem;
+
+
+.projectMenuLeft{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+/* .projectMenuRight{
+  
+  align-self: flex-end;
+} */
+
+.menuProjectCircle{
+  color: transparent;
 }
 
-.menuLi .menuTitle:hover {
+.menuLi:hover .projectMenuLeft .menuProjectCircle{
+  color: #0000004a;
+}
+
+
+.menuProjectSelected{
+  color: #0000004a;
+}
+
+.menuTitle {
+  
+  font-size: 1.5rem;
+  word-wrap: break-word;
+}
+
+.menuLi:hover .menuTitle {
   cursor: pointer;
   font-weight: 800;
 }
@@ -142,7 +170,7 @@ body {
 .numberOfTodos {
   background-color: #fe9393;
   padding: 4px;
-  width: 16px;
+  min-width: 16px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;

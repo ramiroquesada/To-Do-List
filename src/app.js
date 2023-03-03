@@ -278,9 +278,7 @@ let renderTodos = () => {
         todo.priority
       )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
         todo.title
-      }  ${
-        todo.project
-      }</p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
+      } </p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
         todo.dueDate
       )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
       let checkCompletedInput = tareali.querySelector(".checkboxTodo");
@@ -332,8 +330,7 @@ let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
 
 todosArray.push(
-  tarea1
-  // , tarea2, tarea3, tarea4, tarea5, tarea6, tarea7
+  tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7
 );
 
 renderTodos();

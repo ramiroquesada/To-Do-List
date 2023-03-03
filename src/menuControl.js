@@ -114,9 +114,8 @@ export function updateMenu() {
   dinamicUl.innerHTML = ``;
   let mainLi = document.createElement("li");
   mainLi.classList.add("menuLi");
-  mainLi.innerHTML = `<span><i class="fa-solid fa-circle"></i></span
-    ><span class="menuTitle">Todos</span
-    ><span class="numberOfTodos">${todosArray.length}</span>`;
+  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle menuProjectSelected"><i class="fa-solid fa-circle"></i></span><span class="menuTitle">Todos</span
+    ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArray.length}</span></div>`;
   dinamicUl.appendChild(mainLi);
 
   projectsArray.forEach((project) => {
@@ -124,7 +123,7 @@ export function updateMenu() {
       let projectIdForEvent = project.id + 1000;
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
-      dinamicLi.innerHTML = `<span></span><span class="menuTitle" id="${projectIdForEvent}">${project.getNombre}</span><span class="numberOfTodos"">${project.getTodos.length}</span>`;
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle"></i></span><span class="menuTitle" id="${projectIdForEvent}">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${project.getTodos.length}</span></div>`;
 
       let projectNameBtn = document.getElementById(`${projectIdForEvent}`);
 
