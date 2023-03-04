@@ -1,7 +1,6 @@
-import { projectsArray, todosArray, renderTodos} from "./app";
+import { projectsArray, todosArray, renderTodos } from "./app";
 
 import "./styles.css";
-
 
 let menuCerrado = document.getElementById("menuCerrado");
 let menuAbierto = document.getElementById("menuAbierto");
@@ -73,12 +72,10 @@ export default class Proyectos {
 let selectCategoria = document.getElementById("selectCategoria");
 
 const createProject = () => {
- 
   let inputValue = projectNameInput.value;
-  let project = new Proyectos(inputValue);
+  const project = new Proyectos(inputValue);
 
   projectsArray.push(project);
-  console.log(projectsArray);
 
   closeNewProjectFunction();
 
@@ -91,13 +88,11 @@ const createProject = () => {
   selectCategoria.append(option);
 };
 
-const nuevoProyecto = (e) => {
+const nuevoProyecto = () => {
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
 
   acceptNewProject.addEventListener("click", createProject);
-
-  
 };
 
 addProjectBtn.addEventListener("click", nuevoProyecto);
@@ -113,59 +108,91 @@ cancelNewProject.addEventListener("click", closeNewProjectFunction);
 let dinamicUl = document.getElementById("dinamicUl");
 
 export function updateMenu() {
-  let circleSpanArray = [];
-  let projectIdForEventInTitle = projectsArray[0].id + 1000;
-  let idForSpan = projectsArray[0].id  + 3000;
+  let circleIArray = [];
   
+  let projectIdForEventInTitle = projectsArray[0].id + 1000;
+  let idForSpan = projectsArray[0].id + 3000;
+
   dinamicUl.innerHTML = ``;
   let mainLi = document.createElement("li");
-  mainLi.classList.add("menuLi");  
-  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle menuProjectSelected" id="${idForSpan}"><i class="fa-solid fa-circle"></i></span><span class="menuTitle" id="${projectIdForEventInTitle}">Todos</span
+  mainLi.classList.add("menuLi");
+  mainLi.setAttribute("id", `${projectIdForEventInTitle}`);
+  mainLi.setAttribute("projectName", `Ninguna`);
+  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle" id="${idForSpan}"><i class="fa-solid fa-circle" id="iCircleMainLi"></i></span><span class="menuTitle" >Todos</span
     ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArray.length}</span></div>`;
+
   dinamicUl.appendChild(mainLi);
+ 
+
+
   let circleSpan = document.getElementById(`${idForSpan}`);
-  circleSpanArray.push(circleSpan);
+  let circleI = circleSpan.firstElementChild;
+  circleIArray.push(circleI);
 
   let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
 
-projectNameBtn.addEventListener("click", renderTodos(todosArray));
+  
+    
+  
 
+  projectNameBtn.addEventListener("click", () => {
+    renderTodos(projectsArray[0]);
 
-
-
-
+    circleIArray.forEach((circle) => {
+      circle.classList.remove("menuProjectSelected");
+      
+    });
+    circleI.classList.add("menuProjectSelected");
+    console.log(circleI)
+  });
 
   projectsArray.forEach((project) => {
     if (project.id != 0) {
       let projectIdForEventInTitle = project.id + 1000;
       let idForSpan = project.id + 3000;
-      
+      let idForLi = project.id + 6000;
+
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle" id="${idForSpan}"><i class="fa-solid fa-circle"></i></span><span class="menuTitle" id="${projectIdForEventInTitle}">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${project.getTodos.length}</span></div>`;
-
+      dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
+      dinamicLi.setAttribute("projectName", `${project.getNombre}`);
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle" id="${idForSpan}"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${project.getTodos.length}</span></div>`;
 
       dinamicUl.appendChild(dinamicLi);
-      circleSpanArray.push(dinamicLi);
 
-      let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
+      let projectNameBtn = document.getElementById(
+        `${projectIdForEventInTitle}`
+      );
 
       let circleSpan = document.getElementById(`${idForSpan}`);
 
-      circleSpanArray.push(circleSpan);
+      let circleI = circleSpan.firstElementChild;
+      circleIArray.push(circleI);
+      
 
       /////////////////////////////////////////////////////////////////////////////////////////////
-
-
       
 
-      projectNameBtn.addEventListener("click", renderTodos(project));
-      console.log(project)
+
+
+      projectNameBtn.addEventListener("click", () => {
+        renderTodos(project);
+
+        circleIArray.forEach((circle) => {
+          circle.classList.remove("menuProjectSelected");
+          
+        });
+        circleI.classList.add("menuProjectSelected");
+        console.log(circleI)
+
+        
+      });
+      circleIArray = [];
       /////////////////////////////////////////////////////////////////////////////////////////////
-      
-      
-    
-    
-  };
+    }
+  });
 
-})};
+ 
+
+
+}

@@ -138,17 +138,14 @@ body {
   align-items: center;
   gap: .5rem;
 }
-/* .projectMenuRight{
-  
-  align-self: flex-end;
-} */
+
 
 .menuProjectCircle{
   color: transparent;
 }
 
-.menuLi:hover .projectMenuLeft .menuProjectCircle{
-  color: #0000004a;
+.menuLi:hover .projectMenuLeft .menuProjectCircle i:not(.menuProjectSelected){
+  color: #0000001a;
 }
 
 
