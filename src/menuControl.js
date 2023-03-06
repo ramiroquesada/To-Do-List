@@ -1,4 +1,9 @@
-import { projectsArray, todosArray, renderTodos } from "./app";
+import {
+  projectsArray,
+  todosArray,
+  renderTodos,
+  menuSeleccionado,
+} from "./app";
 
 import "./styles.css";
 
@@ -73,13 +78,69 @@ let selectCategoria = document.getElementById("selectCategoria");
 
 const createProject = () => {
   let inputValue = projectNameInput.value;
+
+  if (inputValue == "") {
+    let timerInterval;
+    Swal.fire({
+      heightAuto: false,
+      title: "Debe tener un nombre!",
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+      }
+    });
+
+    return;
+  }
+
+  let nombreDeTareaExistente = projectsArray.some(project => project.nombre == inputValue);
+
+
+  if (nombreDeTareaExistente) {
+    let timerInterval;
+    Swal.fire({
+      heightAuto: false,
+      title: "El nombre no puede ser igual al de otro proyecto",
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+      }
+    });
+
+    return;
+  }
+
+
+
+
   const project = new Proyectos(inputValue);
 
   projectsArray.push(project);
 
   closeNewProjectFunction();
 
-  updateMenu();
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Categoría creada!",
+    showConfirmButton: false,
+    timer: 2000,
+    heightAuto: false,
+  });
+
+  renderTodos(project)
+  updateMenu(project);
+
 
   let option = document.createElement("option");
   option.setAttribute("value", `${project.getNombre}`);
@@ -106,57 +167,69 @@ const closeNewProjectFunction = () => {
 cancelNewProject.addEventListener("click", closeNewProjectFunction);
 
 let dinamicUl = document.getElementById("dinamicUl");
+let circleIArray = [];
 
-export function updateMenu() {
-  let circleIArray = [];
+
+
+
+export function updateMenu(proyecto) {
   
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
-  let idForSpan = projectsArray[0].id + 3000;
+  
+  let todosArrayUncompleted = todosArray.filter(todos => todos.completed == false);
+  
+  
 
   dinamicUl.innerHTML = ``;
   let mainLi = document.createElement("li");
   mainLi.classList.add("menuLi");
   mainLi.setAttribute("id", `${projectIdForEventInTitle}`);
   mainLi.setAttribute("projectName", `Ninguna`);
-  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle" id="${idForSpan}"><i class="fa-solid fa-circle" id="iCircleMainLi"></i></span><span class="menuTitle" >Todos</span
-    ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArray.length}</span></div>`;
+  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="iCircleI"></i></span><span class="menuTitle" >Todos</span
+    ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArrayUncompleted.length}</span></div>`;
 
   dinamicUl.appendChild(mainLi);
- 
-
-
-  let circleSpan = document.getElementById(`${idForSpan}`);
-  let circleI = circleSpan.firstElementChild;
-  circleIArray.push(circleI);
-
   let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
 
-  
-    
-  
+
+  let circleI = document.getElementById(`iCircleI`);
+
+  circleIArray.push(circleI);
+
+  if (proyecto == projectsArray[0]){
+    circleI.classList.add("menuProjectSelected");
+  }
+
+  if (projectsArray.length == 1) {
+    circleI.classList.add("menuProjectSelected");
+  }
 
   projectNameBtn.addEventListener("click", () => {
     renderTodos(projectsArray[0]);
 
     circleIArray.forEach((circle) => {
       circle.classList.remove("menuProjectSelected");
-      
     });
+    
     circleI.classList.add("menuProjectSelected");
-    console.log(circleI)
+
+    
   });
 
   projectsArray.forEach((project) => {
     if (project.id != 0) {
-      let projectIdForEventInTitle = project.id + 1000;
-      let idForSpan = project.id + 3000;
+
+      let projectTodosUncompleted = project.getTodos.filter(todos => todos.completed == false);
+
+      let projectIdForEventInTitle = project.id;
+     
       let idForLi = project.id + 6000;
 
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
       dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
       dinamicLi.setAttribute("projectName", `${project.getNombre}`);
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle" id="${idForSpan}"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${project.getTodos.length}</span></div>`;
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${projectTodosUncompleted.length}</span></div>`;
 
       dinamicUl.appendChild(dinamicLi);
 
@@ -164,35 +237,30 @@ export function updateMenu() {
         `${projectIdForEventInTitle}`
       );
 
-      let circleSpan = document.getElementById(`${idForSpan}`);
-
-      let circleI = circleSpan.firstElementChild;
+      let circleI = document.getElementById(`${idForLi}`);
+     
       circleIArray.push(circleI);
-      
 
       /////////////////////////////////////////////////////////////////////////////////////////////
-      
 
+        if (project == proyecto){
+          circleI.classList.add("menuProjectSelected");
+        }
 
 
       projectNameBtn.addEventListener("click", () => {
         renderTodos(project);
 
+        
+
         circleIArray.forEach((circle) => {
           circle.classList.remove("menuProjectSelected");
-          
         });
         circleI.classList.add("menuProjectSelected");
-        console.log(circleI)
-
         
       });
-      circleIArray = [];
+
       /////////////////////////////////////////////////////////////////////////////////////////////
     }
   });
-
- 
-
-
 }

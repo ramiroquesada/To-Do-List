@@ -359,12 +359,12 @@ body {
 
 .tareas li:hover {
   background-color: rgb(201, 221, 215);
-  border-bottom: #27b27d 3px solid;
-  -webkit-transform: scale(1.01);
+  /* border-bottom: #27b27d 3px solid ; */
+  /* -webkit-transform: scale(1.01);
   -moz-transform: scale(1.01);
   -ms-transform: scale(1.01);
   -o-transform: scale(1.01);
-  transform: scale(1.01);
+  transform: scale(1.01); */
 }
 
 .tareas li:hover .todoLeft .todoTitle {

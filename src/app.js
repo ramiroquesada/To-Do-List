@@ -17,10 +17,11 @@ export const todosArray = [];
 
 export const projectsArray = [];
 
+export const circleIArray = [];
+
 //cambio nombre de pestaña cuando se va xDD
 
 let tituloPrevio = document.title;
-
 
 window.addEventListener("blur", () => {
   tituloPrevio = document.title;
@@ -59,9 +60,37 @@ let crearTarea = () => {
     return;
   }
 
+  let nombreTodoExistente = todosArray.some((todo) => todo.title == todoname);
+
+  if (nombreTodoExistente) {
+    let timerInterval;
+    Swal.fire({
+      heightAuto: false,
+      title: "El nombre de la tarea no puede ser igual a otra",
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+      }
+    });
+
+    return;
+  }
+
   const tarea = new Todos(todoname, fechalimite, todoprioridad);
+
+  if (menuSeleccionado() != projectsArray[0]) {
+    tarea.project = menuSeleccionado().nombre;
+    menuSeleccionado().todos.push(tarea);
+  }
   todosArray.push(tarea);
-  renderTodos();
+
+  renderTodos(menuSeleccionado());
+  updateMenu(menuSeleccionado());
 
   Swal.fire({
     position: "center",
@@ -82,7 +111,7 @@ btnCrearTarea.addEventListener("click", crearTarea);
 
 let getTodoById = (id) => {
   return todosArray.find(function (todo) {
-    return todo.id === id;
+    return todo.id === id
   });
 };
 
@@ -134,16 +163,65 @@ let editTodo = (e) => {
 
     let origenTodoIndex = proyectoActual.todos.indexOf(todo);
 
+    if (todonameEdit.value == "") {
+      let timerInterval;
+      Swal.fire({
+        heightAuto: false,
+        title: "La tarea debe tener un nombre!",
+        timer: 2000,
+        timerProgressBar: true,
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
+
+      return;
+    }
+
+    if (todo.title != todonameEdit.value) {
+      let todonameEditCampo = todonameEdit.value;
+     
+
+      // let todosArrayFiltrado = todosArray.filter(
+      //   (todoarr) => todoarr.title != todonameEditCampo);
+
+      //   console.log
+             
+
+      let nombreTodoExistente = todosArray.some(
+        (todoarr2) => todoarr2.title == todonameEditCampo);
+
+      if (nombreTodoExistente) {
+        let timerInterval;
+        Swal.fire({
+          heightAuto: false,
+          title: "El nombre de la tarea no puede ser igual a otra",
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+          }
+        });
+
+        return;
+      }
+    }
+
     if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
       proyectoActual.todos.splice(origenTodoIndex, 1);
       nuevoProyecto.todos.push(todo);
-      
     } else if (proyectoActual.id == 0 && nuevoProyecto != proyectoActual) {
       nuevoProyecto.todos.push(todo);
-      
     } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
       proyectoActual.todos.splice(origenTodoIndex, 1);
-      
     }
 
     todo.setTitle = todonameEdit.value;
@@ -154,10 +232,8 @@ let editTodo = (e) => {
     modalEditarTarea.style.display = "none";
     modal.style.display = "none";
 
-
-    
-    renderTodos();
-    updateMenu();
+    renderTodos(menuSeleccionado());
+    updateMenu(menuSeleccionado());
 
     Swal.fire({
       position: "center",
@@ -170,7 +246,11 @@ let editTodo = (e) => {
   };
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
-  btnAceptarCambios.addEventListener("click", modificarTodo, { once: true });
+  btnAceptarCambios.addEventListener(
+    "click",
+    modificarTodo
+    //, { once: true }
+  );
 };
 
 //ELIMINAR TAREA
@@ -193,16 +273,17 @@ let deleteTodo = (e) => {
   }).then((result) => {
     if (result.isConfirmed) {
       let todoProjectName = todo.project;
-      
 
-      
-      let todoProjectforDelete = projectsArray.find(x => x.nombre === todoProjectName);
-      
+      let todoProjectforDelete = projectsArray.find(
+        (x) => x.nombre === todoProjectName
+      );
 
-
-      todosArray.splice(todosArray.indexOf(todo), 1); 
-      if(todoProjectforDelete.id > 0){
-        todoProjectforDelete.todos.splice(todoProjectforDelete.todos.indexOf(todo), 1)
+      todosArray.splice(todosArray.indexOf(todo), 1);
+      if (todoProjectforDelete.id > 0) {
+        todoProjectforDelete.todos.splice(
+          todoProjectforDelete.todos.indexOf(todo),
+          1
+        );
       }
 
       // Swal.fire("Borrado!", "La tarea ha sido eliminada.", "success");
@@ -214,8 +295,8 @@ let deleteTodo = (e) => {
         timer: 2000,
         heightAuto: false,
       });
-      renderTodos();
-      updateMenu();
+      renderTodos(menuSeleccionado());
+      updateMenu(menuSeleccionado());
     }
   });
 
@@ -233,26 +314,20 @@ let compararPorPropiedad = (objeto1, objeto2) => {
   }
 };
 
+export const menuSeleccionado = () => {
+  let selectedCategoriaCircle = document.getElementsByClassName(
+    "menuProjectSelected"
+  );
 
-let menuSeleccionado = () =>{
-  let selectedCategoriaCircle = document.getElementsByClassName("menuProjectSelected");
-  
-  console.log(selectedCategoriaCircle)
-
-  let selectedCategoriaLi = selectedCategoriaCircle[0].parentElement.parentElement.parentElement;
-  console.log(selectedCategoriaLi)
-  
-
+  let selectedCategoriaLi =
+    selectedCategoriaCircle[0].parentElement.parentElement.parentElement;
 
   let selectedProject = selectedCategoriaLi.getAttribute("projectname");
- 
-  let selected = projectsArray.find(x => x.nombre === selectedProject);
 
-  return selected
-}
+  let selected = projectsArray.find((x) => x.nombre === selectedProject);
 
-
-
+  return selected;
+};
 
 let completeStatus = (e) => {
   let todoFromLi = e.target.parentElement.parentElement;
@@ -263,11 +338,10 @@ let completeStatus = (e) => {
 
   todosArray.sort(compararPorPropiedad);
   let projectArray = menuSeleccionado().todos;
-  projectArray.sort(compararPorPropiedad)
-  
+  projectArray.sort(compararPorPropiedad);
+
   renderTodos(menuSeleccionado());
-  
-  
+  updateMenu(menuSeleccionado());
 };
 
 //funcion para cambiar variable de clase dependiendo de la prioridad
@@ -298,71 +372,59 @@ let formatearFecha = (fechalimite) => {
 //RENDERIZA LOS TODOS DEL ARRAY TODOSARRAY
 
 export const renderTodos = (proyecto) => {
-  
-  
-  if(proyecto == undefined){
+  if (proyecto == undefined) {
     proyecto = projectsArray[0].todos;
-      
-  }else if(proyecto.id > 0){
+  } else if (proyecto.id > 0) {
     proyecto = proyecto.todos;
-    
-  }
-  else{
+  } else {
     proyecto = proyecto.todos;
   }
 
   let tareas = document.getElementById("tareas");
 
-  if(tareas == null){
+  if (tareas == null) {
     let contentPrincipal = document.getElementById("contentPrincipal");
     let ulTareas = document.createElement("ul");
     ulTareas.classList.add("tareas");
     ulTareas.setAttribute("id", "tareas");
     contentPrincipal.appendChild(ulTareas);
     tareas = ulTareas;
-
   }
-  
+
   tareas.innerHTML = ``;
 
   if (proyecto.length === 0) {
     let contentPrincipal = document.getElementById("contentPrincipal");
     let divMsg2 = document.getElementById("divMsg");
-    updateMenu();
-    if(divMsg2){
+    if (divMsg2) {
       divMsg2.remove();
     }
-    
+
     tareas.remove();
 
-    
     let divMsg = document.createElement("div");
     divMsg.classList.add("divMsgTodosVacio");
-    divMsg.setAttribute("id", "divMsg")
+    divMsg.setAttribute("id", "divMsg");
     let todosVacioMsg = document.createElement("p");
 
     todosVacioMsg.classList.add("todosVacioMsg");
-    
-    if(todosArray.length > 0){
-      todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente en esta categoria!`;
-    }
-    else{
-      todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente!`;
 
+    if (todosArray.length > 0) {
+      todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente en esta categoria!`;
+    } else {
+      todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente!`;
     }
 
     divMsg.appendChild(todosVacioMsg);
 
     contentPrincipal.appendChild(divMsg);
-  } 
-  
-  else {
+  } else {
     let divMsg = document.getElementById("divMsg");
-    if(divMsg){
+    if (divMsg) {
       divMsg.remove();
-    }   
-   
-    proyecto.forEach( (todo) => {
+    }
+
+    proyecto.forEach((todo) => {
       let tareali = document.createElement("li");
       tareali.setAttribute("id", todo.id);
 
@@ -398,13 +460,7 @@ export const renderTodos = (proyecto) => {
       }
 
       tareas.appendChild(tareali);
-
-      
-
     });
-
-    
-    
   }
 };
 
@@ -412,9 +468,6 @@ export const renderTodos = (proyecto) => {
 const ninguna = new Proyectos("Ninguna");
 ninguna.todos = todosArray;
 projectsArray.push(ninguna);
-
-
-
 
 let tarea1 = new Todos("Ir al baño", "2024-03-02", "Alto");
 let tarea2 = new Todos(
@@ -429,29 +482,7 @@ let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
 let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
 
-
-todosArray.push(
-  tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
+todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
 
 renderTodos();
 updateMenu();
-
-// (function() {
-//   // Código que se ejecutará solamente una vez
-  
-//   // Utilizando una variable booleana
-//   let yaEjecutado = false;
-//   if (!yaEjecutado) {
-//     // Código que se ejecutará solamente una vez
-
-//     let iCircleMainLi = document.getElementById("iCircleMainLi");
-//     iCircleMainLi.classList.add("menuProjectSelected");
-
-//     //
-//     yaEjecutado = true;
-//     console.log("1")
-//   }
-// })();
-
-
-
