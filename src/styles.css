@@ -378,7 +378,7 @@ body {
   gap: 1.5rem;
   
   width: 85%;
-  height: 63%;
+  height: calc(80vh - 200px);
   
   overflow-y: auto;
   padding: 0 0.5rem 0 0.5rem;
