@@ -34,6 +34,8 @@ window.addEventListener("focus", () => {
 
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 
+let todoname = document.getElementById("todoname");
+
 let crearTarea = () => {
   let fechalimite = document.getElementById("inputFechaLimite").value;
 
@@ -60,6 +62,32 @@ let crearTarea = () => {
     return;
   }
 
+  var now = new Date();
+  now.setHours(now.getHours() - 24);
+  var fechaActual = now.toISOString().slice(0, 10);
+
+  if (fechalimite < fechaActual) {
+    let timerInterval;
+    Swal.fire({
+      heightAuto: false,
+      title: "La fecha debe ser igual o posterior a hoy!",
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+      }
+    });
+
+    return;
+  }
+
+
+
+
   const tarea = new Todos(todoname, fechalimite, todoprioridad);
 
   if (menuSeleccionado() != projectsArray[0]) {
@@ -82,9 +110,19 @@ let crearTarea = () => {
 
   nuevaTareaForm.reset();
   modal.style.display = "none";
+
+  
 };
 
 btnCrearTarea.addEventListener("click", crearTarea);
+
+todoname.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+
+  }
+})
+
 
 //OBTENER TODO POR ID
 
@@ -101,6 +139,11 @@ const getProjectById = (id) => {
 };
 
 //EDITAR TAREA
+let todonameEdit = document.getElementById("todonameEdit");
+  let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
+  let todoprioridadEdit = document.getElementById("todoprioridadEdit");
+  let selectCategoria = document.getElementById("selectCategoria");
+
 
 let editTodo = (e) => {
   let todoIdFromLi = e.target.parentElement.parentElement.parentElement.id;
@@ -111,10 +154,7 @@ let editTodo = (e) => {
   modalNuevaTarea.style.display = "none";
   modalEditarTarea.style.display = "flex";
 
-  let todonameEdit = document.getElementById("todonameEdit");
-  let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
-  let todoprioridadEdit = document.getElementById("todoprioridadEdit");
-  let selectCategoria = document.getElementById("selectCategoria");
+  
 
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
@@ -207,7 +247,45 @@ let editTodo = (e) => {
       }
     }
 
-    todo.setDueDate = inputFechaLimiteEdit.value;
+
+
+
+    var now = new Date();
+    now.setHours(now.getHours() - 24);
+    var fechaActual = now.toISOString().slice(0, 10);
+  
+    if(todo.getDueDate != inputFechaLimiteEdit.value){
+      if (inputFechaLimiteEdit.value < fechaActual) {
+        let timerInterval;
+        Swal.fire({
+          heightAuto: false,
+          title: "La fecha debe ser igual o posterior a hoy!",
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+          }
+        });
+        btnAceptarCambios.addEventListener("click", modificarTodo, {
+          once: true,
+        });
+        return;
+      }
+      else{
+        todo.setDueDate = inputFechaLimiteEdit.value;
+      }
+    }
+    
+    
+
+
+
+
+    
     todo.setPriority = todoprioridadEdit.value;
     todo.setProject = selectCategoria.value;
     nuevaTareaForm.reset();
@@ -230,6 +308,11 @@ let editTodo = (e) => {
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
   btnAceptarCambios.addEventListener("click", modificarTodo, { once: true });
+  todonameEdit.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter"){
+      e.preventDefault()
+    }
+  })
 };
 
 //ELIMINAR TAREA
@@ -459,8 +542,10 @@ let tarea4 = new Todos("Espiar a la unión sovietica", "1996-11-06", "Medio");
 let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
 let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
+let tarea8 = new Todos("Ir a natación", "1996-11-06", "Alto");
+let tarea9 = new Todos("Mirar la serie", "1996-11-06", "Medio");
 
-todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7);
+todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8, tarea9);
 
 renderTodos();
 updateMenu();
