@@ -171,7 +171,7 @@ let circleIArray = [];
 let dltBtnArray = [];
 
 const deleteProject = (proyecto) => {
-  console.log(proyecto);
+  
   Swal.fire({
     heightAuto: false,
     title: "Estas seguro?",
@@ -188,22 +188,25 @@ const deleteProject = (proyecto) => {
       let proyectoTodos = proyecto.todos;
 
       proyectoTodos.forEach((todo) => {
-        
+        // let indexTodoInProjecto = proyectoTodos.indexOf(todo);
+        // proyectoTodos.splice(indexTodoInProjecto, 1);
+
         let indexTodoInAllTodos = todosArray.indexOf(todo);
         todosArray.splice(indexTodoInAllTodos, 1);
 
-        let indexTodoInProjecto = proyectoTodos.indexOf(todo);
-        proyectoTodos.splice(indexTodoInProjecto, 1);
+        
 
       });
 
-      let indexOfProyecto = projectsArray.indexOf(proyecto);
-      projectsArray.splice(indexOfProyecto, 1);
+      
 
       const opcionAEliminar = selectCategoria.querySelector(
         `option[value="${proyecto.nombre}"]`
       );
       opcionAEliminar.remove();
+
+      let indexOfProyecto = projectsArray.indexOf(proyecto);
+      projectsArray.splice(indexOfProyecto, 1);
 
       renderTodos(projectsArray[0]);
       updateMenu(projectsArray[0]);

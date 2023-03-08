@@ -17,14 +17,12 @@
   },
   "homepage": "https://github.com/ramessj/To-Do-List#readme",
   "devDependencies": {
-    "css-loader": "^6.7.3",
-    "favicons": "^7.1.0",
-    "favicons-webpack-plugin": "^6.0.0",
+    "css-loader": "^6.7.3",    
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
+    "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-cli": "^5.0.1"    
   }
 }

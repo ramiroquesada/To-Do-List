@@ -275,7 +275,7 @@ let editTodo = (e) => {
         });
 
         return;
-      } 
+      }
     }
 
    
@@ -317,6 +317,17 @@ let editTodo = (e) => {
     }
     
     
+    
+
+
+    todo.setDueDate = inputFechaLimiteEdit.value;
+    todo.setTitle = todonameEdit.value;
+    todo.setPriority = todoprioridadEdit.value;
+    
+    nuevaTareaForm.reset();
+    modalEditarTarea.style.display = "none";
+    modal.style.display = "none";
+
     let nuevoProyecto = getProjectById(newCategoriaId);
 
     let proyectoActual = getProjectById(categoriaId);
@@ -328,18 +339,14 @@ let editTodo = (e) => {
         proyectoActual.todos.splice(origenTodoIndex, 1);
       }
       if (nuevoProyecto.id !== 0) {
-        nuevoProyecto.todos.push(todo);
+        if (!nuevoProyecto.todos.includes(todo)){          
+          nuevoProyecto.todos.push(todo);
+        }       
+        
       }
     }
+    todo.setProject = nuevoProyecto.nombre;
 
-
-    todo.setDueDate = inputFechaLimiteEdit.value;
-    todo.setTitle = todonameEdit.value;
-    todo.setPriority = todoprioridadEdit.value;
-    todo.setProject = selectCategoria.value;
-    nuevaTareaForm.reset();
-    modalEditarTarea.style.display = "none";
-    modal.style.display = "none";
 
     renderTodos(menuSeleccionado());
     updateMenu(menuSeleccionado());
