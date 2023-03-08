@@ -140,6 +140,32 @@ body {
   gap: .5rem;
 }
 
+.projectMenuRight{
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.xMarkCategoria{
+  min-width: 12px;
+  cursor: pointer;
+  color: #8d8d8d;
+}
+.xMarkCategoria:hover{
+  
+  color: #cb3232;
+}
+
+.deleteCategoryBtn{
+  display: none;
+}
+
+.btnDltHidden{
+  display: flex;
+}
+
 
 .menuProjectCircle{
   color: transparent;
@@ -158,6 +184,8 @@ body {
   
   font-size: 1.5rem;
   word-wrap: break-word;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .menuLi:hover .menuTitle {
@@ -178,6 +206,8 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 

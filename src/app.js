@@ -176,7 +176,7 @@ let editTodo = (e) => {
   let defSelectedOption = todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
 
     let defSelectedColorEd = getComputedStyle(defSelectedOption).backgroundColor;
-    console.log(defSelectedColorEd)
+    
 
     todoprioridadEdit.style.backgroundColor = defSelectedColorEd;
 
@@ -230,12 +230,18 @@ let editTodo = (e) => {
         }
       });
 
+      btnAceptarCambios.removeEventListener("click", modificarTodo, {
+        once: true,
+      });
+
       btnAceptarCambios.addEventListener("click", modificarTodo, {
         once: true,
       });
 
       return;
     }
+
+
 
     if (todo.title != todonameEdit.value) {
       let todonameEditCampo = todonameEdit.value;
@@ -260,30 +266,19 @@ let editTodo = (e) => {
           }
         });
 
+        btnAceptarCambios.removeEventListener("click", modificarTodo, {
+          once: true,
+        });
+
         btnAceptarCambios.addEventListener("click", modificarTodo, {
           once: true,
         });
 
         return;
-      } else {
-        todo.setTitle = todonameEdit.value;
-      }
+      } 
     }
 
-    let nuevoProyecto = getProjectById(newCategoriaId);
-
-    let proyectoActual = getProjectById(categoriaId);
-
-    let origenTodoIndex = proyectoActual.todos.indexOf(todo);
-
-    if (proyectoActual.id != nuevoProyecto.id) {
-      if (proyectoActual.id !== 0) {
-        proyectoActual.todos.splice(origenTodoIndex, 1);
-      }
-      if (nuevoProyecto.id !== 0) {
-        nuevoProyecto.todos.push(todo);
-      }
-    }
+   
 
 
 
@@ -308,22 +303,38 @@ let editTodo = (e) => {
           if (result.dismiss === Swal.DismissReason.timer) {
           }
         });
+
+        btnAceptarCambios.removeEventListener("click", modificarTodo, {
+          once: true,
+        });
+
         btnAceptarCambios.addEventListener("click", modificarTodo, {
           once: true,
         });
         return;
       }
-      else{
-        todo.setDueDate = inputFechaLimiteEdit.value;
-      }
+      
     }
     
     
+    let nuevoProyecto = getProjectById(newCategoriaId);
+
+    let proyectoActual = getProjectById(categoriaId);
+
+    let origenTodoIndex = proyectoActual.todos.indexOf(todo);
+
+    if (proyectoActual.id != nuevoProyecto.id) {
+      if (proyectoActual.id !== 0) {
+        proyectoActual.todos.splice(origenTodoIndex, 1);
+      }
+      if (nuevoProyecto.id !== 0) {
+        nuevoProyecto.todos.push(todo);
+      }
+    }
 
 
-
-
-    
+    todo.setDueDate = inputFechaLimiteEdit.value;
+    todo.setTitle = todonameEdit.value;
     todo.setPriority = todoprioridadEdit.value;
     todo.setProject = selectCategoria.value;
     nuevaTareaForm.reset();

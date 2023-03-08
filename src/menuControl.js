@@ -168,6 +168,54 @@ cancelNewProject.addEventListener("click", closeNewProjectFunction);
 
 let dinamicUl = document.getElementById("dinamicUl");
 let circleIArray = [];
+let dltBtnArray = [];
+
+const deleteProject = (proyecto) => {
+  console.log(proyecto);
+  Swal.fire({
+    heightAuto: false,
+    title: "Estas seguro?",
+    text: "Se borraran todas las tareas del proyecto!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Borrar Proyecto!",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let proyectoTodos = proyecto.todos;
+
+      proyectoTodos.forEach((todo) => {
+        
+        let indexTodoInAllTodos = todosArray.indexOf(todo);
+        todosArray.splice(indexTodoInAllTodos, 1);
+
+        let indexTodoInProjecto = proyectoTodos.indexOf(todo);
+        proyectoTodos.splice(indexTodoInProjecto, 1);
+
+      });
+
+      let indexOfProyecto = projectsArray.indexOf(proyecto);
+      projectsArray.splice(indexOfProyecto, 1);
+
+      const opcionAEliminar = selectCategoria.querySelector(
+        `option[value="${proyecto.nombre}"]`
+      );
+      opcionAEliminar.remove();
+
+      renderTodos(projectsArray[0]);
+      updateMenu(projectsArray[0]);
+
+      Swal.fire({
+        heightAuto: false,
+        title: "Proyecto borrado",
+        icon: "success",
+      });
+    }
+  });
+};
 
 export function updateMenu(proyecto) {
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
@@ -185,6 +233,7 @@ export function updateMenu(proyecto) {
     ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArrayUncompleted.length}</span></div>`;
 
   dinamicUl.appendChild(mainLi);
+
   let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
 
   let circleI = document.getElementById(`iCircleI`);
@@ -205,6 +254,9 @@ export function updateMenu(proyecto) {
     circleIArray.forEach((circle) => {
       circle.classList.remove("menuProjectSelected");
     });
+    dltBtnArray.forEach((xBtn) => {
+      xBtn.classList.remove("btnDltHidden");
+    });
 
     circleI.classList.add("menuProjectSelected");
   });
@@ -218,12 +270,12 @@ export function updateMenu(proyecto) {
       let projectIdForEventInTitle = project.id;
 
       let idForLi = project.id + 6000;
-
+      let idForDeleteBtn = project.id + 12000;
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
       dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
       dinamicLi.setAttribute("projectName", `${project.getNombre}`);
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"><span class="numberOfTodos projectMenuRight">${projectTodosUncompleted.length}</span></div>`;
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
 
       dinamicUl.appendChild(dinamicLi);
 
@@ -235,8 +287,16 @@ export function updateMenu(proyecto) {
 
       circleIArray.push(circleI);
 
+      let deleteProjectBtn = document.getElementById(`${idForDeleteBtn}`);
+      dltBtnArray.push(deleteProjectBtn);
+
+      deleteProjectBtn.addEventListener("click", () => {
+        deleteProject(project);
+      });
+
       if (project == proyecto) {
         circleI.classList.add("menuProjectSelected");
+        deleteProjectBtn.classList.add("btnDltHidden");
       }
 
       projectNameBtn.addEventListener("click", () => {
@@ -246,6 +306,11 @@ export function updateMenu(proyecto) {
           circle.classList.remove("menuProjectSelected");
         });
         circleI.classList.add("menuProjectSelected");
+
+        dltBtnArray.forEach((xBtn) => {
+          xBtn.classList.remove("btnDltHidden");
+        });
+        deleteProjectBtn.classList.add("btnDltHidden");
       });
     }
   });
