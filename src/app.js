@@ -600,13 +600,9 @@ let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
 let tarea8 = new Todos("Ir a natación", "1996-11-06", "Alto");
 let tarea9 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea10 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea11 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea12 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea13 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea14 = new Todos("nashe", "1996-11-06", "Medio");
+let tarea10 = new Todos("nashe", "1996-11-06", "Medio");
 
-todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8, tarea9, tarea10, tarea11, tarea12, tarea13, tarea14);
+todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8, tarea9, tarea10);
 
 renderTodos();
 updateMenu();
