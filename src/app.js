@@ -60,27 +60,6 @@ let crearTarea = () => {
     return;
   }
 
-  let nombreTodoExistente = todosArray.some((todo) => todo.title == todoname);
-
-  if (nombreTodoExistente) {
-    let timerInterval;
-    Swal.fire({
-      heightAuto: false,
-      title: "El nombre de la tarea no puede ser igual a otra",
-      timer: 2000,
-      timerProgressBar: true,
-      willClose: () => {
-        clearInterval(timerInterval);
-      },
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    });
-
-    return;
-  }
-
   const tarea = new Todos(todoname, fechalimite, todoprioridad);
 
   if (menuSeleccionado() != projectsArray[0]) {
@@ -111,7 +90,7 @@ btnCrearTarea.addEventListener("click", crearTarea);
 
 let getTodoById = (id) => {
   return todosArray.find(function (todo) {
-    return todo.id === id
+    return todo.id === id;
   });
 };
 
@@ -157,12 +136,6 @@ let editTodo = (e) => {
   });
 
   let modificarTodo = () => {
-    let nuevoProyecto = getProjectById(newCategoriaId);
-
-    let proyectoActual = getProjectById(categoriaId);
-
-    let origenTodoIndex = proyectoActual.todos.indexOf(todo);
-
     if (todonameEdit.value == "") {
       let timerInterval;
       Swal.fire({
@@ -179,21 +152,19 @@ let editTodo = (e) => {
         }
       });
 
+      btnAceptarCambios.addEventListener("click", modificarTodo, {
+        once: true,
+      });
+
       return;
     }
 
     if (todo.title != todonameEdit.value) {
       let todonameEditCampo = todonameEdit.value;
-     
-
-      // let todosArrayFiltrado = todosArray.filter(
-      //   (todoarr) => todoarr.title != todonameEditCampo);
-
-      //   console.log
-             
 
       let nombreTodoExistente = todosArray.some(
-        (todoarr2) => todoarr2.title == todonameEditCampo);
+        (todoarr2) => todoarr2.title == todonameEditCampo
+      );
 
       if (nombreTodoExistente) {
         let timerInterval;
@@ -211,20 +182,31 @@ let editTodo = (e) => {
           }
         });
 
+        btnAceptarCambios.addEventListener("click", modificarTodo, {
+          once: true,
+        });
+
         return;
+      } else {
+        todo.setTitle = todonameEdit.value;
       }
     }
 
-    if (proyectoActual.id != 0 && nuevoProyecto.id != 0) {
-      proyectoActual.todos.splice(origenTodoIndex, 1);
-      nuevoProyecto.todos.push(todo);
-    } else if (proyectoActual.id == 0 && nuevoProyecto != proyectoActual) {
-      nuevoProyecto.todos.push(todo);
-    } else if (proyectoActual.id != 0 && nuevoProyecto.id == 0) {
-      proyectoActual.todos.splice(origenTodoIndex, 1);
+    let nuevoProyecto = getProjectById(newCategoriaId);
+
+    let proyectoActual = getProjectById(categoriaId);
+
+    let origenTodoIndex = proyectoActual.todos.indexOf(todo);
+
+    if (proyectoActual.id != nuevoProyecto.id) {
+      if (proyectoActual.id !== 0) {
+        proyectoActual.todos.splice(origenTodoIndex, 1);
+      }
+      if (nuevoProyecto.id !== 0) {
+        nuevoProyecto.todos.push(todo);
+      }
     }
 
-    todo.setTitle = todonameEdit.value;
     todo.setDueDate = inputFechaLimiteEdit.value;
     todo.setPriority = todoprioridadEdit.value;
     todo.setProject = selectCategoria.value;
@@ -243,14 +225,11 @@ let editTodo = (e) => {
       timer: 2000,
       heightAuto: false,
     });
+    btnAceptarCambios.removeEventListener("click", modificarTodo);
   };
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
-  btnAceptarCambios.addEventListener(
-    "click",
-    modificarTodo
-    //, { once: true }
-  );
+  btnAceptarCambios.addEventListener("click", modificarTodo, { once: true });
 };
 
 //ELIMINAR TAREA
@@ -286,7 +265,6 @@ let deleteTodo = (e) => {
         );
       }
 
-      // Swal.fire("Borrado!", "La tarea ha sido eliminada.", "success");
       Swal.fire({
         position: "center",
         icon: "success",

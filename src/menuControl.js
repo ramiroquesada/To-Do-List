@@ -1,9 +1,4 @@
-import {
-  projectsArray,
-  todosArray,
-  renderTodos,
-  menuSeleccionado,
-} from "./app";
+import { projectsArray, todosArray, renderTodos } from "./app";
 
 import "./styles.css";
 
@@ -98,8 +93,9 @@ const createProject = () => {
     return;
   }
 
-  let nombreDeTareaExistente = projectsArray.some(project => project.nombre == inputValue);
-
+  let nombreDeTareaExistente = projectsArray.some(
+    (project) => project.nombre == inputValue
+  );
 
   if (nombreDeTareaExistente) {
     let timerInterval;
@@ -120,9 +116,6 @@ const createProject = () => {
     return;
   }
 
-
-
-
   const project = new Proyectos(inputValue);
 
   projectsArray.push(project);
@@ -138,9 +131,8 @@ const createProject = () => {
     heightAuto: false,
   });
 
-  renderTodos(project)
+  renderTodos(project);
   updateMenu(project);
-
 
   let option = document.createElement("option");
   option.setAttribute("value", `${project.getNombre}`);
@@ -149,11 +141,19 @@ const createProject = () => {
   selectCategoria.append(option);
 };
 
+const handleCreateProjectKey = (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    createProject();
+  }
+};
+
 const nuevoProyecto = () => {
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
 
   acceptNewProject.addEventListener("click", createProject);
+  projectNameInput.addEventListener("keydown", handleCreateProjectKey);
 };
 
 addProjectBtn.addEventListener("click", nuevoProyecto);
@@ -169,16 +169,12 @@ cancelNewProject.addEventListener("click", closeNewProjectFunction);
 let dinamicUl = document.getElementById("dinamicUl");
 let circleIArray = [];
 
-
-
-
 export function updateMenu(proyecto) {
-  
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
-  
-  let todosArrayUncompleted = todosArray.filter(todos => todos.completed == false);
-  
-  
+
+  let todosArrayUncompleted = todosArray.filter(
+    (todos) => todos.completed == false
+  );
 
   dinamicUl.innerHTML = ``;
   let mainLi = document.createElement("li");
@@ -191,12 +187,11 @@ export function updateMenu(proyecto) {
   dinamicUl.appendChild(mainLi);
   let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
 
-
   let circleI = document.getElementById(`iCircleI`);
 
   circleIArray.push(circleI);
 
-  if (proyecto == projectsArray[0]){
+  if (proyecto == projectsArray[0]) {
     circleI.classList.add("menuProjectSelected");
   }
 
@@ -210,19 +205,18 @@ export function updateMenu(proyecto) {
     circleIArray.forEach((circle) => {
       circle.classList.remove("menuProjectSelected");
     });
-    
-    circleI.classList.add("menuProjectSelected");
 
-    
+    circleI.classList.add("menuProjectSelected");
   });
 
   projectsArray.forEach((project) => {
     if (project.id != 0) {
-
-      let projectTodosUncompleted = project.getTodos.filter(todos => todos.completed == false);
+      let projectTodosUncompleted = project.getTodos.filter(
+        (todos) => todos.completed == false
+      );
 
       let projectIdForEventInTitle = project.id;
-     
+
       let idForLi = project.id + 6000;
 
       let dinamicLi = document.createElement("li");
@@ -238,29 +232,21 @@ export function updateMenu(proyecto) {
       );
 
       let circleI = document.getElementById(`${idForLi}`);
-     
+
       circleIArray.push(circleI);
 
-      /////////////////////////////////////////////////////////////////////////////////////////////
-
-        if (project == proyecto){
-          circleI.classList.add("menuProjectSelected");
-        }
-
+      if (project == proyecto) {
+        circleI.classList.add("menuProjectSelected");
+      }
 
       projectNameBtn.addEventListener("click", () => {
         renderTodos(project);
-
-        
 
         circleIArray.forEach((circle) => {
           circle.classList.remove("menuProjectSelected");
         });
         circleI.classList.add("menuProjectSelected");
-        
       });
-
-      /////////////////////////////////////////////////////////////////////////////////////////////
     }
   });
 }
