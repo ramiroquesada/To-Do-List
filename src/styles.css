@@ -463,18 +463,26 @@ body {
   border-radius: 0.5rem 0 0 0.5rem;
   -webkit-user-select: none;
   user-select: none;
+  
 }
+
+
+
 
 .priorityBajo {
   background-color: #39bd8b;
+  font-weight: 600;
 }
 
 .priorityMedio {
   background-color: #f0f026;
+  font-weight: 600;
 }
 .priorityAlto {
   background-color: #fa6b6b;
+  font-weight: 600;
 }
+
 
 .editDeleteContainer {
   display: flex;

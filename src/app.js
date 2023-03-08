@@ -41,7 +41,11 @@ let crearTarea = () => {
 
   let todoname = document.getElementById("todoname").value;
 
+  
   let todoprioridad = document.getElementById("todoprioridad").value;
+
+  
+
 
   if (todoname == "" || fechalimite == "") {
     let timerInterval;
@@ -139,13 +143,15 @@ const getProjectById = (id) => {
 };
 
 //EDITAR TAREA
-let todonameEdit = document.getElementById("todonameEdit");
+
+
+
+let editTodo = (e) => {
+  let todonameEdit = document.getElementById("todonameEdit");
   let inputFechaLimiteEdit = document.getElementById("inputFechaLimiteEdit");
   let todoprioridadEdit = document.getElementById("todoprioridadEdit");
   let selectCategoria = document.getElementById("selectCategoria");
 
-
-let editTodo = (e) => {
   let todoIdFromLi = e.target.parentElement.parentElement.parentElement.id;
 
   let todo = getTodoById(todoIdFromLi);
@@ -154,12 +160,40 @@ let editTodo = (e) => {
   modalNuevaTarea.style.display = "none";
   modalEditarTarea.style.display = "flex";
 
+
+
+      
+    
+
   
 
   todonameEdit.value = todo.getTitle;
   inputFechaLimiteEdit.value = todo.getDueDate;
   todoprioridadEdit.value = todo.getPriority;
   selectCategoria.value = todo.getProject;
+
+
+  let defSelectedOption = todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
+
+    let defSelectedColorEd = getComputedStyle(defSelectedOption).backgroundColor;
+    console.log(defSelectedColorEd)
+
+    todoprioridadEdit.style.backgroundColor = defSelectedColorEd;
+
+    
+
+    todoprioridadEdit.addEventListener("change", () => {
+    
+    
+    let selectedOptionEd = todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
+   
+    let selectedColor = getComputedStyle(selectedOptionEd).backgroundColor;
+   
+    todoprioridadEdit.style.backgroundColor = selectedColor;
+    });
+
+
+
 
   let categoriaId =
     selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
@@ -173,6 +207,10 @@ let editTodo = (e) => {
       selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
         "datass"
       );
+
+
+
+
   });
 
   let modificarTodo = () => {
