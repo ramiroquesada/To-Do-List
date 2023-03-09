@@ -1,1 +1,179 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>To-Do-App</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/><link rel="shortcut icon" href="./images/favicon.ico" type="image/ico"/><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script><link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet"/><script defer="defer" src="main.js"></script></head><body><div class="ventanaModal" id="modal"><div class="modalContent"><div class="closeFullW"><span></span> <span class="close" id="cerrarModal" title="Cancelar">✕</span></div><div class="modalNuevaTarea" id="modalNuevaTarea"><h1 id="h1NuevaTarea" class="h1NuevaTarea">Nueva tarea</h1><form class="nuevaTareaForm" id="nuevaTareaForm"><label for="todoname">Nombre</label> <input title="todoname" placeholder="Nombre de la tarea" id="todoname" maxlength="60"/> <label for="todolimit">Fecha límite</label> <input type="date" title="todolimit" id="inputFechaLimite"/> <label for="todoprioridad">Seleccionar Prioridad</label> <select name="prioridad" title="todoprioridad" id="todoprioridad"><option value="Bajo" class="priorityBajo">Bajo</option><option value="Medio" class="priorityMedio" selected="selected">Medio</option><option value="Alto" class="priorityAlto">Alto</option></select></form><div class="msgBtnNuevaTarea"><div class="msgNuevaTarea" id="msgNuevaTarea"></div><button type="button" class="nuevaTareaButton" id="nuevaTareaButton">Crear Tarea</button></div></div><div class="modalEditarTarea" id="modalEditarTarea"><h1 id="h1EditarTarea" class="h1EditarTarea">Modificar tarea</h1><form class="nuevaTareaForm"><label for="todoname">Nombre</label> <input title="todoname" placeholder="Nombre de la tarea" id="todonameEdit" maxlength="60"/> <label for="todolimit">Fecha límite</label> <input type="date" title="todolimit" id="inputFechaLimiteEdit"/> <label for="todoprioridad">Prioridad</label> <select name="prioridad" title="todoprioridad" id="todoprioridadEdit"><option value="Bajo" class="priorityBajo">Bajo</option><option value="Medio" class="priorityMedio">Medio</option><option value="Alto" class="priorityAlto">Alto</option></select> <label for="todocategoria">Asignar Categoria</label> <select id="selectCategoria" name="categoria" title="todocategoria"><option value="Ninguna" datass="0">Ninguna</option></select></form><div class="aceptarCancelarEdit"><div></div><button type="button" id="btnAceptarCambios" class="btnAceptarCambios">Aceptar</button></div></div></div></div><div class="main"><div class="header"><div class="header-logo"><p>TO-DO</p><i class="fa-solid fa-check-double"></i></div><div class="headerMenuButtons"><i class="fa-solid fa-bars menuCerrado" id="menuCerrado" title="Menú"></i> <i class="fa-solid fa-xmark menuAbierto" id="menuAbierto" title="Cerrar Menú"></i></div></div><div class="main-content"><div class="menu" id="menuPrincipal"><p class="menuPrincipalTitle">//CATEGORÍAS</p><ul id="dinamicUl"></ul><div class="addProjectContainer"><div class="addNuevaBtn" id="addNuevaBtn"><p>NUEVA</p><div class="addProjectBtnContainer" id="addProjectBtn"><i class="fa-solid fa-circle-plus addProjectBtn"></i></div></div><div class="projectInput" id="projectInput"><form id="newProjectForm"><input name="projectName" id="projectName" title="Nombre del proyecto" maxlength="9"/></form><div class="acceptCancelProject"><i class="fa-solid fa-check" id="acceptNewProject"></i> <i class="fa-solid fa-ban" id="cancelNewProject"></i></div></div></div></div><div class="content" id="contentPrincipal"><div class="tituloMas"><h1>TAREAS PENDIENTES</h1><div class="btnAgregarTarea" id="btnAgregarTarea"><div class="add"><i class="fa-solid fa-circle-plus"></i></div></div></div><ul class="tareas" id="tareas"></ul></div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do-App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/ico" />
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js
+"></script>
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
+"
+      rel="stylesheet"
+    />
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="ventanaModal" id="modal">
+      <div class="modalContent">
+        <div class="closeFullW">
+          <span></span>
+          <span class="close" id="cerrarModal" title="Cancelar">✕</span>
+        </div>
+
+        <div class="modalNuevaTarea" id="modalNuevaTarea">
+          <h1 id="h1NuevaTarea" class="h1NuevaTarea">Nueva tarea</h1>
+          <form class="nuevaTareaForm" id="nuevaTareaForm">
+            <label for="todoname">Nombre</label>
+            <input
+              type="text"
+              title="todoname"
+              placeholder="Nombre de la tarea"
+              id="todoname"
+              maxlength="60"
+            />
+            <label for="todolimit">Fecha límite</label>
+            <input type="date" title="todolimit" id="inputFechaLimite" />
+            <label for="todoprioridad">Seleccionar Prioridad</label>
+            <select name="prioridad" title="todoprioridad" id="todoprioridad">
+              <option value="Bajo" class="priorityBajo">Bajo</option>
+              <option value="Medio" class="priorityMedio" selected>
+                Medio
+              </option>
+              <option value="Alto" class="priorityAlto">Alto</option>
+            </select>
+          </form>
+
+          <div class="msgBtnNuevaTarea">
+            <div class="msgNuevaTarea" id="msgNuevaTarea"></div>
+            <button
+              type="button"
+              class="nuevaTareaButton"
+              id="nuevaTareaButton"
+            >
+              Crear Tarea
+            </button>
+          </div>
+        </div>
+
+        <div class="modalEditarTarea" id="modalEditarTarea">
+          <h1 id="h1EditarTarea" class="h1EditarTarea">Modificar tarea</h1>
+          <form class="nuevaTareaForm">
+            <label for="todoname">Nombre</label>
+            <input
+              type="text"
+              title="todoname"
+              placeholder="Nombre de la tarea"
+              id="todonameEdit"
+              maxlength="60"
+            />
+            <label for="todolimit">Fecha límite</label>
+            <input type="date" title="todolimit" id="inputFechaLimiteEdit" />
+            <label for="todoprioridad">Prioridad</label>
+            <select
+              name="prioridad"
+              title="todoprioridad"
+              id="todoprioridadEdit"
+            >
+              <option value="Bajo" class="priorityBajo">Bajo</option>
+              <option value="Medio" class="priorityMedio">Medio</option>
+              <option value="Alto" class="priorityAlto">Alto</option>
+            </select>
+            <label for="todocategoria">Asignar Categoria</label>
+            <select id="selectCategoria" name="categoria" title="todocategoria">
+              <option value="Ninguna" datass="0">Ninguna</option>
+            </select>
+          </form>
+
+          <div class="aceptarCancelarEdit">
+            <div></div>
+            <button
+              type="button"
+              id="btnAceptarCambios"
+              class="btnAceptarCambios"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <div class="header-logo">
+          <p>TO-DO</p>
+          <i class="fa-solid fa-check-double"></i>
+        </div>
+        <div class="headerMenuButtons">
+          <i
+            class="fa-solid fa-bars menuCerrado"
+            id="menuCerrado"
+            title="Menú"
+          ></i>
+          <i
+            class="fa-solid fa-xmark menuAbierto"
+            id="menuAbierto"
+            title="Cerrar Menú"
+          ></i>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="menu" id="menuPrincipal">
+          <p class="menuPrincipalTitle">//CATEGORÍAS</p>
+          <ul id="dinamicUl"></ul>
+
+          <div class="addProjectContainer">
+            <div class="addNuevaBtn" id="addNuevaBtn">
+              <p>NUEVA</p>
+              <div class="addProjectBtnContainer" id="addProjectBtn">
+                <i class="fa-solid fa-circle-plus addProjectBtn"></i>
+              </div>
+            </div>
+
+            <div class="projectInput" id="projectInput">
+              <form id="newProjectForm">
+                <input
+                  type="text"
+                  name="projectName"
+                  id="projectName"
+                  title="Nombre del proyecto"
+                  maxlength="9"
+                />
+              </form>
+              <div class="acceptCancelProject">
+                <i class="fa-solid fa-check" id="acceptNewProject"></i>
+                <i class="fa-solid fa-ban" id="cancelNewProject"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content" id="contentPrincipal">
+          <div class="tituloMas">
+            <h1>TAREAS PENDIENTES</h1>
+            <div class="btnAgregarTarea" id="btnAgregarTarea">
+              <div class="add">
+                <i class="fa-solid fa-circle-plus"></i>
+              </div>
+            </div>
+          </div>
+
+         
+            <ul class="tareas" id="tareas"></ul>
+
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
