@@ -384,9 +384,12 @@ body {
   padding: 0 0.5rem 0 0.5rem;
   align-items: center;
 
+  box-shadow: #27b27d 0 1px 0;
   
   
 }
+
+
 
 
 /* Estilos para el scrollbar */
