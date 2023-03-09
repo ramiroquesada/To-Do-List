@@ -13,7 +13,6 @@ import "./menuControl";
 
 import { updateMenu } from "./menuControl.js";
 
-export const todosArray = [];
 
 export const projectsArray = [];
 
@@ -98,7 +97,8 @@ let crearTarea = () => {
     tarea.project = menuSeleccionado().nombre;
     menuSeleccionado().todos.push(tarea);
   }
-  todosArray.push(tarea);
+  let project0 = projectsArray[0].todos;
+  project0.push(tarea);
   todosDueDateSort ();
   todosChekedSort ();
 
@@ -134,7 +134,9 @@ todoname.addEventListener("keydown", (e)=>{
 //OBTENER TODO POR ID
 
 let getTodoById = (id) => {
-  return todosArray.find(function (todo) {
+  let project0 = projectsArray[0].todos;
+
+  return project0.find(function (todo) {
     return todo.id === id;
   });
 };
@@ -249,7 +251,9 @@ let editTodo = (e) => {
     if (todo.title != todonameEdit.value) {
       let todonameEditCampo = todonameEdit.value;
 
-      let nombreTodoExistente = todosArray.some(
+      let project0 = projectsArray[0].todos;
+
+      let nombreTodoExistente = project0.some(
         (todoarr2) => todoarr2.title == todonameEditCampo
       );
 
@@ -402,7 +406,8 @@ let deleteTodo = (e) => {
         (x) => x.nombre === todoProjectName
       );
 
-      todosArray.splice(todosArray.indexOf(todo), 1);
+      let project0 = projectsArray[0].todos
+      project0.splice(project0.indexOf(todo), 1);
       if (todoProjectforDelete.id > 0) {
         todoProjectforDelete.todos.splice(
           todoProjectforDelete.todos.indexOf(todo),
@@ -466,13 +471,17 @@ export const menuSeleccionado = () => {
 };
 
 export const todosChekedSort = () => {
-  todosArray.sort(compararPorPropiedad);
+  let project0 = projectsArray[0].todos;
+  
+  project0.sort(compararPorPropiedad);
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorPropiedad);
 }
 
 export const todosDueDateSort = () => {
-  todosArray.sort(compararPorDueDate);
+  let project0 = projectsArray[0].todos;
+
+  project0.sort(compararPorDueDate);
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorDueDate);
 }
@@ -517,7 +526,7 @@ let formatearFecha = (fechalimite) => {
   return fechaFormateada;
 };
 
-//RENDERIZA LOS TODOS DEL ARRAY TODOSARRAY
+//RENDERIZA LOS TODOS DEL ARRAY projectsArray[0].todos o el proyecto que se le pase como parametro
 
 export const renderTodos = (proyecto) => {
   if (proyecto == undefined) {
@@ -559,7 +568,9 @@ export const renderTodos = (proyecto) => {
 
     todosVacioMsg.classList.add("todosVacioMsg");
 
-    if (todosArray.length > 0) {
+    let project0 = projectsArray[0].todos;
+
+    if (project0.length > 0) {
       todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente en esta categoria!`;
     } else {
       todosVacioMsg.innerHTML = `No tienes ninguna tarea pendiente!`;
@@ -586,7 +597,7 @@ export const renderTodos = (proyecto) => {
         todo.priority
       )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
         todo.title
-      } </p></div><div class="todoRight"><p class="todoFecha" title="Fecha Límite">${formatearFecha(
+      } </p></div><div class="todoRight"><p>${todo.project}</p><p class="todoFecha" title="Fecha Límite">${formatearFecha(
         todo.dueDate
       )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
       let checkCompletedInput = tareali.querySelector(".checkboxTodo");
@@ -619,7 +630,7 @@ export const renderTodos = (proyecto) => {
 
 //TESTING
 const ninguna = new Proyectos("Ninguna");
-ninguna.todos = todosArray;
+
 projectsArray.push(ninguna);
 
 let tarea1 = new Todos("Ir al baño", "2024-03-02", "Alto");
@@ -634,11 +645,12 @@ let tarea4 = new Todos("Espiar a la unión sovietica", "1996-11-06", "Medio");
 let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
 let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
 let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
-let tarea8 = new Todos("Ir a natación", "1996-11-06", "Alto");
-let tarea9 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-let tarea10 = new Todos("nashe", "1996-11-06", "Medio");
 
-todosArray.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8, tarea9, tarea10);
+let tarea8 = new Todos("Mirar la serie", "1996-11-06", "Medio");
+
+let project0 = projectsArray[0].todos;
+
+project0.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8);
 
 renderTodos();
 updateMenu();

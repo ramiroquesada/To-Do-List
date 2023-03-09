@@ -381,8 +381,8 @@ body {
   height: calc(80vh - 200px);
   
   overflow-y: auto;
-  padding: 0 0.5rem 5px 0.5rem;
-  align-items: center;
+  padding: 0 0 5px 0;
+  align-items: center; 
 
   box-shadow: #27b27d 0 1px 0;
   
@@ -416,7 +416,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 95%;
+  width: 99%;
   position: relative;
   max-height: 10rem;
 

@@ -1,4 +1,4 @@
-import { projectsArray, todosArray, renderTodos } from "./app";
+import { projectsArray, renderTodos } from "./app";
 
 import "./styles.css";
 
@@ -171,7 +171,6 @@ let circleIArray = [];
 let dltBtnArray = [];
 
 const deleteProject = (proyecto) => {
-  
   Swal.fire({
     heightAuto: false,
     title: "Estas seguro?",
@@ -191,14 +190,11 @@ const deleteProject = (proyecto) => {
         // let indexTodoInProjecto = proyectoTodos.indexOf(todo);
         // proyectoTodos.splice(indexTodoInProjecto, 1);
 
-        let indexTodoInAllTodos = todosArray.indexOf(todo);
-        todosArray.splice(indexTodoInAllTodos, 1);
+        let project0 = projectsArray[0].todos;
 
-        
-
+        let indexTodoInAllTodos = project0.indexOf(todo);
+        project0.splice(indexTodoInAllTodos, 1);
       });
-
-      
 
       const opcionAEliminar = selectCategoria.querySelector(
         `option[value="${proyecto.nombre}"]`
@@ -223,7 +219,9 @@ const deleteProject = (proyecto) => {
 export function updateMenu(proyecto) {
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
 
-  let todosArrayUncompleted = todosArray.filter(
+  let project0 = projectsArray[0].todos;
+
+  let todosArrayUncompleted = project0.filter(
     (todos) => todos.completed == false
   );
 
