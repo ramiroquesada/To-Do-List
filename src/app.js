@@ -99,6 +99,9 @@ let crearTarea = () => {
     menuSeleccionado().todos.push(tarea);
   }
   todosArray.push(tarea);
+  todosDueDateSort ();
+  todosChekedSort ();
+
 
   renderTodos(menuSeleccionado());
   updateMenu(menuSeleccionado());
@@ -434,6 +437,19 @@ let compararPorPropiedad = (objeto1, objeto2) => {
   }
 };
 
+let compararPorDueDate = (objeto1, objeto2) => {
+  if (objeto1.dueDate > objeto2.dueDate) {
+    return -1;
+  } else if (objeto1.dueDate < objeto2.dueDate) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+
+
+
 export const menuSeleccionado = () => {
   let selectedCategoriaCircle = document.getElementsByClassName(
     "menuProjectSelected"
@@ -449,6 +465,18 @@ export const menuSeleccionado = () => {
   return selected;
 };
 
+export const todosChekedSort = () => {
+  todosArray.sort(compararPorPropiedad);
+  let projectArray = menuSeleccionado().todos;
+  projectArray.sort(compararPorPropiedad);
+}
+
+export const todosDueDateSort = () => {
+  todosArray.sort(compararPorDueDate);
+  let projectArray = menuSeleccionado().todos;
+  projectArray.sort(compararPorDueDate);
+}
+
 let completeStatus = (e) => {
   let todoFromLi = e.target.parentElement.parentElement;
   let todoIdFromLi = todoFromLi.id;
@@ -456,9 +484,9 @@ let completeStatus = (e) => {
 
   todo.completed = !todo.completed;
 
-  todosArray.sort(compararPorPropiedad);
-  let projectArray = menuSeleccionado().todos;
-  projectArray.sort(compararPorPropiedad);
+  todosDueDateSort ();
+  todosChekedSort ();
+  
 
   renderTodos(menuSeleccionado());
   updateMenu(menuSeleccionado());
@@ -499,6 +527,8 @@ export const renderTodos = (proyecto) => {
   } else {
     proyecto = proyecto.todos;
   }
+
+  
 
   let tareas = document.getElementById("tareas");
 
@@ -544,6 +574,8 @@ export const renderTodos = (proyecto) => {
       divMsg.remove();
     }
 
+    
+
     proyecto.forEach((todo) => {
       let tareali = document.createElement("li");
       tareali.setAttribute("id", todo.id);
@@ -582,6 +614,7 @@ export const renderTodos = (proyecto) => {
       tareas.appendChild(tareali);
     });
   }
+  
 };
 
 //TESTING
