@@ -1,4 +1,4 @@
-import { projectsArray, renderTodos } from "./app";
+import { projectsArray, renderTodos, todosSort } from "./app";
 
 import "./styles.css";
 
@@ -120,7 +120,7 @@ const createProject = () => {
     timer: 2000,
     heightAuto: false,
   });
-
+  todosSort();
   renderTodos(project);
   updateMenu(project);
 
@@ -242,10 +242,12 @@ export function updateMenu(proyecto) {
 
   if (proyecto == projectsArray[0]) {
     circleI.classList.add("menuProjectSelected");
+    todosSort();
   }
 
   if (projectsArray.length == 1) {
     circleI.classList.add("menuProjectSelected");
+    todosSort();
   }
 
   projectNameBtn.addEventListener("click", () => {
@@ -259,6 +261,7 @@ export function updateMenu(proyecto) {
     });
 
     circleI.classList.add("menuProjectSelected");
+    todosSort();
   });
 
   projectsArray.forEach((project) => {
@@ -309,6 +312,7 @@ export function updateMenu(proyecto) {
           circle.classList.remove("menuProjectSelected");
         });
         circleI.classList.add("menuProjectSelected");
+        todosSort();
 
         dltBtnArray.forEach((xBtn) => {
           xBtn.classList.remove("btnDltHidden");
