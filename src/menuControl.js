@@ -1,4 +1,9 @@
-import { projectsArray, renderTodos, todosSort } from "./app";
+import {
+  projectsArray,
+  renderTodos,
+  saveToLocalStorage,
+  todosSort,
+} from "./app";
 
 import "./styles.css";
 
@@ -129,6 +134,7 @@ const createProject = () => {
   option.setAttribute("datass", `${project.id}`);
   option.innerHTML = `${project.nombre}`;
   selectCategoria.append(option);
+  saveToLocalStorage();
 };
 
 const handleCreateProjectKey = (e) => {
@@ -161,7 +167,6 @@ cancelNewProject.addEventListener("click", closeNewProjectFunction);
 // FUNCION PARA ELIMINAR UN PROYECTO (CON TODOS SUS TODOS)
 
 const deleteProject = (proyecto) => {
-  console.log(proyecto);
   let project1 = proyecto;
   Swal.fire({
     heightAuto: false,
@@ -188,7 +193,7 @@ const deleteProject = (proyecto) => {
       const opcionAEliminar = selectCategoria.querySelector(
         `option[value="${project1.nombre}"]`
       );
-      console.log(opcionAEliminar);
+
       opcionAEliminar.remove();
 
       let indexOfProyecto = projectsArray.indexOf(proyecto);
@@ -277,13 +282,19 @@ export function updateMenu(proyecto) {
 
       let idForLi = project.id + 6000;
       let idForDeleteBtn = project.id + 12000;
+      let idForNumberOfTodos = project.id + 24000;
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
       dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
       dinamicLi.setAttribute("projectName", `${project.nombre}`);
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos" id="${idForNumberOfTodos}">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
 
       dinamicUl.appendChild(dinamicLi);
+
+      let numberOfTodosSpan = document.getElementById(`${idForNumberOfTodos}`);
+      if (projectTodosUncompleted.length == 0) {
+        numberOfTodosSpan.classList.add("numberOfTodosSpanHidden");
+      }
 
       let projectNameBtn = document.getElementById(
         `${projectIdForEventInTitle}`

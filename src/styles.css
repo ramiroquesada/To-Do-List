@@ -198,6 +198,11 @@ body {
   user-select: none;
 }
 
+.numberOfTodosSpanHidden{
+  display: none;
+}
+
+
 .addProjectContainer {
   display: flex;
 }

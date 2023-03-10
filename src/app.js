@@ -12,64 +12,22 @@ import { updateMenu } from "./menuControl.js";
 
 import "./menuControl";
 
-
-
 export const circleIArray = [];
 
-
-
 export let projectsArray = [];
-
-
 
 //manejador de LocalStorage rama
 
 document.addEventListener("DOMContentLoaded", () => {
-  let projects = JSON.parse(localStorage.getItem("projects"));
-  let project0 = JSON.parse(localStorage.getItem("project0"));
-
-  let projectsArrayNuevo =  [];
-
-  if (projectsArray.length == 0 && projects == null) {
-    projectsArrayNuevo = project0;
-  } else if (projectsArray.length == 0 && projects != null) {
-    projectsArrayNuevo = [...project0]; 
-  }else{
-    projectsArrayNuevo = projectsArray;
+  if (!localStorage.getItem("projects")) {
+    app();
   }
 
-  projectsArray = projectsArrayNuevo;
-  app();
-  projectsArray.forEach((proyect)=>{
-    if(proyect.id>0 ){
-      proyect.todos = [];
-    }
-  })
+  let projects = JSON.parse(localStorage.getItem("projects"));
 
-  if(projectsArray[0].todos.length > 0){
-    let allTodos = projectsArray[0].todos;
-    console.log("allTodos")
-    console.log(allTodos)
-     allTodos.forEach((todo1)=>{
-    let todoProy = todo1.project;
-
-    let proyMatch = projectsArray.find((proyect)=>{
-      proyect.nombre == todoProy;
-      
-    });
-    console.log(proyMatch)
-    
-    //proyMatch.todos.push(todo1);
-  })}else{console.log("no")}
-  
-
-  
-  console.log("projectsArray dom loaded")
-  console.log(projectsArray)
+  projectsArray = [...projects];
 
   let selectCategoria = document.getElementById("selectCategoria");
-
-  
 
   projectsArray.forEach((project) => {
     if (project.id > 0) {
@@ -86,35 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 export let saveToLocalStorage = () => {
- 
-  let projectsX = [];
-  let project0 = [];
-
-  projectsArray.forEach((project) => {
-    if (project.id > 0) {
-      projectsX.push(project);
-    } else if (project.id == 0) {
-      project0.push(project);
-    }
-  });
-  localStorage.setItem("project0", JSON.stringify(project0));
-  localStorage.setItem("projects", JSON.stringify(projectsX));
-
-  console.log("saveToStorage")
-  console.log(projectsArray);
-
-  
-  
-}
+  localStorage.setItem("projects", JSON.stringify(projectsArray));
+};
 
 // iniciaiza el proyecto 0 si no existe
 let app = () => {
-  if (projectsArray == null) {
-    const ninguna = new Proyectos("Ninguna");
-    projectsArray = [];
-    ninguna.id = 0;
-    projectsArray.push(ninguna);
-  }
+  const ninguna = new Proyectos("Ninguna");
+  projectsArray = [];
+  ninguna.id = 0;
+  projectsArray.push(ninguna);
+  saveToLocalStorage();
 };
 
 //cambia el nombre de pestaña cuando se va para llamar la atención del usuario
@@ -185,13 +124,44 @@ let crearTarea = () => {
     return;
   }
 
+  let project0 = projectsArray[0].todos;
+
+  let nombreTodoExistente = project0.some(
+    (todoarr2) => todoarr2.title == todoname
+  );
+
+  if (nombreTodoExistente) {
+    let timerInterval;
+    Swal.fire({
+      heightAuto: false,
+      title: "El nombre de la tarea no puede ser igual a otra",
+      timer: 2000,
+      timerProgressBar: true,
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+      }
+    });
+
+    btnCrearTarea.removeEventListener("click", crearTarea, {
+      once: true,
+    });
+
+    btnCrearTarea.addEventListener("click", crearTarea, { once: true });
+
+    return;
+  }
+
   const tarea = new Todos(todoname, fechalimite, todoprioridad);
 
   if (menuSeleccionado() != projectsArray[0]) {
     tarea.project = menuSeleccionado().nombre;
     menuSeleccionado().todos.push(tarea);
   }
-  let project0 = projectsArray[0].todos;
+
   project0.push(tarea);
 
   todosSort();
@@ -213,7 +183,7 @@ let crearTarea = () => {
   modal.style.display = "none";
 };
 
-btnCrearTarea.addEventListener("click", crearTarea);
+btnCrearTarea.addEventListener("click", crearTarea, { once: true });
 
 todoname.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -250,6 +220,16 @@ let editTodo = (e) => {
   let todoIdFromLi = e.target.parentElement.parentElement.parentElement.id;
 
   let todo = getTodoById(todoIdFromLi);
+
+  let todoProjectName = todo.project;
+
+  let todoProjectforChecked = projectsArray.find(
+    (x) => x.nombre === todoProjectName
+  );
+
+  let todoInProject = todoProjectforChecked.todos.find(
+    (y) => y.id === todoIdFromLi
+  );
 
   modal.style.display = "block";
   modalNuevaTarea.style.display = "none";
@@ -352,7 +332,6 @@ let editTodo = (e) => {
         });
 
         return;
-      } else {
       }
     }
 
@@ -389,8 +368,11 @@ let editTodo = (e) => {
     }
 
     todo.dueDate = inputFechaLimiteEdit.value;
+    todoInProject.dueDate = inputFechaLimiteEdit.value;
     todo.title = todonameEdit.value;
+    todoInProject.title = todonameEdit.value;
     todo.priority = todoprioridadEdit.value;
+    todoInProject.priority = todoprioridadEdit.value;
 
     nuevaTareaForm.reset();
     modalEditarTarea.style.display = "none";
@@ -413,10 +395,12 @@ let editTodo = (e) => {
       }
     }
     todo.project = nuevoProyecto.nombre;
+    todoInProject.project = nuevoProyecto.nombre;
 
     todosSort();
     renderTodos(menuSeleccionado());
     updateMenu(menuSeleccionado());
+    saveToLocalStorage();
 
     Swal.fire({
       position: "center",
@@ -480,10 +464,11 @@ let deleteTodo = (e) => {
         timer: 2000,
         heightAuto: false,
       });
-      
-      saveToLocalStorage();
+
+      todosSort();
       renderTodos(menuSeleccionado());
       updateMenu(menuSeleccionado());
+      saveToLocalStorage();
     }
   });
 
@@ -505,7 +490,6 @@ export const menuSeleccionado = () => {
 
   return selected;
 };
-
 
 // COMPARADOR DE TODOS COMPLETADOS PARA EL SORT
 let compararPorCompleted = (objeto1, objeto2) => {
@@ -536,19 +520,22 @@ let prioridadToNumber = (todo) => {
     throw new Error('La propiedad "prioridad" no está definida');
   }
 
-  switch(prioridad){
-    case "Bajo": return 1;    
-    
-    case "Medio": return 2;
+  switch (prioridad) {
+    case "Bajo":
+      return 1;
 
-    case "Alto": return 3;
-    default: throw new Error(`La prioridad "${prioridad}" no es válida`);
+    case "Medio":
+      return 2;
+
+    case "Alto":
+      return 3;
+    default:
+      throw new Error(`La prioridad "${prioridad}" no es válida`);
   }
-}
+};
 
 // COMPARADOR DE FECHA LIMITE DE TODOS PARA EL SORT
 let compararPorPrioridad = (objeto1, objeto2) => {
-  
   if (prioridadToNumber(objeto1) > prioridadToNumber(objeto2)) {
     return -1;
   } else if (prioridadToNumber(objeto1) < prioridadToNumber(objeto2)) {
@@ -558,19 +545,13 @@ let compararPorPrioridad = (objeto1, objeto2) => {
   }
 };
 
-
-
-
-
-
 // FUNCION PARA HACER EL SORT Y PONER LOS TODOS COMPLETADOS AL FINAL
 export const todosChekedSort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorCompleted);
   let projectArray = menuSeleccionado().todos;
-  console.log(menuSeleccionado().todos)
-  
+
   projectArray.sort(compararPorCompleted);
 };
 
@@ -597,29 +578,35 @@ export const todoPrioritySort = () => {
 export const todosSort = () => {
   todosDueDateSort();
   todoPrioritySort();
-  
+
   todosDueDateSort();
   todosChekedSort();
-}
-
-
-
+};
 
 // FUNCIÓN PARA MARCAR/DESMARCAR UN TODO COMO COMPLETADO
 let completeStatus = (e) => {
   let todoFromLi = e.target.parentElement.parentElement;
   let todoIdFromLi = todoFromLi.id;
   let todo = getTodoById(todoIdFromLi);
-  
-  todo.completed = !todo.completed;
 
-  
+  let todoProjectName = todo.project;
+
+  let todoProjectforChecked = projectsArray.find(
+    (x) => x.nombre === todoProjectName
+  );
+
+  let todoInProject = todoProjectforChecked.todos.find(
+    (y) => y.id === todoIdFromLi
+  );
+
+  todo.completed = !todo.completed;
+  todoInProject.completed = !todoInProject.completed;
+
   todosSort();
-  
+
   renderTodos(menuSeleccionado());
   updateMenu(menuSeleccionado());
   saveToLocalStorage();
-  
 };
 
 //FUNCION PARA CAMBIAR LA VARIABLE DE CLASE DEPENDIENDO LA PRIORIDAD DEL TODO
@@ -653,17 +640,9 @@ export const renderTodos = (proyecto) => {
     proyecto = projectsArray[0].todos;
   } else if (proyecto.id > 0) {
     proyecto = proyecto.todos;
-    
-    console.log("render todos proyecto id > 0");
-    console.log(proyecto);
   } else {
     proyecto = proyecto.todos;
-    console.log("render todos proyecto else");
-    console.log(proyecto);
   }
-
-  
-  //saveToLocalStorage();
 
   let tareas = document.getElementById("tareas");
 
@@ -710,8 +689,6 @@ export const renderTodos = (proyecto) => {
     if (divMsg) {
       divMsg.remove();
     }
-     
-    
 
     proyecto.forEach((todo) => {
       let tareali = document.createElement("li");
@@ -728,7 +705,7 @@ export const renderTodos = (proyecto) => {
       }</p><p class="todoFecha" title="Fecha Límite">${formatearFecha(
         todo.dueDate
       )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
-      
+
       let checkCompletedInput = tareali.querySelector(".checkboxTodo");
 
       let editBtn = tareali.querySelector(".editTodoContainer");
@@ -757,9 +734,6 @@ export const renderTodos = (proyecto) => {
       }
 
       tareas.appendChild(tareali);
-      //saveToLocalStorage();
     });
-    //todosSort();
-    //saveToLocalStorage()
   }
 };
