@@ -1,6 +1,5 @@
 import "./reset.css";
 import "./styles.css";
-
 import "./modal.css";
 
 import "./modal";
@@ -9,16 +8,74 @@ import Todos from "./tareas";
 
 import Proyectos from "./menuControl.js";
 
-import "./menuControl";
-
 import { updateMenu } from "./menuControl.js";
 
+import "./menuControl";
 
-export const projectsArray = [];
+export let projectsArray = [];
 
 export const circleIArray = [];
 
-//cambio nombre de pestaña cuando se va xDD
+// manejador de LocalStorage
+
+document.addEventListener("DOMContentLoaded", () => {
+  let projects = JSON.parse(localStorage.getItem("projects"));
+  let project0 = JSON.parse(localStorage.getItem("project0"));
+
+  let projectsArrayNuevo = projectsArray;
+
+  if (projectsArrayNuevo.length == 0 && projects == null) {
+    projectsArrayNuevo = project0;
+  } else if (projectsArrayNuevo.length == 0 && projects != null) {
+    projectsArrayNuevo = project0.concat(projects); // assign concatenated array
+  }
+
+  projectsArray = projectsArrayNuevo;
+
+  let selectCategoria = document.getElementById("selectCategoria");
+
+  app();
+
+  projectsArray.forEach((project) => {
+    if (project.id > 0) {
+      let option = document.createElement("option");
+      option.setAttribute("value", `${project.nombre}`);
+      option.setAttribute("datass", `${project.id}`);
+      option.innerHTML = `${project.nombre}`;
+      selectCategoria.append(option);
+    }
+  });
+
+  renderTodos();
+  updateMenu();
+});
+
+function saveToLocalStorage() {
+  let projectsX = [];
+  let project0 = [];
+
+  projectsArray.forEach((project) => {
+    if (project.id > 0) {
+      projectsX.push(project);
+    } else if (project.id == 0) {
+      project0.push(project);
+    }
+  });
+  localStorage.setItem("project0", JSON.stringify(project0));
+  localStorage.setItem("projects", JSON.stringify(projectsX));
+}
+
+// iniciaiza el proyecto 0 si no existe
+let app = () => {
+  if (projectsArray == null) {
+    const ninguna = new Proyectos("Ninguna");
+    projectsArray = [];
+    ninguna.id = 0;
+    projectsArray.push(ninguna);
+  }
+};
+
+//cambia el nombre de pestaña cuando se va para llamar la atención del usuario
 
 let tituloPrevio = document.title;
 
@@ -31,6 +88,8 @@ window.addEventListener("focus", () => {
   document.title = tituloPrevio;
 });
 
+// Creacion de nueva tarea
+
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
 
 let todoname = document.getElementById("todoname");
@@ -40,11 +99,7 @@ let crearTarea = () => {
 
   let todoname = document.getElementById("todoname").value;
 
-  
   let todoprioridad = document.getElementById("todoprioridad").value;
-
-  
-
 
   if (todoname == "" || fechalimite == "") {
     let timerInterval;
@@ -88,9 +143,6 @@ let crearTarea = () => {
     return;
   }
 
-
-
-
   const tarea = new Todos(todoname, fechalimite, todoprioridad);
 
   if (menuSeleccionado() != projectsArray[0]) {
@@ -99,9 +151,8 @@ let crearTarea = () => {
   }
   let project0 = projectsArray[0].todos;
   project0.push(tarea);
-  todosDueDateSort ();
-  todosChekedSort ();
-
+  todosDueDateSort();
+  todosChekedSort();
 
   renderTodos(menuSeleccionado());
   updateMenu(menuSeleccionado());
@@ -117,19 +168,15 @@ let crearTarea = () => {
 
   nuevaTareaForm.reset();
   modal.style.display = "none";
-
-  
 };
 
 btnCrearTarea.addEventListener("click", crearTarea);
 
-todoname.addEventListener("keydown", (e)=>{
-  if(e.key === "Enter"){
+todoname.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
     e.preventDefault();
-
   }
-})
-
+});
 
 //OBTENER TODO POR ID
 
@@ -141,6 +188,8 @@ let getTodoById = (id) => {
   });
 };
 
+//OBTENER PROYECTO POR ID
+
 const getProjectById = (id) => {
   return projectsArray.find(function (project) {
     return project.id == id;
@@ -148,8 +197,6 @@ const getProjectById = (id) => {
 };
 
 //EDITAR TAREA
-
-
 
 let editTodo = (e) => {
   let todonameEdit = document.getElementById("todonameEdit");
@@ -165,40 +212,26 @@ let editTodo = (e) => {
   modalNuevaTarea.style.display = "none";
   modalEditarTarea.style.display = "flex";
 
+  todonameEdit.value = todo.title;
+  inputFechaLimiteEdit.value = todo.dueDate;
+  todoprioridadEdit.value = todo.priority;
+  selectCategoria.value = todo.project;
 
+  let defSelectedOption =
+    todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
 
-      
-    
+  let defSelectedColorEd = getComputedStyle(defSelectedOption).backgroundColor;
 
-  
+  todoprioridadEdit.style.backgroundColor = defSelectedColorEd;
 
-  todonameEdit.value = todo.getTitle;
-  inputFechaLimiteEdit.value = todo.getDueDate;
-  todoprioridadEdit.value = todo.getPriority;
-  selectCategoria.value = todo.getProject;
+  todoprioridadEdit.addEventListener("change", () => {
+    let selectedOptionEd =
+      todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
 
-
-  let defSelectedOption = todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
-
-    let defSelectedColorEd = getComputedStyle(defSelectedOption).backgroundColor;
-    
-
-    todoprioridadEdit.style.backgroundColor = defSelectedColorEd;
-
-    
-
-    todoprioridadEdit.addEventListener("change", () => {
-    
-    
-    let selectedOptionEd = todoprioridadEdit.options[todoprioridadEdit.selectedIndex];
-   
     let selectedColor = getComputedStyle(selectedOptionEd).backgroundColor;
-   
+
     todoprioridadEdit.style.backgroundColor = selectedColor;
-    });
-
-
-
+  });
 
   let categoriaId =
     selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
@@ -212,10 +245,6 @@ let editTodo = (e) => {
       selectCategoria.options[selectCategoria.selectedIndex].getAttribute(
         "datass"
       );
-
-
-
-
   });
 
   let modificarTodo = () => {
@@ -245,8 +274,6 @@ let editTodo = (e) => {
 
       return;
     }
-
-
 
     if (todo.title != todonameEdit.value) {
       let todonameEditCampo = todonameEdit.value;
@@ -282,22 +309,15 @@ let editTodo = (e) => {
         });
 
         return;
-      }
-      else{
-        
+      } else {
       }
     }
-
-   
-
-
-
 
     var now = new Date();
     now.setHours(now.getHours() - 24);
     var fechaActual = now.toISOString().slice(0, 10);
-  
-    if(todo.getDueDate != inputFechaLimiteEdit.value){
+
+    if (todo.dueDate != inputFechaLimiteEdit.value) {
       if (inputFechaLimiteEdit.value < fechaActual) {
         let timerInterval;
         Swal.fire({
@@ -323,17 +343,12 @@ let editTodo = (e) => {
         });
         return;
       }
-      
     }
-    
-    
-    
-
 
     todo.setDueDate = inputFechaLimiteEdit.value;
     todo.setTitle = todonameEdit.value;
     todo.setPriority = todoprioridadEdit.value;
-    
+
     nuevaTareaForm.reset();
     modalEditarTarea.style.display = "none";
     modal.style.display = "none";
@@ -349,14 +364,12 @@ let editTodo = (e) => {
         proyectoActual.todos.splice(origenTodoIndex, 1);
       }
       if (nuevoProyecto.id !== 0) {
-        if (!nuevoProyecto.todos.includes(todo)){          
+        if (!nuevoProyecto.todos.includes(todo)) {
           nuevoProyecto.todos.push(todo);
-        }       
-        
+        }
       }
     }
-    todo.setProject = nuevoProyecto.nombre;
-
+    todo.project = nuevoProyecto.nombre;
 
     renderTodos(menuSeleccionado());
     updateMenu(menuSeleccionado());
@@ -374,11 +387,11 @@ let editTodo = (e) => {
 
   let btnAceptarCambios = document.getElementById("btnAceptarCambios");
   btnAceptarCambios.addEventListener("click", modificarTodo, { once: true });
-  todonameEdit.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter"){
-      e.preventDefault()
+  todonameEdit.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
     }
-  })
+  });
 };
 
 //ELIMINAR TAREA
@@ -406,7 +419,7 @@ let deleteTodo = (e) => {
         (x) => x.nombre === todoProjectName
       );
 
-      let project0 = projectsArray[0].todos
+      let project0 = projectsArray[0].todos;
       project0.splice(project0.indexOf(todo), 1);
       if (todoProjectforDelete.id > 0) {
         todoProjectforDelete.todos.splice(
@@ -431,8 +444,8 @@ let deleteTodo = (e) => {
   //
 };
 
-//MARCAR TAREA COMO COMPLETADA
-let compararPorPropiedad = (objeto1, objeto2) => {
+// COMPARADOR DE TODOS COMPLETADOS PARA EL SORT
+let compararPorCompleted = (objeto1, objeto2) => {
   if (!objeto1.completed && objeto2.completed) {
     return -1;
   } else if (objeto1.completed && !objeto2.completed) {
@@ -442,6 +455,7 @@ let compararPorPropiedad = (objeto1, objeto2) => {
   }
 };
 
+// COMPARADOR DE FECHA LIMITE DE TODOS PARA EL SORT
 let compararPorDueDate = (objeto1, objeto2) => {
   if (objeto1.dueDate > objeto2.dueDate) {
     return -1;
@@ -452,9 +466,7 @@ let compararPorDueDate = (objeto1, objeto2) => {
   }
 };
 
-
-
-
+// FUNCION PARA RETORNAR EL PROYECTO QUE ESTA SELECCIONADO
 export const menuSeleccionado = () => {
   let selectedCategoriaCircle = document.getElementsByClassName(
     "menuProjectSelected"
@@ -470,22 +482,25 @@ export const menuSeleccionado = () => {
   return selected;
 };
 
+// FUNCION PARA HACER EL SORT Y PONER LOS TODOS COMPLETADOS AL FINAL
 export const todosChekedSort = () => {
   let project0 = projectsArray[0].todos;
-  
-  project0.sort(compararPorPropiedad);
-  let projectArray = menuSeleccionado().todos;
-  projectArray.sort(compararPorPropiedad);
-}
 
+  project0.sort(compararPorCompleted);
+  let projectArray = menuSeleccionado().todos;
+  projectArray.sort(compararPorCompleted);
+};
+
+//FUNCION PARA HACER EL SORT DE LOS TODOS POR SU FECHA LIMITE
 export const todosDueDateSort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorDueDate);
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorDueDate);
-}
+};
 
+// FUNCIÓN PARA MARCAR/DESMARCAR UN TODO COMO COMPLETADO
 let completeStatus = (e) => {
   let todoFromLi = e.target.parentElement.parentElement;
   let todoIdFromLi = todoFromLi.id;
@@ -493,16 +508,14 @@ let completeStatus = (e) => {
 
   todo.completed = !todo.completed;
 
-  todosDueDateSort ();
-  todosChekedSort ();
-  
+  todosDueDateSort();
+  todosChekedSort();
 
   renderTodos(menuSeleccionado());
   updateMenu(menuSeleccionado());
 };
 
-//funcion para cambiar variable de clase dependiendo de la prioridad
-
+//FUNCION PARA CAMBIAR LA VARIABLE DE CLASE DEPENDIENDO LA PRIORIDAD DEL TODO
 let colorPrioridad = (prioridad) => {
   if (prioridad == "Bajo") {
     return "priorityBajo";
@@ -537,7 +550,7 @@ export const renderTodos = (proyecto) => {
     proyecto = proyecto.todos;
   }
 
-  
+  saveToLocalStorage();
 
   let tareas = document.getElementById("tareas");
 
@@ -585,8 +598,6 @@ export const renderTodos = (proyecto) => {
       divMsg.remove();
     }
 
-    
-
     proyecto.forEach((todo) => {
       let tareali = document.createElement("li");
       tareali.setAttribute("id", todo.id);
@@ -597,7 +608,9 @@ export const renderTodos = (proyecto) => {
         todo.priority
       )}"></div><input type="checkbox" title="checkCompleted" class="checkboxTodo"> <p class="todoTitle">${
         todo.title
-      } </p></div><div class="todoRight"><p>${todo.project}</p><p class="todoFecha" title="Fecha Límite">${formatearFecha(
+      } </p></div><div class="todoRight"><p class="todoProyectName">${
+        todo.project
+      }</p><p class="todoFecha" title="Fecha Límite">${formatearFecha(
         todo.dueDate
       )}</p> <div class="editDeleteContainer"> <div class="editTodoContainer" title="Editar"><i class="fa-solid fa-pen-to-square"></i></div><div class="deleteTodoContainer" title="Eliminar"><i class="fa-solid fa-trash"></i></div></div></div>`;
       let checkCompletedInput = tareali.querySelector(".checkboxTodo");
@@ -607,6 +620,11 @@ export const renderTodos = (proyecto) => {
 
       let deleteBtn = tareali.querySelector(".deleteTodoContainer");
       deleteBtn.addEventListener("click", deleteTodo);
+
+      let pProyectName = tareali.querySelector(".todoProyectName");
+      if (todo.project == "Ninguna") {
+        pProyectName.remove();
+      }
 
       checkCompletedInput.addEventListener("change", completeStatus);
 
@@ -623,34 +641,7 @@ export const renderTodos = (proyecto) => {
       }
 
       tareas.appendChild(tareali);
+      saveToLocalStorage();
     });
   }
-  
 };
-
-//TESTING
-const ninguna = new Proyectos("Ninguna");
-
-projectsArray.push(ninguna);
-
-let tarea1 = new Todos("Ir al baño", "2024-03-02", "Alto");
-let tarea2 = new Todos(
-  "Practicar javascript orientado a objetos",
-  "2023-02-28",
-  "Medio"
-);
-
-let tarea3 = new Todos("Hacer judo", "1996-11-06", "Bajo");
-let tarea4 = new Todos("Espiar a la unión sovietica", "1996-11-06", "Medio");
-let tarea5 = new Todos("Ir al baño de nuevo", "1996-11-06", "Alto");
-let tarea6 = new Todos("Hornear un pastel", "1996-11-06", "Bajo");
-let tarea7 = new Todos("Practicar karate", "1996-11-06", "Alto");
-
-let tarea8 = new Todos("Mirar la serie", "1996-11-06", "Medio");
-
-let project0 = projectsArray[0].todos;
-
-project0.push(tarea1, tarea2, tarea3, tarea4, tarea5, tarea6, tarea7, tarea8);
-
-renderTodos();
-updateMenu();

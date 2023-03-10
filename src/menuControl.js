@@ -17,6 +17,7 @@ let acceptNewProject = document.getElementById("acceptNewProject");
 let newProjectForm = document.getElementById("newProjectForm");
 let projectNameInput = document.getElementById("projectName");
 
+// FUNCION PARA ABRIR EL MENU (SOLO EN MOBILE)
 let abrirMenu = () => {
   menuAbierto.style.display = "flex";
   menuCerrado.style.display = "none";
@@ -26,6 +27,7 @@ let abrirMenu = () => {
 
 menuCerrado.addEventListener("click", abrirMenu);
 
+// FUNCION PARA CERRAR EL MENU (SOLO EN MOBILE)
 let cerrarMenu = () => {
   menuCerrado.style.display = "flex";
   menuAbierto.style.display = "none";
@@ -35,7 +37,7 @@ let cerrarMenu = () => {
 
 menuAbierto.addEventListener("click", cerrarMenu);
 
-//cierra el menu si la ventana se agranda
+//EVENT LISTENER PARA CERRAR EL MENU SI EL WIDTH DE LA VENTANA ES > 900
 window.addEventListener("resize", () => {
   if (document.documentElement.clientWidth > 900) {
     if (menuPrincipal.classList.contains("menuOpened")) {
@@ -44,31 +46,17 @@ window.addEventListener("resize", () => {
   }
 });
 
+// CLASE PARA CREACION DE PROYECTOS
 export default class Proyectos {
-  static id = 0;
+  static id = 1;
   constructor(nombre) {
     this.id = Proyectos.id++;
     this.nombre = nombre;
     this.todos = [];
   }
-
-  get getId() {
-    return this.id;
-  }
-
-  get getNombre() {
-    return this.nombre;
-  }
-
-  get getTodos() {
-    return this.todos;
-  }
-
-  set setNombre(newName) {
-    this.title = newName;
-  }
 }
 
+// FUNCION PARA CREAR UN NUEVO PROYECTO
 let selectCategoria = document.getElementById("selectCategoria");
 
 const createProject = () => {
@@ -118,6 +106,8 @@ const createProject = () => {
 
   const project = new Proyectos(inputValue);
 
+  project.id = projectsArray.length;
+
   projectsArray.push(project);
 
   closeNewProjectFunction();
@@ -135,9 +125,9 @@ const createProject = () => {
   updateMenu(project);
 
   let option = document.createElement("option");
-  option.setAttribute("value", `${project.getNombre}`);
-  option.setAttribute("datass", `${project.getId}`);
-  option.innerHTML = `${project.getNombre}`;
+  option.setAttribute("value", `${project.nombre}`);
+  option.setAttribute("datass", `${project.id}`);
+  option.innerHTML = `${project.nombre}`;
   selectCategoria.append(option);
 };
 
@@ -148,6 +138,7 @@ const handleCreateProjectKey = (e) => {
   }
 };
 
+// FUNCION PARA MOSTRAR EL FORMULARIO DE CREACION DE PROYECTO
 const nuevoProyecto = () => {
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
@@ -158,6 +149,7 @@ const nuevoProyecto = () => {
 
 addProjectBtn.addEventListener("click", nuevoProyecto);
 
+// FUNCION PARA CERRAR EL FORMULARIO DEE CREACION DE PROYECTO
 const closeNewProjectFunction = () => {
   newProjectForm.reset();
   addNuevaBtn.style.display = "flex";
@@ -166,11 +158,11 @@ const closeNewProjectFunction = () => {
 
 cancelNewProject.addEventListener("click", closeNewProjectFunction);
 
-let dinamicUl = document.getElementById("dinamicUl");
-let circleIArray = [];
-let dltBtnArray = [];
+// FUNCION PARA ELIMINAR UN PROYECTO (CON TODOS SUS TODOS)
 
 const deleteProject = (proyecto) => {
+  console.log(proyecto);
+  let project1 = proyecto;
   Swal.fire({
     heightAuto: false,
     title: "Estas seguro?",
@@ -184,12 +176,9 @@ const deleteProject = (proyecto) => {
     reverseButtons: true,
   }).then((result) => {
     if (result.isConfirmed) {
-      let proyectoTodos = proyecto.todos;
+      let proyectoTodos = project1.todos;
 
       proyectoTodos.forEach((todo) => {
-        // let indexTodoInProjecto = proyectoTodos.indexOf(todo);
-        // proyectoTodos.splice(indexTodoInProjecto, 1);
-
         let project0 = projectsArray[0].todos;
 
         let indexTodoInAllTodos = project0.indexOf(todo);
@@ -197,8 +186,9 @@ const deleteProject = (proyecto) => {
       });
 
       const opcionAEliminar = selectCategoria.querySelector(
-        `option[value="${proyecto.nombre}"]`
+        `option[value="${project1.nombre}"]`
       );
+      console.log(opcionAEliminar);
       opcionAEliminar.remove();
 
       let indexOfProyecto = projectsArray.indexOf(proyecto);
@@ -215,6 +205,11 @@ const deleteProject = (proyecto) => {
     }
   });
 };
+
+//FUNCION PARA RENDERIZAR EL MENU
+let circleIArray = [];
+let dltBtnArray = [];
+let dinamicUl = document.getElementById("dinamicUl");
 
 export function updateMenu(proyecto) {
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
@@ -241,6 +236,10 @@ export function updateMenu(proyecto) {
 
   circleIArray.push(circleI);
 
+  if (proyecto === undefined) {
+    proyecto = projectsArray[0];
+  }
+
   if (proyecto == projectsArray[0]) {
     circleI.classList.add("menuProjectSelected");
   }
@@ -264,9 +263,12 @@ export function updateMenu(proyecto) {
 
   projectsArray.forEach((project) => {
     if (project.id != 0) {
-      let projectTodosUncompleted = project.getTodos.filter(
-        (todos) => todos.completed == false
-      );
+      let projectTodosUncompleted = [];
+      if (project.todos.length > 0) {
+        projectTodosUncompleted = project.todos.filter(
+          (todos) => todos.completed == false
+        );
+      }
 
       let projectIdForEventInTitle = project.id;
 
@@ -275,8 +277,8 @@ export function updateMenu(proyecto) {
       let dinamicLi = document.createElement("li");
       dinamicLi.classList.add("menuLi");
       dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
-      dinamicLi.setAttribute("projectName", `${project.getNombre}`);
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.getNombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
+      dinamicLi.setAttribute("projectName", `${project.nombre}`);
+      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
 
       dinamicUl.appendChild(dinamicLi);
 

@@ -20,7 +20,7 @@ body {
   overflow: hidden;
   box-shadow: #0000004a 0.5rem 0.5rem 8px 2px;
   display: grid;
-  
+
   grid-template-rows: 60px 1fr;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
@@ -32,7 +32,7 @@ body {
 .header {
   height: 60px;
   background-color: #27b27d;
-  
+
   grid-column: 1/3;
   -webkit-border-radius: 1rem 1rem 0 0;
   -moz-border-radius: 1rem 1rem 0 0;
@@ -82,7 +82,6 @@ body {
 /***********************************************************************************************************************/
 
 .main-content {
-  
   grid-column: 1/3;
   background-color: rgb(239, 255, 250);
   display: grid;
@@ -107,7 +106,7 @@ body {
   align-items: center;
 }
 
-.menuPrincipalTitle{
+.menuPrincipalTitle {
   padding-top: 2.5rem;
   font-size: 1.2rem;
   font-weight: 900;
@@ -118,12 +117,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 50%;
+  min-width: 70%;
 }
-
-
-
-
 
 .menuLi {
   gap: 1rem;
@@ -132,56 +127,49 @@ body {
   align-items: center;
 }
 
-
-
-.projectMenuLeft{
+.projectMenuLeft {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
-.projectMenuRight{
+.projectMenuRight {
   display: flex;
-  gap: .4rem;
+  gap: 0.4rem;
   align-items: center;
   justify-content: center;
 }
 
-
-.xMarkCategoria{
+.xMarkCategoria {
   min-width: 12px;
   cursor: pointer;
   color: #8d8d8d;
 }
-.xMarkCategoria:hover{
-  
+.xMarkCategoria:hover {
   color: #cb3232;
 }
 
-.deleteCategoryBtn{
+.deleteCategoryBtn {
   display: none;
 }
 
-.btnDltHidden{
+.btnDltHidden {
   display: flex;
 }
 
-
-.menuProjectCircle{
+.menuProjectCircle {
   color: transparent;
 }
 
-.menuLi:hover .projectMenuLeft .menuProjectCircle i:not(.menuProjectSelected){
+.menuLi:hover .projectMenuLeft .menuProjectCircle i:not(.menuProjectSelected) {
   color: #0000001a;
 }
 
-
-.menuProjectSelected{
+.menuProjectSelected {
   color: #0000004a;
 }
 
 .menuTitle {
-  
   font-size: 1.5rem;
   word-wrap: break-word;
   -webkit-user-select: none;
@@ -210,24 +198,25 @@ body {
   user-select: none;
 }
 
-
-.addProjectContainer{
+.addProjectContainer {
   display: flex;
-    
 }
 
+.nuevaCategoriaP {
+  display: flex;
+  word-wrap: break-word;
+  max-width: 110px;
+  font-size: 1rem;
+  line-height: normal;
+}
 
-
-.addNuevaBtn{
+.addNuevaBtn {
   display: flex;
   font-weight: 600;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-}
-
-.addNuevaBtn p{
-  font-size: 1.5rem;
+  margin-top: 1rem;
 }
 
 .addProjectBtn {
@@ -236,17 +225,15 @@ body {
   display: flex;
   animation-fill-mode: forwards;
   animation-direction: alternate;
-  
 }
 .addProjectBtn:hover {
-  
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
   -ms-transition: all 0.6s ease-in-out;
   -o-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
   animation-direction: alternate;
-  
+
   -webkit-transform: rotate(-360deg);
   -moz-transform: rotate(-360deg);
   -ms-transform: rotate(-360deg);
@@ -254,10 +241,9 @@ body {
   transform: rotate(-360deg);
   animation-fill-mode: forwards;
   animation-direction: alternate;
-  
 }
 
-.addProjectBtn:active{
+.addProjectBtn:active {
   -webkit-transition: all 0.6s ease-in-out;
   -moz-transition: all 0.6s ease-in-out;
   -ms-transition: all 0.6s ease-in-out;
@@ -271,36 +257,32 @@ body {
   animation-fill-mode: forwards;
   animation-direction: alternate;
 }
-
 
 .addProjectBtn i {
   pointer-events: none;
 }
 
-
-.projectInput{
+.projectInput {
   display: none;
   flex-direction: column;
 }
 
-.acceptCancelProject{
+.acceptCancelProject {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   font-size: 1.5rem;
 }
 
-.acceptCancelProject i{
+.acceptCancelProject i {
   cursor: pointer;
 }
 
-.menuLi:first-child{
-  padding-bottom: .5rem;
+.menuLi:first-child {
+  padding-bottom: 0.5rem;
   border-bottom: #27b27d 2px solid;
   margin-bottom: 1rem;
 }
-
-
 
 /***********************************************************************************************************************/
 
@@ -314,7 +296,6 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100%;
-  
 }
 /***********************************************************************************************************************/
 .tituloMas {
@@ -324,7 +305,6 @@ body {
   display: flex;
   align-items: center;
   gap: 3rem;
-  
 }
 
 .tituloMas h1 {
@@ -368,48 +348,43 @@ body {
   transform: rotate(360deg);
 }
 
+.divMsgTodosVacio {
+  margin-top: 5rem;
+  font-size: 1.3rem;
+}
+
 /***********************************************************************************************************************/
 
-
 .tareas {
-  
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  
+
   width: 85%;
   height: calc(80vh - 200px);
-  
+
   overflow-y: auto;
   padding: 0 0 5px 0;
-  align-items: center; 
+  align-items: center;
 
   box-shadow: #27b27d 0 1px 0;
-  
-  
 }
-
-
-
 
 /* Estilos para el scrollbar */
-.tareas::-webkit-scrollbar {  
-  width: 10px;   
+.tareas::-webkit-scrollbar {
+  width: 10px;
 }
 
-
-.tareas::-webkit-scrollbar-thumb {  
-  background-color: #27b27dc6;  
+.tareas::-webkit-scrollbar-thumb {
+  background-color: #27b27dc6;
   border-radius: 5px;
 }
 
-.tareas::-webkit-scrollbar-track { 
-  background-color: #f2f2f2;  
+.tareas::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-
 
 .tareas li {
   background-color: rgb(230, 245, 240);
@@ -428,13 +403,7 @@ body {
 }
 
 .tareas li:hover {
-  background-color: rgb(201, 221, 215);
-  /* border-bottom: #27b27d 3px solid ; */
-  /* -webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  -ms-transform: scale(1.01);
-  -o-transform: scale(1.01);
-  transform: scale(1.01); */
+  background-color: rgb(201, 221, 215);  
 }
 
 .tareas li:hover .todoLeft .todoTitle {
@@ -478,6 +447,10 @@ body {
   align-items: center;
 }
 
+.todoProyectName{
+  font-style: italic;
+}
+
 .todoFecha {
   font-weight: 600;
   -webkit-user-select: none;
@@ -504,11 +477,7 @@ body {
   border-radius: 0.5rem 0 0 0.5rem;
   -webkit-user-select: none;
   user-select: none;
-  
 }
-
-
-
 
 .priorityBajo {
   background-color: #39bd8b;
@@ -523,7 +492,6 @@ body {
   background-color: #fa6b6b;
   font-weight: 600;
 }
-
 
 .editDeleteContainer {
   display: flex;
@@ -653,12 +621,9 @@ body {
     border-radius: 0;
   }
 
-
-  .tareas{
+  .tareas {
     height: 70%;
   }
-
-  
 }
 
 /***********************************************************************************************************************/
@@ -709,14 +674,9 @@ body {
   .menuCerrado {
     display: flex;
   }
-
-  
 }
 
 /***********************************************************************************************************************/
-
-
-
 
 @media (max-width: 500px) {
   .tituloMas {
@@ -733,7 +693,6 @@ body {
   .tareas {
     width: 94%;
     height: 70%;
-    
   }
 
   .tareas li {
@@ -768,8 +727,8 @@ body {
     width: 66%;
     font-size: 1.2rem;
   }
+
+  .numberOfTodos {
+    min-width: 19px;
+  }
 }
-
-
-
-
