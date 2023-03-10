@@ -198,6 +198,11 @@ body {
   user-select: none;
 }
 
+.numberOfTodosSpanHidden{
+  display: none;
+}
+
+
 .addProjectContainer {
   display: flex;
 }
@@ -449,6 +454,8 @@ body {
 
 .todoProyectName{
   font-style: italic;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .todoFecha {
@@ -468,8 +475,8 @@ body {
 .todoPriority {
   display: flex;
   height: 100%;
-  min-width: 0.2rem;
-  border: 1px rgba(0, 0, 0, 0.5) solid;
+  min-width: 0.5rem;
+  /* border: 1px rgba(0, 0, 0, 0.5) solid; */
   -webkit-border-radius: 0.5rem 0 0 0.5rem;
   -moz-border-radius: 0.5rem 0 0 0.5rem;
   -ms-border-radius: 0.5rem 0 0 0.5rem;
@@ -501,7 +508,7 @@ body {
 }
 
 .editTodoContainer {
-  background-color: #ffff92;
+  color: #696969;
   height: 2.4rem;
   width: 2.4rem;
   display: flex;
@@ -509,13 +516,6 @@ body {
   justify-content: center;
   cursor: pointer;
 
-  border: 1px solid rgba(0, 0, 0, 0.5);
-
-  -webkit-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -moz-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -ms-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -o-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .editTodoContainer:hover i {
@@ -524,6 +524,11 @@ body {
   -ms-transform: scale(1.3);
   -o-transform: scale(1.3);
   transform: scale(1.3);
+  color: black;
+}
+
+.editTodoContainer i {
+  pointer-events: none;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
@@ -531,25 +536,19 @@ body {
   transition: all 0.2s;
 }
 
-.editTodoContainer i {
-  pointer-events: none;
-}
-
 .deleteTodoContainer {
-  background-color: #fe9393;
+  color: #696969;
   height: 2.4rem;
   width: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -moz-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -ms-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  -o-border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  
+  
 }
+
+
 
 .deleteTodoContainer:hover i {
   -webkit-transform: scale(1.3);
@@ -557,14 +556,16 @@ body {
   -ms-transform: scale(1.3);
   -o-transform: scale(1.3);
   transform: scale(1.3);
+  
+  color: black;
+}
+
+.deleteTodoContainer i {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
-}
-
-.deleteTodoContainer i {
   pointer-events: none;
 }
 
