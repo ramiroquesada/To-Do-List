@@ -70,16 +70,14 @@ window.addEventListener("focus", () => {
   document.title = tituloPrevio;
 });
 
-
 // OBTENER FECHA ACTUAL
 
-let fechaHoy = ()=>{
+let fechaHoy = () => {
   var now = new Date();
-  now.setHours(now.getHours() -23);
+  now.setHours(now.getHours() - 23);
   var fechaActual = now.toISOString().slice(0, 10);
-  return fechaActual
-}
-
+  return fechaActual;
+};
 
 // Creacion de nueva tarea
 
@@ -112,8 +110,6 @@ let crearTarea = () => {
 
     return;
   }
-
-  
 
   if (fechalimite < fechaHoy()) {
     let timerInterval;
@@ -155,7 +151,7 @@ let crearTarea = () => {
       if (result.dismiss === Swal.DismissReason.timer) {
       }
     });
-    
+
     return;
   }
 
@@ -339,7 +335,6 @@ let editTodo = (e) => {
       }
     }
 
-    
     if (todo.dueDate != inputFechaLimiteEdit.value) {
       if (inputFechaLimiteEdit.value < fechaHoy()) {
         let timerInterval;
@@ -482,13 +477,8 @@ export const menuSeleccionado = () => {
     "menuProjectSelected"
   );
 
-  
-
   let selectedCategoriaLi =
     selectedCategoriaCircle[0].parentElement.parentElement.parentElement;
-
-  
-
 
   let selectedProject = selectedCategoriaLi.getAttribute("projectname");
 
@@ -557,7 +547,6 @@ export const todosChekedSort = () => {
 
   project0.sort(compararPorCompleted);
   let projectArray = menuSeleccionado().todos;
-  
 
   projectArray.sort(compararPorCompleted);
 };
@@ -567,7 +556,7 @@ export const todosDueDateSort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorDueDate);
-  
+
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorDueDate);
 };
@@ -577,8 +566,7 @@ export const todoPrioritySort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorPrioridad);
-  
-  
+
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorPrioridad);
 };
@@ -601,16 +589,20 @@ let completeStatus = (e) => {
 
   let todoProjectName = todo.project;
 
-  let todoProjectforChecked = projectsArray.find(
-    (x) => x.nombre === todoProjectName
-  );
+  if (todoProjectName != "Ninguna") {
+    let todoProjectforChecked = projectsArray.find(
+      (x) => x.nombre === todoProjectName
+    );
 
-  let todoInProject = todoProjectforChecked.todos.find(
-    (y) => y.id === todoIdFromLi
-  );
-
-  todo.completed = !todo.completed;
-  todoInProject.completed = !todoInProject.completed;
+    let todoInProject = todoProjectforChecked.todos.find(
+      (y) => y.id === todoIdFromLi
+    );
+    todoInProject.completed = !todoInProject.completed;
+    todo.completed = !todo.completed;
+    console.log(todoInProject);
+  } else {
+    todo.completed = !todo.completed;
+  }
 
   todosSort();
 

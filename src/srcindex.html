@@ -131,32 +131,54 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
       </div>
       <div class="main-content">
         <div class="menu" id="menuPrincipal">
-          <p class="menuPrincipalTitle">//CATEGORÍAS</p>
-          <ul id="dinamicUl"></ul>
+          <div class="menuArriba" class="menuArriba">
+            <p class="menuPrincipalTitle">//CATEGORÍAS</p>
+            <ul id="dinamicUl"></ul>
 
-          <div class="addProjectContainer">
-            <div class="addNuevaBtn" id="addNuevaBtn">
-              <p class="nuevaCategoriaP">AGREGAR CATEGORÍA</p>
-              <div class="addProjectBtnContainer" id="addProjectBtn">
-                <i class="fa-solid fa-circle-plus addProjectBtn"></i>
+            <div class="addProjectContainer">
+              <div class="addNuevaBtn" id="addNuevaBtn">
+                <p class="nuevaCategoriaP">AGREGAR CATEGORÍA</p>
+                <div class="addProjectBtnContainer" id="addProjectBtn">
+                  <i class="fa-solid fa-circle-plus addProjectBtn"></i>
+                </div>
+              </div>
+
+              <div class="projectInput" id="projectInput">
+                <form id="newProjectForm">
+                  <input
+                    type="text"
+                    name="projectName"
+                    id="projectName"
+                    title="Nombre del proyecto"
+                    maxlength="9"
+                  />
+                </form>
+                <div class="acceptCancelProject">
+                  <i class="fa-solid fa-check" id="acceptNewProject"></i>
+                  <i class="fa-solid fa-ban" id="cancelNewProject"></i>
+                </div>
               </div>
             </div>
-
-            <div class="projectInput" id="projectInput">
-              <form id="newProjectForm">
-                <input
-                  type="text"
-                  name="projectName"
-                  id="projectName"
-                  title="Nombre del proyecto"
-                  maxlength="9"
-                />
-              </form>
-              <div class="acceptCancelProject">
-                <i class="fa-solid fa-check" id="acceptNewProject"></i>
-                <i class="fa-solid fa-ban" id="cancelNewProject"></i>
-              </div>
-            </div>
+          </div>
+          <div class="menuAbajo" class="menuAbajo">
+            <p>
+              Creado por
+              <a
+                href="https://github.com/ramessj"
+                target="blank"
+                class="gitLink"
+                >Ramiro Quesada</a
+              >
+            </p>
+            <p>
+              Hosteado en
+              <a
+                href="https://github.com/ramessj/To-Do-List"
+                target="blank"
+                class="gitLink"
+                >GitHub</a
+              >
+            </p>
           </div>
         </div>
         <div class="content" id="contentPrincipal">
