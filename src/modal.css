@@ -13,9 +13,9 @@
 .modalContent {
   position: relative;
   background-color: aliceblue;
-  top: 25%;
-
-  left: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 50%;
 
   -webkit-border-radius: 1rem;
@@ -30,6 +30,7 @@
 .closeFullW {
   display: flex;
   justify-content: space-between;
+  height: 1.5rem;
 }
 
 .close {
@@ -63,10 +64,27 @@
   flex-direction: column;
 }
 
-.h1NuevaTarea {
-  margin-bottom: 2rem;
+.h1NuevaTarea,
+.h1EditarTarea {
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 600;
+  color: #2e926c;
+  text-shadow: #212422d0 0px 1px 1px;
+  align-self: center;
+}
+
+.h1NuevaTarea::after,
+.h1EditarTarea::after {
+  display: block;
+  position: relative;
+  content: "";
+  width: 120%;
+  border-bottom: 2px #2e926c solid;
+  left: -10%;
+  bottom: -0.3rem;
+  height: 3px;
+  
 }
 
 .nuevaTareaForm {
@@ -74,16 +92,40 @@
   flex-direction: column;
   gap: 1rem;
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+  padding: 0 1rem 0 1rem;
+  min-width: 16rem;
+  width: 25rem;
+  align-self: center;
 }
 
+.nuevaTareaForm label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 .nuevaTareaForm input {
   font-size: 1rem;
+  border: 2px solid #969696;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem 0.3rem;
+  display: flex;
+  align-items: center;
+}
+.nuevaTareaForm select {
+  font-size: 1rem;
+  border: 2px solid #969696;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem 0.3rem;
+  display: flex;
+  align-items: center;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .msgBtnNuevaTarea {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -122,15 +164,9 @@
   flex-direction: column;
 }
 
-.h1EditarTarea {
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
 .aceptarCancelarEdit {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .btnAceptarCambios {
@@ -157,22 +193,18 @@
 
 @media (max-width: 1200px) {
   .modalContent {
-    left: 20%;
     width: 60%;
   }
 }
 
 @media (max-width: 700px) {
   .modalContent {
-    left: 3%;
     width: 94%;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .modalContent {
-    top: 20%;
-    left: 0;
     width: 97%;
     /* border-left: none;
     border-right: none; */
@@ -186,5 +218,16 @@
 
   .nuevaTareaButton {
     font-size: 1.2rem;
+  }
+
+  .modalEditarTarea {
+    padding: 1rem;
+  }
+
+  .nuevaTareaForm {
+    gap: 0.6rem;
+    min-width: 16rem;
+    width: auto;
+    align-self: center;
   }
 }

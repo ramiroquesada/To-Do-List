@@ -65,6 +65,7 @@ export default class Proyectos {
 let selectCategoria = document.getElementById("selectCategoria");
 
 const createProject = () => {
+  console.log(projectsArray)
   let inputValue = projectNameInput.value;
 
   if (inputValue == "") {
@@ -113,6 +114,7 @@ const createProject = () => {
 
   project.id = projectsArray.length;
 
+  
   projectsArray.push(project);
 
   closeNewProjectFunction();
@@ -183,12 +185,15 @@ const deleteProject = (proyecto) => {
     if (result.isConfirmed) {
       let proyectoTodos = project1.todos;
 
-      proyectoTodos.forEach((todo) => {
-        let project0 = projectsArray[0].todos;
-
-        let indexTodoInAllTodos = project0.indexOf(todo);
-        project0.splice(indexTodoInAllTodos, 1);
-      });
+      if(proyectoTodos.length > 0){
+        proyectoTodos.forEach((todo) => {
+          let project0 = projectsArray[0].todos;
+  
+          let indexTodoInAllTodos = project0.indexOf(todo);
+          project0.splice(indexTodoInAllTodos, 1);
+        });
+      }
+      
 
       const opcionAEliminar = selectCategoria.querySelector(
         `option[value="${project1.nombre}"]`
@@ -199,8 +204,11 @@ const deleteProject = (proyecto) => {
       let indexOfProyecto = projectsArray.indexOf(proyecto);
       projectsArray.splice(indexOfProyecto, 1);
 
+
+      saveToLocalStorage();
       renderTodos(projectsArray[0]);
       updateMenu(projectsArray[0]);
+      
 
       Swal.fire({
         heightAuto: false,
@@ -215,6 +223,7 @@ const deleteProject = (proyecto) => {
 let circleIArray = [];
 let dltBtnArray = [];
 let dinamicUl = document.getElementById("dinamicUl");
+let staticUl = document.getElementById("staticUl");
 
 export function updateMenu(proyecto) {
   let projectIdForEventInTitle = projectsArray[0].id + 1000;
@@ -225,15 +234,15 @@ export function updateMenu(proyecto) {
     (todos) => todos.completed == false
   );
 
-  dinamicUl.innerHTML = ``;
+  staticUl.innerHTML = ``;
   let mainLi = document.createElement("li");
   mainLi.classList.add("menuLi");
   mainLi.setAttribute("id", `${projectIdForEventInTitle}`);
   mainLi.setAttribute("projectName", `Ninguna`);
-  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="iCircleI"></i></span><span class="menuTitle">TODOS</span
+  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="iCircleI"></i></span><span class="menuTitle">HOME</span
     ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArrayUncompleted.length}</span></div>`;
 
-  dinamicUl.appendChild(mainLi);
+    staticUl.appendChild(mainLi);
 
   let projectNameBtn = document.getElementById(`${projectIdForEventInTitle}`);
 
@@ -253,6 +262,7 @@ export function updateMenu(proyecto) {
   if (projectsArray.length == 1) {
     circleI.classList.add("menuProjectSelected");
     todosSort();
+    dinamicUl.innerHTML = ``;
   }
 
   projectNameBtn.addEventListener("click", () => {
@@ -269,67 +279,73 @@ export function updateMenu(proyecto) {
     todosSort();
   });
 
-  projectsArray.forEach((project) => {
-    if (project.id != 0) {
-      let projectTodosUncompleted = [];
-      if (project.todos.length > 0) {
-        projectTodosUncompleted = project.todos.filter(
-          (todos) => todos.completed == false
+
+  if(projectsArray.length>1){
+    dinamicUl.innerHTML = ``;
+    projectsArray.forEach((project) => {
+      if (project.id != 0) {
+        let projectTodosUncompleted = [];
+        if (project.todos.length > 0) {
+          projectTodosUncompleted = project.todos.filter(
+            (todos) => todos.completed == false
+          );
+        }
+  
+        let projectIdForEventInTitle = project.id;
+  
+        let idForLi = project.id + 6000;
+        let idForDeleteBtn = project.id + 12000;
+        let idForNumberOfTodos = project.id + 24000;
+        let dinamicLi = document.createElement("li");
+        dinamicLi.classList.add("menuLi");
+        dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
+        dinamicLi.setAttribute("projectName", `${project.nombre}`);
+        dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos" id="${idForNumberOfTodos}">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
+  
+        dinamicUl.appendChild(dinamicLi);
+  
+        let numberOfTodosSpan = document.getElementById(`${idForNumberOfTodos}`);
+        if (projectTodosUncompleted.length == 0) {
+          numberOfTodosSpan.classList.add("numberOfTodosSpanHidden");
+        }
+  
+        let projectNameBtn = document.getElementById(
+          `${projectIdForEventInTitle}`
         );
-      }
-
-      let projectIdForEventInTitle = project.id;
-
-      let idForLi = project.id + 6000;
-      let idForDeleteBtn = project.id + 12000;
-      let idForNumberOfTodos = project.id + 24000;
-      let dinamicLi = document.createElement("li");
-      dinamicLi.classList.add("menuLi");
-      dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
-      dinamicLi.setAttribute("projectName", `${project.nombre}`);
-      dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos" id="${idForNumberOfTodos}">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
-
-      dinamicUl.appendChild(dinamicLi);
-
-      let numberOfTodosSpan = document.getElementById(`${idForNumberOfTodos}`);
-      if (projectTodosUncompleted.length == 0) {
-        numberOfTodosSpan.classList.add("numberOfTodosSpanHidden");
-      }
-
-      let projectNameBtn = document.getElementById(
-        `${projectIdForEventInTitle}`
-      );
-
-      let circleI = document.getElementById(`${idForLi}`);
-
-      circleIArray.push(circleI);
-
-      let deleteProjectBtn = document.getElementById(`${idForDeleteBtn}`);
-      dltBtnArray.push(deleteProjectBtn);
-
-      deleteProjectBtn.addEventListener("click", () => {
-        deleteProject(project);
-      });
-
-      if (project == proyecto) {
-        circleI.classList.add("menuProjectSelected");
-        deleteProjectBtn.classList.add("btnDltHidden");
-      }
-
-      projectNameBtn.addEventListener("click", () => {
-        renderTodos(project);
-
-        circleIArray.forEach((circle) => {
-          circle.classList.remove("menuProjectSelected");
+  
+        let circleI = document.getElementById(`${idForLi}`);
+  
+        circleIArray.push(circleI);
+  
+        let deleteProjectBtn = document.getElementById(`${idForDeleteBtn}`);
+        dltBtnArray.push(deleteProjectBtn);
+  
+        deleteProjectBtn.addEventListener("click", () => {
+          deleteProject(project);
         });
-        circleI.classList.add("menuProjectSelected");
-        todosSort();
-
-        dltBtnArray.forEach((xBtn) => {
-          xBtn.classList.remove("btnDltHidden");
+  
+        if (project == proyecto) {
+          circleI.classList.add("menuProjectSelected");
+          deleteProjectBtn.classList.add("btnDltHidden");
+        }
+  
+        projectNameBtn.addEventListener("click", () => {
+          renderTodos(project);
+  
+          circleIArray.forEach((circle) => {
+            circle.classList.remove("menuProjectSelected");
+          });
+          circleI.classList.add("menuProjectSelected");
+          todosSort();
+  
+          dltBtnArray.forEach((xBtn) => {
+            xBtn.classList.remove("btnDltHidden");
+          });
+          deleteProjectBtn.classList.add("btnDltHidden");
         });
-        deleteProjectBtn.classList.add("btnDltHidden");
-      });
-    }
-  });
+      }
+    });
+  }
+
+  
 }

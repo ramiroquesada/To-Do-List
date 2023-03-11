@@ -33,9 +33,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
         </div>
 
         <div class="modalNuevaTarea" id="modalNuevaTarea">
-          <h1 id="h1NuevaTarea" class="h1NuevaTarea">Nueva tarea</h1>
+          <h1 id="h1NuevaTarea" class="h1NuevaTarea">NUEVA TAREA</h1>
           <form class="nuevaTareaForm" id="nuevaTareaForm">
-            <label for="todoname">Nombre</label>
+            <label for="todoname">Tarea:</label>
             <input
               type="text"
               title="todoname"
@@ -43,9 +43,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
               id="todoname"
               maxlength="60"
             />
-            <label for="todolimit">Fecha límite</label>
+            <label for="todolimit">Fecha límite:</label>
             <input type="date" title="todolimit" id="inputFechaLimite" />
-            <label for="todoprioridad">Seleccionar Prioridad</label>
+            <label for="todoprioridad">Seleccionar Prioridad:</label>
             <select name="prioridad" title="todoprioridad" id="todoprioridad">
               <option value="Bajo" class="priorityBajo">Bajo</option>
               <option value="Medio" class="priorityMedio" selected>
@@ -56,7 +56,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
           </form>
 
           <div class="msgBtnNuevaTarea">
-            <div class="msgNuevaTarea" id="msgNuevaTarea"></div>
+            
             <button
               type="button"
               class="nuevaTareaButton"
@@ -68,9 +68,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
         </div>
 
         <div class="modalEditarTarea" id="modalEditarTarea">
-          <h1 id="h1EditarTarea" class="h1EditarTarea">Modificar tarea</h1>
+          <h1 id="h1EditarTarea" class="h1EditarTarea">EDITAR TAREA</h1>
           <form class="nuevaTareaForm">
-            <label for="todoname">Nombre</label>
+            <label for="todoname">Tarea:</label>
             <input
               type="text"
               title="todoname"
@@ -78,9 +78,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
               id="todonameEdit"
               maxlength="60"
             />
-            <label for="todolimit">Fecha límite</label>
+            <label for="todolimit">Fecha límite:</label>
             <input type="date" title="todolimit" id="inputFechaLimiteEdit" />
-            <label for="todoprioridad">Prioridad</label>
+            <label for="todoprioridad">Prioridad:</label>
             <select
               name="prioridad"
               title="todoprioridad"
@@ -97,7 +97,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
           </form>
 
           <div class="aceptarCancelarEdit">
-            <div></div>
+            
             <button
               type="button"
               id="btnAceptarCambios"
@@ -132,7 +132,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
       <div class="main-content">
         <div class="menu" id="menuPrincipal">
           <div class="menuArriba" class="menuArriba">
-            <p class="menuPrincipalTitle">//CATEGORÍAS</p>
+            <ul id="staticUl"></ul>
+            <p class="menuPrincipalTitle">CATEGORÍAS</p>
             <ul id="dinamicUl"></ul>
 
             <div class="addProjectContainer">
@@ -163,13 +164,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
           <div class="menuAbajo" class="menuAbajo">
             <p>
               Creado por
-              <a
+               <a
                 href="https://github.com/ramessj"
                 target="blank"
                 class="gitLink"
                 >Ramiro Quesada</a
-              >
-            </p>
+              ></p>
+            
             <p>
               Hosteado en
               <a
@@ -177,8 +178,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css
                 target="blank"
                 class="gitLink"
                 >GitHub</a
-              >
-            </p>
+              ></p>
+            
           </div>
         </div>
         <div class="content" id="contentPrincipal">

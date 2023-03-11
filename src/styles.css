@@ -123,50 +123,58 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  gap: 1.4rem;
+  
+  gap: 1rem;
+  
+}
+
+.menuAbajo p {
+  font-size: 0.75rem;
+  height: 0.9rem;
   -webkit-user-select: none;
   user-select: none;
 }
 
-.menuAbajo p {
-  font-weight: 600;
-}
-
 .gitLink {
+  font-size: 0.75rem;
+  margin-left: .2rem;
   text-decoration: none;
+  font-weight: 600;
   color: #27b27d;
   -webkit-transition: font-size 0.2s;
   -moz-transition: font-size 0.2s;
   -ms-transition: font-size 0.2s;
   -o-transition: font-size 0.2s;
   transition: font-size 0.2s;
+  
 }
 
 .gitLink:hover {
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .menuPrincipalTitle {
-  padding-top: 2.5rem;
   font-size: 1.2rem;
   font-weight: 900;
 }
 
 .menu ul {
-  margin: 2rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  min-width: 14rem;
-  max-height: calc(60vh - 140px);
+  min-width: 13.7rem;
+  max-height: calc(60vh - 180px);
   overflow-y: auto;
-  padding-bottom: 0.66rem;
-  box-shadow: #27b27d 0 1px 0;
+  padding-bottom: .6rem;
+  
 }
 
+
+
 .menu ul::-webkit-scrollbar {
-  margin-left: 1rem;
+  margin-left: 1.5rem;
   width: 6px;
 }
 
@@ -194,7 +202,7 @@ body {
   -o-border-radius: 0.6rem;
   border-radius: 0.6rem;
   cursor: pointer;
-  width: 11.5rem;
+  width: 11rem;
 }
 
 .projectMenuLeft {
@@ -282,9 +290,30 @@ body {
   display: none;
 }
 
+
+#staticUl{
+  margin: 1.5rem 0 1rem 0;
+}
+#staticUl .menuLi:first-child {
+  border-bottom: #27b27d 3px solid;
+  
+}
+
+#staticUl .menuLi:first-child div .menuTitle {
+  font-size: 1.6rem;
+  margin-left: 1.5rem;
+  font-style: italic;
+}
+
+
+
 .addProjectContainer {
   display: flex;
+  flex-direction: column;
 }
+
+
+
 
 .nuevaCategoriaP {
   display: flex;
@@ -296,6 +325,24 @@ body {
   user-select: none;
 }
 
+#newProjectForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: .5rem;
+}
+
+
+#newProjectForm input{
+  width: 85%;
+  font-size: 1rem;
+  border: 2px solid #969696;
+  
+  align-items: center;  
+  border-radius: 0.5rem;
+  
+}
+
 .addNuevaBtn {
   display: flex;
   font-weight: 600;
@@ -303,7 +350,9 @@ body {
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1rem;
+  
 }
+
 
 .addProjectBtn {
   font-size: 2rem;
@@ -364,17 +413,7 @@ body {
   cursor: pointer;
 }
 
-.menuLi:first-child {
-  padding-bottom: 0.5rem;
-  border-bottom: #27b27d 3px solid;
-  margin-bottom: 1rem;
-  font-style: italic;
-}
 
-.menuLi:first-child div .menuTitle {
-  font-size: 1.5rem;
-  margin-left: 1.6rem;
-}
 
 /***********************************************************************************************************************/
 
@@ -698,7 +737,7 @@ body {
   }
 
   .menu ul {
-    max-height: calc(80vh - 160px);
+    max-height: calc(80vh - 220px);
   }
 
   .content {
@@ -817,8 +856,7 @@ body {
   }
 
   .menuOpened {
-    width: 66%;
-    font-size: 1.2rem;
+    width: 240px;
   }
 
   .numberOfTodos {
@@ -830,6 +868,26 @@ body {
   }
 
   .menuPrincipalTitle {
-    padding-top: 1.5rem;
+    padding-top: .2rem;
+  }
+
+  
+  .menuLi div .menuTitle{
+    font-size: 1rem;
+  }
+
+  #staticUl .menuLi:first-child {
+    border-bottom: #27b27d 2px solid;
+    margin: 0;
+  }
+  
+  #staticUl .menuLi:first-child div .menuTitle {
+    font-size: 1.3rem;
+    margin-left: 1.4rem;
+  }
+
+  .acceptCancelProject {
+    padding: .3rem;
+    font-size: 1rem;
   }
 }
