@@ -125,6 +125,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgb(239, 255, 250);
+  padding: .5rem;
+  -webkit-border-radius: .6rem;
+  -moz-border-radius: .6rem;
+  -ms-border-radius: .6rem;
+  -o-border-radius: .6rem;
+  border-radius: .6rem;
 }
 
 .projectMenuLeft {
@@ -646,6 +653,10 @@ body {
     pointer-events: none;
     -webkit-filter: blur(5px);
     filter: blur(5px);
+    -webkit-user-select: none;
+    user-select: none;
+
+    -webkit-user-drag: none;
   }
 
   .menuOpened {
@@ -731,5 +742,9 @@ body {
 
   .numberOfTodos {
     min-width: 19px;
+  }
+
+  .divMsgTodosVacio {
+    font-size: 1rem;
   }
 }

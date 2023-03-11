@@ -230,7 +230,7 @@ export function updateMenu(proyecto) {
   mainLi.classList.add("menuLi");
   mainLi.setAttribute("id", `${projectIdForEventInTitle}`);
   mainLi.setAttribute("projectName", `Ninguna`);
-  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="iCircleI"></i></span><span class="menuTitle" >Todos</span
+  mainLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="iCircleI"></i></span><span class="menuTitle">TODOS</span
     ></div><div class="projectMenuRight"><span class="numberOfTodos">${todosArrayUncompleted.length}</span></div>`;
 
   dinamicUl.appendChild(mainLi);

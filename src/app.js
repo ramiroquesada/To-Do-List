@@ -21,6 +21,7 @@ export let projectsArray = [];
 document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("projects")) {
     app();
+    saveToLocalStorage();
   }
 
   let projects = JSON.parse(localStorage.getItem("projects"));
@@ -69,6 +70,17 @@ window.addEventListener("focus", () => {
   document.title = tituloPrevio;
 });
 
+
+// OBTENER FECHA ACTUAL
+
+let fechaHoy = ()=>{
+  var now = new Date();
+  now.setHours(now.getHours() -23);
+  var fechaActual = now.toISOString().slice(0, 10);
+  return fechaActual
+}
+
+
 // Creacion de nueva tarea
 
 let btnCrearTarea = document.getElementById("nuevaTareaButton");
@@ -101,11 +113,9 @@ let crearTarea = () => {
     return;
   }
 
-  var now = new Date();
-  now.setHours(now.getHours() - 24);
-  var fechaActual = now.toISOString().slice(0, 10);
+  
 
-  if (fechalimite < fechaActual) {
+  if (fechalimite < fechaHoy()) {
     let timerInterval;
     Swal.fire({
       heightAuto: false,
@@ -145,13 +155,7 @@ let crearTarea = () => {
       if (result.dismiss === Swal.DismissReason.timer) {
       }
     });
-
-    btnCrearTarea.removeEventListener("click", crearTarea, {
-      once: true,
-    });
-
-    btnCrearTarea.addEventListener("click", crearTarea, { once: true });
-
+    
     return;
   }
 
@@ -183,7 +187,7 @@ let crearTarea = () => {
   modal.style.display = "none";
 };
 
-btnCrearTarea.addEventListener("click", crearTarea, { once: true });
+btnCrearTarea.addEventListener("click", crearTarea);
 
 todoname.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -335,12 +339,9 @@ let editTodo = (e) => {
       }
     }
 
-    var now = new Date();
-    now.setHours(now.getHours() - 24);
-    var fechaActual = now.toISOString().slice(0, 10);
-
+    
     if (todo.dueDate != inputFechaLimiteEdit.value) {
-      if (inputFechaLimiteEdit.value < fechaActual) {
+      if (inputFechaLimiteEdit.value < fechaHoy()) {
         let timerInterval;
         Swal.fire({
           heightAuto: false,
@@ -481,8 +482,13 @@ export const menuSeleccionado = () => {
     "menuProjectSelected"
   );
 
+  
+
   let selectedCategoriaLi =
     selectedCategoriaCircle[0].parentElement.parentElement.parentElement;
+
+  
+
 
   let selectedProject = selectedCategoriaLi.getAttribute("projectname");
 
@@ -551,6 +557,7 @@ export const todosChekedSort = () => {
 
   project0.sort(compararPorCompleted);
   let projectArray = menuSeleccionado().todos;
+  
 
   projectArray.sort(compararPorCompleted);
 };
@@ -560,6 +567,7 @@ export const todosDueDateSort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorDueDate);
+  
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorDueDate);
 };
@@ -569,6 +577,8 @@ export const todoPrioritySort = () => {
   let project0 = projectsArray[0].todos;
 
   project0.sort(compararPorPrioridad);
+  
+  
   let projectArray = menuSeleccionado().todos;
   projectArray.sort(compararPorPrioridad);
 };
