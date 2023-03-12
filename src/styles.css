@@ -190,7 +190,7 @@ body {
 }
 
 .menuLi {
-  gap: 1rem;
+  gap: .14rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -208,12 +208,12 @@ body {
 .projectMenuLeft {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .projectMenuRight {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.1rem;
   align-items: center;
   justify-content: center;
 }
@@ -228,7 +228,7 @@ body {
 }
 
 .deleteCategoryBtn {
-  min-width: 1.15rem;
+  min-width: 1.13rem;
   display: none;
   -webkit-transition: font-size 0.2s;
   -moz-transition: font-size 0.2s;
@@ -258,7 +258,7 @@ body {
 }
 
 .menuTitle {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   word-wrap: break-word;
   -webkit-user-select: none;
   user-select: none;
@@ -271,8 +271,8 @@ body {
 
 .numberOfTodos {
   background-color: #fe9393;
-  padding: 4px;
-  min-width: 16px;
+  padding: 3px;
+  min-width: 1.03rem;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -876,7 +876,7 @@ body {
   }
 
   .numberOfTodos {
-    min-width: 19px;
+    min-width: 1rem;
   }
 
   .divMsgTodosVacio {
@@ -889,7 +889,7 @@ body {
 
   
   .menuLi div .menuTitle{
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   #staticUl .menuLi:first-child {

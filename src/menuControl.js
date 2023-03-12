@@ -149,17 +149,38 @@ const handleCreateProjectKey = (e) => {
   }
 };
 
+
+
+
+let projectEventListener = (e)=>{
+  if (!projectInput.contains(e.target)) {
+    console.log("1")
+    closeNewProjectFunction();
+  }
+};
+
+
+let addMenuProjectEvent = ()=>{
+document.addEventListener('mouseup', projectEventListener)};
+
+let removeMenuProjectEvent = ()=>{
+  document.removeEventListener('mouseup', projectEventListener)};
+
+
 // FUNCION PARA MOSTRAR EL FORMULARIO DE CREACION DE PROYECTO
 const nuevoProyecto = () => {
   
 
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
-  projectName.focus();
 
+
+  projectName.focus();
+  addMenuProjectEvent();
   
   acceptNewProject.addEventListener("click", createProject);
   projectNameInput.addEventListener("keydown", handleCreateProjectKey);
+  
 };
 
 addProjectBtn.addEventListener("click", nuevoProyecto);
@@ -170,6 +191,7 @@ const closeNewProjectFunction = () => {
   newProjectForm.reset();
   addNuevaBtn.style.display = "flex";
   projectInput.style.display = "none";
+  removeMenuProjectEvent();
 };
 
 cancelNewProject.addEventListener("click", closeNewProjectFunction);
