@@ -21,6 +21,7 @@ let cancelNewProject = document.getElementById("cancelNewProject");
 let acceptNewProject = document.getElementById("acceptNewProject");
 let newProjectForm = document.getElementById("newProjectForm");
 let projectNameInput = document.getElementById("projectName");
+let projectName = document.getElementById("projectName")
 
 // FUNCION PARA ABRIR EL MENU (SOLO EN MOBILE)
 let abrirMenu = () => {
@@ -34,6 +35,7 @@ menuCerrado.addEventListener("click", abrirMenu);
 
 // FUNCION PARA CERRAR EL MENU (SOLO EN MOBILE)
 let cerrarMenu = () => {
+  closeNewProjectFunction();
   menuCerrado.style.display = "flex";
   menuAbierto.style.display = "none";
   menuPrincipal.classList.remove("menuOpened");
@@ -46,6 +48,7 @@ menuAbierto.addEventListener("click", cerrarMenu);
 window.addEventListener("resize", () => {
   if (document.documentElement.clientWidth > 900) {
     if (menuPrincipal.classList.contains("menuOpened")) {
+      closeNewProjectFunction();
       cerrarMenu();
     }
   }
@@ -148,9 +151,13 @@ const handleCreateProjectKey = (e) => {
 
 // FUNCION PARA MOSTRAR EL FORMULARIO DE CREACION DE PROYECTO
 const nuevoProyecto = () => {
+  
+
   addNuevaBtn.style.display = "none";
   projectInput.style.display = "flex";
+  projectName.focus();
 
+  
   acceptNewProject.addEventListener("click", createProject);
   projectNameInput.addEventListener("keydown", handleCreateProjectKey);
 };
@@ -159,12 +166,14 @@ addProjectBtn.addEventListener("click", nuevoProyecto);
 
 // FUNCION PARA CERRAR EL FORMULARIO DEE CREACION DE PROYECTO
 const closeNewProjectFunction = () => {
+  
   newProjectForm.reset();
   addNuevaBtn.style.display = "flex";
   projectInput.style.display = "none";
 };
 
 cancelNewProject.addEventListener("click", closeNewProjectFunction);
+
 
 // FUNCION PARA ELIMINAR UN PROYECTO (CON TODOS SUS TODOS)
 
@@ -300,7 +309,7 @@ export function updateMenu(proyecto) {
         dinamicLi.classList.add("menuLi");
         dinamicLi.setAttribute("id", `${projectIdForEventInTitle}`);
         dinamicLi.setAttribute("projectName", `${project.nombre}`);
-        dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"> <span class="numberOfTodos" id="${idForNumberOfTodos}">${projectTodosUncompleted.length}</span><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span></div>`;
+        dinamicLi.innerHTML = `<div class="projectMenuLeft"><span class="menuProjectCircle"><i class="fa-solid fa-circle" id="${idForLi}"></i></span><span class="menuTitle">${project.nombre}</span></div><div class="projectMenuRight"><span class="deleteCategoryBtn" id="${idForDeleteBtn}"><i class="fa-regular fa-circle-xmark xMarkCategoria"></i></span> <span class="numberOfTodos" id="${idForNumberOfTodos}">${projectTodosUncompleted.length}</span></div>`;
   
         dinamicUl.appendChild(dinamicLi);
   

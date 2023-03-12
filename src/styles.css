@@ -415,6 +415,19 @@ body {
 
 
 
+#acceptNewProject:hover{
+  font-size: 1.6rem;
+  color: #378731;
+}
+
+#cancelNewProject:hover{
+  font-size: 1.6rem;
+  color: #c63131;
+}
+
+
+
+
 /***********************************************************************************************************************/
 
 .content {
@@ -435,7 +448,7 @@ body {
   font-size: 2rem;
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 1.5rem;
 }
 
 .tituloMas h1 {

@@ -12,10 +12,13 @@ let nuevaTareaForm = document.getElementById("nuevaTareaForm");
 
 let msgNuevaTarea = document.getElementById("msgNuevaTarea");
 
+let todoName = document.getElementById("todoname");
+
 //EVENT LISTENER DEL BOTON PARA ABRIR EL MODAL CON EL FORMULARIO PARA CREAR UNA TAREA
 abrirModalAgregarTarea.addEventListener("click", () => {
   modal.style.display = "block";
   modalNuevaTarea.style.display = "flex";
+  todoName.focus();
   modalEditarTarea.style.display = "none";
 
   let selectColors = document.getElementById("todoprioridad");
