@@ -13,6 +13,6 @@ Keep track of tasks with custom project folders.
 
 [Live App](https://ramessj.github.io/To-Do-List/)
 
-![alt text](https://raw.githubusercontent.com/ramessj/todo/main/todo-full.png "Desktop App Preview")
+![alt text](https://raw.githubusercontent.com/ramessj/To-Do-List/main/todo-full.png "Desktop App Preview")
 
-![alt text](https://raw.githubusercontent.com/ramessj/todo/main/todo-mobile.png "Mobile App Preview")
+![alt text](https://raw.githubusercontent.com/ramessj/To-Do-List/main/todo-mobile.png "Mobile App Preview")
